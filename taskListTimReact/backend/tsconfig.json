@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",               // Allows modern JavaScript features
+    "module": "commonjs",             // Required for Node.js modules
+    "rootDir": "src",                 // Your TypeScript source files go here
+    "outDir": "dist",                 // Compiled JavaScript output directory
+    "strict": true,                   // Enable all strict type-checking options
+    "esModuleInterop": true,          // Allows default import of CommonJS modules
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,             // Speeds up compilation by skipping .d.ts file checks
+    "moduleResolution": "node",       // Required for resolving Node modules
+    "resolveJsonModule": true,        // Allows importing .json files if needed
+    "sourceMap": true,                // Enable source maps for debugging
+    "allowSyntheticDefaultImports": true,
+    "noImplicitAny": false            // Optional: disables `any` type warnings if you want flexibility
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
+}
