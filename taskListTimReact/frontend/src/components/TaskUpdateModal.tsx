@@ -13,7 +13,7 @@ interface TaskUpdateModalProps {
   task: Task;
 }
 
-// Utility function to safely parse date strings to Date objects
+// Utility function to safely parse date strings to Date objectsz
 const parseDate = (date: string | Date | null | undefined): Date | null => {
   if (!date) return null;
   return typeof date === 'string' ? new Date(date) : date;
