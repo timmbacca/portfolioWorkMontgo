@@ -9,12 +9,12 @@ services:
     depends_on:
       - db
     env_file:
-      - .env
+      - .env  # Use the root .env file
 
   db:
     image: mysql:8
     env_file:
-      - .env
+      - .env  # Use the root .env file
     ports:
       - "3307:3306"
     volumes:

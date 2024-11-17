@@ -10,10 +10,14 @@ export const getAllTasks = async (req: Request, res: Response) => {
   try {
     const [tasks] = await pool.query(`SELECT * FROM tasks`);
     res.json(tasks);
-  } catch (error) {
+  } catch (err) {
+    const error = err as Error; // Explicitly cast err to Error
+    console.error('Error retrieving tasks:', error.message, error.stack);
     res.status(500).json({ message: 'Error retrieving tasks' });
   }
 };
+
+
 
 // Create a new task
 export const createTask = async (req: Request, res: Response) => {
@@ -43,6 +47,11 @@ export const createTask = async (req: Request, res: Response) => {
 
     res.status(201).json({ id: result.insertId, ...req.body });
   } catch (error) {
+    if (error instanceof Error) {
+      console.error('Error adding task:', error.message); // Safely access error.message
+    } else {
+      console.error('Unknown error:', error); // Fallback for unknown error types
+    }
     res.status(500).json({ message: 'Error adding task' });
   }
 };

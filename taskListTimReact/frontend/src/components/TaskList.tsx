@@ -8,6 +8,7 @@ import {
   FormControlLabel, Checkbox, Slider, Typography, Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow,
   TableSortLabel, Paper, TablePagination
 } from '@mui/material';
+import { validateInput } from '../utils/validation';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { DatePicker } from '@mui/x-date-pickers';
@@ -26,6 +27,7 @@ const TaskList: React.FC = () => {
   const [taskToDelete, setTaskToDelete] = useState<Task | null>(null);
   const [selectedTask, setSelectedTask] = useState<Task | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  // Form state
   const [newTitle, setNewTitle] = useState('');
   const [newDescription, setNewDescription] = useState('');
   const [priority, setPriority] = useState('');
@@ -41,6 +43,9 @@ const TaskList: React.FC = () => {
   const [isRecurring, setIsRecurring] = useState(false);
   const [riskLevel, setRiskLevel] = useState('');
 
+  // Validation errors
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
+
   // Fetch tasks on component load
   useEffect(() => {
     fetchTasks();
@@ -49,6 +54,21 @@ const TaskList: React.FC = () => {
   useEffect(() => {
     applyFilters();
   }, [tasks, searchQuery, filterStatus, sortOrder, sortField]);
+
+  // Validation logic
+  const validateFields = () => {
+    const newErrors: { [key: string]: string } = {};
+    newErrors.title = validateInput(newTitle, /^[a-zA-Z0-9\s]+$/, 255);
+    newErrors.description = validateInput(newDescription, /^[a-zA-Z0-9\s.,!?]+$/, 1000);
+    newErrors.assignedTo = validateInput(assignedTo, /^[a-zA-Z\s]+$/, 255);
+
+    if (startDate && dueDate && startDate > dueDate) {
+      newErrors.dates = 'Start date cannot be after the due date.';
+    }
+    setErrors(newErrors);
+
+    return Object.values(newErrors).every((error) => error === '');
+  };
 
   const fetchTasks = async () => {
     const tasks = await getTasks();
@@ -109,6 +129,10 @@ const TaskList: React.FC = () => {
     const formattedStartDate = startDate ? startDate.toISOString().split('T')[0] : null;
     const formattedDueDate = dueDate ? dueDate.toISOString().split('T')[0] : null;  
 
+    if (!validateFields()) {
+      return;
+    }
+
     // Log each piece of data to confirm
     console.log("Title:", newTitle);
     console.log("Description:", newDescription);
@@ -164,6 +188,7 @@ const TaskList: React.FC = () => {
     setComments('');
     setIsRecurring(false);
     setRiskLevel('');
+    setErrors({});
   };
 
   const openUpdateModal = (task: Task) => {
@@ -251,8 +276,10 @@ function formatDateToMMDDYYYY(date: Date | string | null | undefined): string {
     <Box sx={{ padding: 2 }}>
      
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, maxWidth: 400, margin: 'auto' }}>
-        <TextField label="Task Title" value={newTitle} onChange={(e) => setNewTitle(e.target.value)} required />
-        <TextField label="Task Description" value={newDescription} onChange={(e) => setNewDescription(e.target.value)} multiline rows={3} />
+        <TextField label="Task Title" value={newTitle} onChange={(e) => setNewTitle(e.target.value)} required error={!!errors.title}
+          helperText={errors.title} />
+        <TextField label="Task Description" value={newDescription} onChange={(e) => setNewDescription(e.target.value)} multiline rows={3} error={!!errors.description}
+          helperText={errors.description} />
 
         <FormControl fullWidth margin="dense">
         <InputLabel id="priority-label">Priority</InputLabel>
@@ -286,7 +313,8 @@ function formatDateToMMDDYYYY(date: Date | string | null | undefined): string {
         </Select>
         </FormControl>
 
-        <TextField label="Assigned To" value={assignedTo} onChange={(e) => setAssignedTo(e.target.value)} />
+        <TextField label="Assigned To" value={assignedTo} onChange={(e) => setAssignedTo(e.target.value)} error={!!errors.assignedTo}
+          helperText={errors.assignedTo} />
 
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <DatePicker
@@ -338,7 +366,7 @@ function formatDateToMMDDYYYY(date: Date | string | null | undefined): string {
           <MenuItem value="High">High</MenuItem>
         </Select>
         </FormControl>
-
+        {errors.dates && <Typography color="error">{errors.dates}</Typography>}
         <Button onClick={handleAddTask} variant="contained" color="primary">Add Task</Button>
       </Box>
 
