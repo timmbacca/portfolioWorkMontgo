@@ -11,7 +11,7 @@ import {
 import { validateInput } from '../utils/validation';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { DatePicker } from '@mui/x-date-pickers';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { getTasks, addTask, updateTask, deleteTask, Task } from '../api/taskApi';
 
 const TaskList: React.FC = () => {
@@ -56,18 +56,48 @@ const TaskList: React.FC = () => {
   }, [tasks, searchQuery, filterStatus, sortOrder, sortField]);
 
   // Validation logic
-  const validateFields = () => {
-    const newErrors: { [key: string]: string } = {};
-    newErrors.title = validateInput(newTitle, /^[a-zA-Z0-9\s]+$/, 255);
-    newErrors.description = validateInput(newDescription, /^[a-zA-Z0-9\s.,!?]+$/, 1000);
-    newErrors.assignedTo = validateInput(assignedTo, /^[a-zA-Z\s]+$/, 255);
+  const validateField = (fieldName: string, value: string) => {
+    let error = '';
 
-    if (startDate && dueDate && startDate > dueDate) {
-      newErrors.dates = 'Start date cannot be after the due date.';
+    switch (fieldName) {
+      case 'title':
+        if (!value.trim()) {
+          error = 'Task title is required.';
+        } else {
+          error = validateInput(value, /^[a-zA-Z0-9\s]+$/, 255);
+        }
+        break;
+
+      case 'description':
+        if (!value.trim()) {
+          error = 'Task description is required.';
+        } else {
+          error = validateInput(value, /^[a-zA-Z0-9\s.,!?]+$/, 1000);
+        }
+        break;
+
+      case 'assignedTo':
+        if (!value.trim()) {
+          error = 'Assigned To is required.';
+        } else {
+          error = validateInput(value, /^[a-zA-Z\s]+$/, 255);
+        }
+        break;
+
+      default:
+        break;
     }
-    setErrors(newErrors);
 
-    return Object.values(newErrors).every((error) => error === '');
+    setErrors((prevErrors) => ({ ...prevErrors, [fieldName]: error }));
+  };
+
+  const validateAllFields = () => {
+    validateField('title', newTitle);
+    validateField('description', newDescription);
+    validateField('assignedTo', assignedTo);
+
+    const hasErrors = Object.values(errors).some((error) => error);
+    return !hasErrors;
   };
 
   const fetchTasks = async () => {
@@ -129,8 +159,16 @@ const TaskList: React.FC = () => {
     const formattedStartDate = startDate ? startDate.toISOString().split('T')[0] : null;
     const formattedDueDate = dueDate ? dueDate.toISOString().split('T')[0] : null;  
 
-    if (!validateFields()) {
-      return;
+    validateAllFields(); // Ensure all fields are validated
+
+    // Check if any errors exist after validation
+    const hasErrors = Object.values(errors).some((error) => error);
+    if (hasErrors || !newTitle || !newDescription || !assignedTo) {
+      // Validate empty fields explicitly here for edge cases
+      if (!newTitle) validateField('title', newTitle);
+      if (!newDescription) validateField('description', newDescription);
+      if (!assignedTo) validateField('assignedTo', assignedTo);
+      return; // Stop submission if errors exist
     }
 
     // Log each piece of data to confirm
@@ -171,6 +209,20 @@ const TaskList: React.FC = () => {
     await addTask(newTask); // Call addTask with formatted payload
     resetForm();
     fetchTasks();
+  };
+
+  
+  const [dateError, setDateError] = useState<string | null>(null);
+
+  const handleDateChange = (newStartDate: Date | null, newDueDate: Date | null) => {
+    setStartDate(newStartDate);
+    setDueDate(newDueDate);
+
+    if (newStartDate && newDueDate && newStartDate > newDueDate) {
+      setDateError('Start Date cannot be later than Due Date.');
+    } else {
+      setDateError(null);
+    }
   };
 
   const resetForm = () => {
@@ -276,10 +328,30 @@ function formatDateToMMDDYYYY(date: Date | string | null | undefined): string {
     <Box sx={{ padding: 2 }}>
      
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, maxWidth: 400, margin: 'auto' }}>
-        <TextField label="Task Title" value={newTitle} onChange={(e) => setNewTitle(e.target.value)} required error={!!errors.title}
-          helperText={errors.title} />
-        <TextField label="Task Description" value={newDescription} onChange={(e) => setNewDescription(e.target.value)} multiline rows={3} error={!!errors.description}
-          helperText={errors.description} />
+      <TextField
+          label="Task Title"
+          value={newTitle}
+          onChange={(e) => {
+            setNewTitle(e.target.value);
+            validateField('title', e.target.value);
+          }}
+          onBlur={() => validateField('title', newTitle)}
+          error={!!errors.title}
+          helperText={errors.title}
+        />
+        <TextField
+          label="Task Description"
+          value={newDescription}
+          onChange={(e) => {
+            setNewDescription(e.target.value);
+            validateField('description', e.target.value);
+          }}
+          onBlur={() => validateField('description', newDescription)}
+          multiline
+          rows={3}
+          error={!!errors.description}
+          helperText={errors.description}
+        />
 
         <FormControl fullWidth margin="dense">
         <InputLabel id="priority-label">Priority</InputLabel>
@@ -313,21 +385,43 @@ function formatDateToMMDDYYYY(date: Date | string | null | undefined): string {
         </Select>
         </FormControl>
 
-        <TextField label="Assigned To" value={assignedTo} onChange={(e) => setAssignedTo(e.target.value)} error={!!errors.assignedTo}
-          helperText={errors.assignedTo} />
+        <TextField
+          label="Assigned To"
+          value={assignedTo}
+          onChange={(e) => {
+            setAssignedTo(e.target.value);
+            validateField('assignedTo', e.target.value);
+          }}
+          onBlur={() => validateField('assignedTo', assignedTo)}
+          error={!!errors.assignedTo}
+          helperText={errors.assignedTo}
+        />
 
-        <LocalizationProvider dateAdapter={AdapterDateFns}>
-          <DatePicker
-            label="Start Date"
-            value={startDate}
-            onChange={(newValue) => setStartDate(newValue)}
-          />
-          <DatePicker
-            label="Due Date"
-            value={dueDate}
-            onChange={(newValue) => setDueDate(newValue)}
-          />
-        </LocalizationProvider>
+<LocalizationProvider dateAdapter={AdapterDateFns}>
+  <DatePicker
+    label="Start Date"
+    value={startDate}
+    onChange={(newValue) => handleDateChange(newValue, dueDate)}
+    slotProps={{
+      textField: {
+        error: !!dateError,
+        helperText: dateError || '',
+      },
+    }}
+  />
+  <DatePicker
+    label="Due Date"
+    value={dueDate}
+    onChange={(newValue) => handleDateChange(startDate, newValue)}
+    slotProps={{
+      textField: {
+        error: !!dateError,
+        helperText: dateError || '',
+      },
+    }}
+  />
+</LocalizationProvider>
+
 
         <TextField label="Estimated Time (hours)" type="number" value={estimatedTime} onChange={(e) => setEstimatedTime(Number(e.target.value))} />
         <TextField label="Time Spent (hours)" type="number" value={timeSpent} onChange={(e) => setTimeSpent(Number(e.target.value))} />
@@ -374,15 +468,48 @@ function formatDateToMMDDYYYY(date: Date | string | null | undefined): string {
       <Typography variant="h4" gutterBottom>
         Task List
       </Typography>
-      <TableContainer component={Paper}>
-  <TextField
-    label="Search by Title or Description"
-    variant="outlined"
-    fullWidth
-    margin="dense"
-    value={searchQuery}
-    onChange={(e) => setSearchQuery(e.target.value)}
-  />
+
+      <Box     sx={{
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      padding: 2,
+      position: 'sticky',
+      top: 0,
+      zIndex: 10,
+    }}>
+        <TextField
+          label="Search by Title or Description"
+          variant="outlined"
+          fullWidth
+          margin="dense"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          sx={{
+            maxWidth: 600, // Limit the width on larger screens
+            width: '100%', // Make it responsive to smaller screens
+            '& .MuiOutlinedInput-root': {
+              color: 'text.primary',
+            },
+            '& .MuiInputLabel-root': {
+              color: 'text.secondary',
+            },
+            backgroundColor: 'background.default',
+            boxShadow: '0px 2px 3px rgba(0, 0, 0, 0.2)', // Subtle shadow
+          }}
+        />
+      </Box>
+
+  <TableContainer component={Paper}
+  sx={{
+    marginTop: 4,
+    overflowX: 'auto',
+    '& .MuiOutlinedInput-notchedOutline': {
+              borderColor: '#444444',
+            },
+            boxShadow: '0px 2px 3px rgba(0, 0, 0, 0.2)', // cool timmy shadow
+  }}
+  >
 
   <Table aria-label="task table" sx={{ minWidth: 650 }}>
     <TableHead>
