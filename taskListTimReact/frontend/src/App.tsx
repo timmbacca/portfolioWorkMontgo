@@ -9,7 +9,6 @@ import forestTheme from './themes/forestTheme';
 import commandersTheme from './themes/commandersTheme';
 import Header from './components/Header';
 import LandingPage from './components/LandingPage';
-import AboutPage from './components/AboutPage';
 import TaskTrackerPage from './components/TaskTrackerPage';
 import PastProjectsPage from './components/PastProjectsPage';
 import ResumePage from './components/ResumePage';
@@ -62,7 +61,6 @@ const App: React.FC = () => {
             <main>
               <Routes>
                 <Route path="/" element={<LandingPage />} />
-                <Route path="/about" element={<AboutPage />} />
                 <Route path="/task-tracker" element={<TaskTrackerPage />} />
                 <Route path="/projects" element={<PastProjectsPage />} />
                 <Route path="/resume" element={<ResumePage />} />

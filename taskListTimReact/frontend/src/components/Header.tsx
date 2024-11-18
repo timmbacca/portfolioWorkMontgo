@@ -92,8 +92,7 @@ const Header = () => {
         <Logo>Tim Montgomery</Logo>
       </LogoContainer>
       <NavLinks isActive={menuOpen}>
-        <Link to="/" onClick={closeMenu}>Home</Link>
-        <Link to="/about" onClick={closeMenu}>About Me</Link>
+        <Link to="/" onClick={closeMenu}>About Me</Link>
         <Link to="/task-tracker" onClick={closeMenu}>Task Tracker</Link>
         <Link to="/projects" onClick={closeMenu}>Projects</Link>
         <Link to="/resume" onClick={closeMenu}>Resume</Link>

@@ -45,8 +45,7 @@ const Footer = () => {
   return (
     <FooterWrapper>
       <Sitemap>
-        <Link to="/">Home</Link>
-        <Link to="/about">About Me</Link>
+        <Link to="/">About Me</Link>
         <Link to="/task-tracker">Task Tracker</Link>
         <Link to="/projects">Projects</Link>
         <Link to="/resume">Resume</Link>
