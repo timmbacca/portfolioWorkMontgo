@@ -16,6 +16,7 @@ import ResumePage from './components/ResumePage';
 import FAQPage from './components/FAQPage';
 import ContactPage from './components/ContactPage';
 import './App.css';
+import Footer from './components/Footer';
 
 const App: React.FC = () => {
   const themes = {
@@ -58,15 +59,18 @@ const App: React.FC = () => {
                 </Button>
               ))}
             </Box>
-            <Routes>
-              <Route path="/" element={<LandingPage />} />
-              <Route path="/about" element={<AboutPage />} />
-              <Route path="/task-tracker" element={<TaskTrackerPage />} />
-              <Route path="/projects" element={<PastProjectsPage />} />
-              <Route path="/resume" element={<ResumePage />} />
-              <Route path="/faq" element={<FAQPage />} />
-              <Route path="/contact" element={<ContactPage />} />
-            </Routes>
+            <main>
+              <Routes>
+                <Route path="/" element={<LandingPage />} />
+                <Route path="/about" element={<AboutPage />} />
+                <Route path="/task-tracker" element={<TaskTrackerPage />} />
+                <Route path="/projects" element={<PastProjectsPage />} />
+                <Route path="/resume" element={<ResumePage />} />
+                <Route path="/faq" element={<FAQPage />} />
+                <Route path="/contact" element={<ContactPage />} />
+              </Routes>
+            </main>
+            <Footer />
           </div>
         </Router>
       </StyledThemeProvider>
