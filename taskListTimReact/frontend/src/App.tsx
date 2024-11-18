@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider as MuiThemeProvider, CssBaseline, Button, Box } from '@mui/material';
 import { ThemeProvider as StyledThemeProvider } from 'styled-components'; // Import styled-components ThemeProvider
 import lightTheme from './themes/lightTheme';
@@ -35,40 +36,39 @@ const App: React.FC = () => {
     <MuiThemeProvider theme={themes[selectedTheme] || lightTheme}>
       <StyledThemeProvider theme={themes[selectedTheme] || lightTheme}>
         <CssBaseline />
-        <div className="App">
-          <Header />
-          <Box
-  sx={{
-    textAlign: 'center',
-    padding: 2,
-    display: 'flex',
-    justifyContent: 'center',
-    gap: 1,
-    position: 'relative', // Ensure proper stacking context
-    zIndex: 1, // Place the theme switcher above or below as needed
-  }}
->
-  {Object.keys(themes).map((theme) => (
-    <Button
-      key={theme}
-      variant={selectedTheme === theme ? 'contained' : 'outlined'}
-      onClick={() => handleThemeChange(theme as keyof typeof themes)}
-    >
-      {theme}
-    </Button>
-  ))}
-</Box>
-
-          <main>
-            <LandingPage />
-            <AboutPage />
-            <TaskTrackerPage />
-            <PastProjectsPage />
-            <ResumePage />
-            <FAQPage />
-            <ContactPage />
-          </main>
-        </div>
+        <Router>
+          <div className="App">
+            <Header />
+            <Box
+              sx={{
+                textAlign: 'center',
+                padding: 2,
+                display: 'flex',
+                justifyContent: 'center',
+                gap: 1,
+              }}
+            >
+              {Object.keys(themes).map((theme) => (
+                <Button
+                  key={theme}
+                  variant={selectedTheme === theme ? 'contained' : 'outlined'}
+                  onClick={() => handleThemeChange(theme as keyof typeof themes)}
+                >
+                  {theme}
+                </Button>
+              ))}
+            </Box>
+            <Routes>
+              <Route path="/" element={<LandingPage />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/task-tracker" element={<TaskTrackerPage />} />
+              <Route path="/projects" element={<PastProjectsPage />} />
+              <Route path="/resume" element={<ResumePage />} />
+              <Route path="/faq" element={<FAQPage />} />
+              <Route path="/contact" element={<ContactPage />} />
+            </Routes>
+          </div>
+        </Router>
       </StyledThemeProvider>
     </MuiThemeProvider>
   );

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const HeaderWrapper = styled.header`
@@ -6,7 +7,7 @@ const HeaderWrapper = styled.header`
   color: ${({ theme }) => theme.palette?.text?.primary || '#000000'};
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Ensures logo is on the left and nav is on the right */
+  justify-content: space-between;
   padding: 10px 20px;
   border-bottom: 1px solid ${({ theme }) => theme.palette?.primary?.main || '#1976d2'};
 `;
@@ -14,7 +15,7 @@ const HeaderWrapper = styled.header`
 const LogoContainer = styled.div`
   display: flex;
   align-items: center;
-  gap: 10px; /* Space between hamburger and logo */
+  gap: 10px;
 `;
 
 const Hamburger = styled.button`
@@ -26,7 +27,7 @@ const Hamburger = styled.button`
   display: block;
 
   @media (min-width: 769px) {
-    display: none; /* Hide hamburger on larger screens */
+    display: none;
   }
 `;
 
@@ -41,21 +42,18 @@ const NavLinks = styled.nav<{ isActive: boolean }>`
   flex-direction: column;
   align-items: flex-start;
   position: absolute;
-  top: 60px;
+  top: 125px;
   left: 0;
   width: 100%;
   background-color: ${({ theme }) => theme.palette?.background?.default || '#ffffff'};
-  border-top: 1px solid ${({ theme }) => theme.palette?.primary?.main || '#1976d2'};
   padding: 10px 20px;
-  z-index: 2; /* Ensure it stacks above other elements */
+  z-index: 2;
 
   a {
     padding: 10px 0;
     text-decoration: none;
-    text-align: left;
     color: ${({ theme }) => theme.palette?.text?.primary || '#000000'};
     font-weight: bold;
-    width: 100%;
 
     &:hover {
       background-color: ${({ theme }) => theme.palette?.primary?.main || '#1976d2'};
@@ -66,29 +64,24 @@ const NavLinks = styled.nav<{ isActive: boolean }>`
   @media (min-width: 769px) {
     display: flex;
     flex-direction: row;
-    align-items: center;
     position: static;
     background-color: transparent;
-    width: auto;
 
     a {
       padding: 10px 15px;
-      text-align: center;
-
-      &:hover {
-        background-color: ${({ theme }) => theme.palette?.primary?.main || '#1976d2'};
-        color: ${({ theme }) => theme.palette?.background?.default || '#ffffff'};
-      }
     }
   }
 `;
-
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
+  };
+
+  const closeMenu = () => {
+    setMenuOpen(false);
   };
 
   return (
@@ -98,13 +91,13 @@ const Header = () => {
         <Logo>Timmie's Portfolio</Logo>
       </LogoContainer>
       <NavLinks isActive={menuOpen}>
-        <a href="#landing">Home</a>
-        <a href="#about">About Me</a>
-        <a href="#task-tracker">Task Tracker</a>
-        <a href="#projects">Projects</a>
-        <a href="#resume">Resume</a>
-        <a href="#faq">FAQ</a>
-        <a href="#contact">Contact</a>
+        <Link to="/" onClick={closeMenu}>Home</Link>
+        <Link to="/about" onClick={closeMenu}>About Me</Link>
+        <Link to="/task-tracker" onClick={closeMenu}>Task Tracker</Link>
+        <Link to="/projects" onClick={closeMenu}>Projects</Link>
+        <Link to="/resume" onClick={closeMenu}>Resume</Link>
+        <Link to="/faq" onClick={closeMenu}>FAQ</Link>
+        <Link to="/contact" onClick={closeMenu}>Contact</Link>
       </NavLinks>
     </HeaderWrapper>
   );
