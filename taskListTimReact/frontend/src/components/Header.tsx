@@ -34,6 +34,7 @@ const Hamburger = styled.button`
 const Logo = styled.div`
   font-size: 1.5rem;
   font-weight: bold;
+  text-align: left; /* Ensure the text alignment is left */
   color: ${({ theme }) => theme.palette?.text?.primary || '#000000'};
 `;
 
@@ -43,8 +44,7 @@ const NavLinks = styled.nav<{ isActive: boolean }>`
   align-items: flex-start;
   position: absolute;
   top: 125px;
-  left: 0;
-  width: 100%;
+  right: 0;
   background-color: ${({ theme }) => theme.palette?.background?.default || '#ffffff'};
   padding: 10px 20px;
   z-index: 2;
@@ -61,9 +61,10 @@ const NavLinks = styled.nav<{ isActive: boolean }>`
     }
   }
 
-  @media (min-width: 769px) {
+@media (min-width: 769px) {
     display: flex;
     flex-direction: row;
+    align-items: center;
     position: static;
     background-color: transparent;
 
@@ -88,7 +89,7 @@ const Header = () => {
     <HeaderWrapper>
       <LogoContainer>
         <Hamburger onClick={toggleMenu}>☰</Hamburger>
-        <Logo>Timmie's Portfolio</Logo>
+        <Logo>Tim Montgomery</Logo>
       </LogoContainer>
       <NavLinks isActive={menuOpen}>
         <Link to="/" onClick={closeMenu}>Home</Link>

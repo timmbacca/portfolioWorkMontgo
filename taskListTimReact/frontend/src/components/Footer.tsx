@@ -54,13 +54,12 @@ const Footer = () => {
         <Link to="/contact">Contact</Link>
       </Sitemap>
       <FooterInfo>
-        <div>© 2024 Timmie Montgomery. All rights reserved.</div>
+        <div>© 2024 Tim Montgomery. All rights reserved.</div>
         <div>
-          Connect with me on{' '}
-          <a href="#" target="_blank" rel="noopener noreferrer">
+        Connect with me on{' '}
+          <a href="https://www.linkedin.com/in/ctmontgo" target="_blank" rel="noopener noreferrer">
             LinkedIn
-          </a>{' '}
-          (placeholder).
+          </a>.
         </div>
       </FooterInfo>
     </FooterWrapper>
