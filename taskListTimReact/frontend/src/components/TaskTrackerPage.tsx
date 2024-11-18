@@ -14,7 +14,7 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { getTasks, addTask, updateTask, deleteTask, Task } from '../api/taskApi';
 
-const TaskList: React.FC = () => {
+const TaskTrackerPage: React.FC = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [filteredTasks, setFilteredTasks] = useState<Task[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
@@ -325,8 +325,9 @@ function formatDateToMMDDYYYY(date: Date | string | null | undefined): string {
 
 
   return (
+    
     <Box sx={{ padding: 2 }}>
-     
+     <h1>Task Tracker</h1>
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, maxWidth: 400, margin: 'auto' }}>
       <TextField
           label="Task Title"
@@ -635,4 +636,4 @@ function formatDateToMMDDYYYY(date: Date | string | null | undefined): string {
   );
 };
 
-export default TaskList;
+export default TaskTrackerPage;
