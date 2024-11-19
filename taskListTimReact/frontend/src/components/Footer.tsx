@@ -49,7 +49,6 @@ const Footer = () => {
         <Link to="/task-tracker">Task Tracker</Link>
         <Link to="/projects">Projects</Link>
         <Link to="/resume">Resume</Link>
-        <Link to="/faq">FAQ</Link>
         <Link to="/contact">Contact</Link>
       </Sitemap>
       <FooterInfo>

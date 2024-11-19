@@ -12,7 +12,6 @@ import LandingPage from './components/LandingPage';
 import TaskTrackerPage from './components/TaskTrackerPage';
 import PastProjectsPage from './components/PastProjectsPage';
 import ResumePage from './components/ResumePage';
-import FAQPage from './components/FAQPage';
 import ContactPage from './components/ContactPage';
 import './App.css';
 import Footer from './components/Footer';
@@ -64,7 +63,6 @@ const App: React.FC = () => {
                 <Route path="/task-tracker" element={<TaskTrackerPage />} />
                 <Route path="/projects" element={<PastProjectsPage />} />
                 <Route path="/resume" element={<ResumePage />} />
-                <Route path="/faq" element={<FAQPage />} />
                 <Route path="/contact" element={<ContactPage />} />
               </Routes>
             </main>

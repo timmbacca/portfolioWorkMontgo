@@ -44,7 +44,7 @@ const NavLinks = styled.nav<{ isActive: boolean }>`
   align-items: flex-start;
   position: absolute;
   top: 125px;
-  right: 0;
+  left: 0;
   background-color: ${({ theme }) => theme.palette?.background?.default || '#ffffff'};
   padding: 10px 20px;
   z-index: 2;
@@ -96,7 +96,6 @@ const Header = () => {
         <Link to="/task-tracker" onClick={closeMenu}>Task Tracker</Link>
         <Link to="/projects" onClick={closeMenu}>Projects</Link>
         <Link to="/resume" onClick={closeMenu}>Resume</Link>
-        <Link to="/faq" onClick={closeMenu}>FAQ</Link>
         <Link to="/contact" onClick={closeMenu}>Contact</Link>
       </NavLinks>
     </HeaderWrapper>
