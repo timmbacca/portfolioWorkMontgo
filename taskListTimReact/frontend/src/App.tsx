@@ -6,7 +6,7 @@ import lightTheme from './themes/lightTheme';
 import darkTheme from './themes/darkTheme';
 import federalTheme from './themes/federalTheme';
 import forestTheme from './themes/forestTheme';
-import commandersTheme from './themes/commandersTheme';
+import desertTheme from './themes/desertTheme';
 import Header from './components/Header';
 import LandingPage from './components/LandingPage';
 import TaskTrackerPage from './components/TaskTrackerPage';
@@ -22,7 +22,7 @@ const App: React.FC = () => {
     Dark: darkTheme,
     Federal: federalTheme,
     Forest: forestTheme,
-    Commanders: commandersTheme,
+    Desert: desertTheme,
   };
 
   const [selectedTheme, setSelectedTheme] = useState<keyof typeof themes>('Light');

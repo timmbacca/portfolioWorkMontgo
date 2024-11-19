@@ -3,14 +3,21 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const HeaderWrapper = styled.header`
+  position: fixed; /* Fixes the header at the top */
+  top: 0;
+  left: 0;
+  width: 100%; /* Ensures the header spans the full width of the viewport */
+  z-index: 1000; /* Ensures the header stays above other content */
   background-color: ${({ theme }) => theme.palette?.background?.default || '#f5f5f5'};
   color: ${({ theme }) => theme.palette?.text?.primary || '#000000'};
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-between; /* Space between the logo and navigation */
   padding: 10px 20px;
   border-bottom: 1px solid ${({ theme }) => theme.palette?.primary?.main || '#1976d2'};
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow for a floating effect */
 `;
+
 
 const LogoContainer = styled.div`
   display: flex;

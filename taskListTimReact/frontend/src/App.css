@@ -5,11 +5,25 @@ html, body, #root {
   flex-direction: column;
 }
 
+/* Ensure the body has a minimum width of 420px */
+body {
+  min-width: 420px;
+  overflow-x: auto; /* Enables horizontal scrolling if the viewport is smaller */
+}
+
+/* Optional: Add responsive scaling for specific elements */
+@media (max-width: 420px) {
+  html, body {
+    width: 420px; /* Force content width to remain fixed at 420px */
+  }
+}
+
 .App {
   flex: 1;
   display: flex;
   flex-direction: column;
   text-align: center;
+  padding-top: 80px; /* Match the height of your header */
 }
 
 main {
