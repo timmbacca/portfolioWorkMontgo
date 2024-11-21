@@ -36,3 +36,6 @@ footer {
   flex-shrink: 0; /* Ensures the footer does not shrink */
   width: 100%; /* Ensures the footer spans the full width */
 }
+
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
