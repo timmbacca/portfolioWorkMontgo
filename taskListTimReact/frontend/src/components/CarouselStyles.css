@@ -1,0 +1,79 @@
+/* Set consistent height for the main carousel container */
+.slick-list {
+  overflow: hidden;
+  height: 400px; /* Adjust to fit the largest image */
+}
+
+/* Ensure slick-track aligns images properly */
+.slick-track {
+  display: flex;
+  align-items: center; /* Vertically center the images */
+  height: 100%;
+}
+
+/* Main images in the carousel */
+.slick-slide img {
+  max-height: 400px; /* Adjust to fit the largest image */
+  width: auto; /* Maintain aspect ratio */
+  margin: auto;
+  display: block;
+  object-fit: contain; /* Ensure images fit neatly */
+}
+
+/* Thumbnails under the main carousel */
+.slick-dots {
+  display: flex !important;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 15px;
+}
+
+.slick-dots li {
+  margin: 20px;padding:20px;
+}
+
+.slick-dots img {
+  height: 50px; /* Thumbnail height */
+  width: 50px; /* Maintain square aspect */
+  object-fit: cover;
+  border-radius: 5px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border-color 0.3s ease;
+}
+
+/* Highlight the active thumbnail */
+.slick-dots .slick-active img {
+  border-color: #1976d2; /* Theme color for active thumbnail */
+}
+
+/* Adjust carousel for responsiveness */
+@media (max-width: 768px) {
+  .slick-list {
+    height: 300px; /* Reduce main image height */
+  }
+
+  .slick-slide img {
+    max-height: 280px; /* Scale down main image */
+  }
+
+  .slick-dots img {
+    height: 40px; /* Reduce thumbnail size */
+    width: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .slick-list {
+    height: 240px; /* Further reduce main image height */
+  }
+
+  .slick-slide img {
+    max-height: 220px; /* Scale down for mobile */
+  }
+
+  .slick-dots img {
+    height: 30px; /* Smaller thumbnails */
+    width: 30px;
+  }
+}
