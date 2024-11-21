@@ -82,7 +82,7 @@ const LandingPage = () => {
         </PhotoWrapper>
       </HeroBanner>
       <WelcomeSection>
-        <h1>Welcome to Timmie's Portfolio</h1>
+        <h1>Tim Montgomery</h1>
         <p>Discover my journey, projects, and passion for web development.</p>
       </WelcomeSection>
       <AboutSection>

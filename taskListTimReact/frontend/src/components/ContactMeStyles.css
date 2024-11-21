@@ -1,0 +1,86 @@
+/* Base Styles */
+.contact-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+    background-color: var(--background-color); /* Dynamic based on theme */
+    color: var(--text-color); /* Dynamic based on theme */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .contact-info p {
+    margin: 10px 0;
+  }
+  
+  .contact-info a {
+    color: var(--link-color); /* Dynamic based on theme */
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+  }
+  
+  .contact-info a:hover {
+    text-decoration: underline;
+    color: var(--link-hover-color); /* Dynamic based on theme */
+  }
+  
+  .contact-form {
+    margin-top: 20px;
+  }
+  
+  .contact-form label {
+    display: block;
+    margin: 10px 0;
+    color: var(--text-color); /* Dynamic based on theme */
+  }
+  
+  .contact-form input,
+  .contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid var(--input-border-color); /* Dynamic based on theme */
+    border-radius: 5px;
+    background-color: var(--input-background-color); /* Dynamic based on theme */
+    color: var(--input-text-color); /* Dynamic based on theme */
+    transition: border-color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+  }
+  
+  .contact-form input:focus,
+  .contact-form textarea:focus {
+    border-color: var(--input-focus-border-color); /* Dynamic based on theme */
+    outline: none;
+  }
+  
+  .contact-form button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: var(--button-background-color); /* Dynamic based on theme */
+    color: var(--button-text-color); /* Dynamic based on theme */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .contact-form button:hover {
+    background-color: var(--button-hover-background-color); /* Dynamic based on theme */
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .contact-container {
+      padding: 15px;
+    }
+  
+    .contact-form input,
+    .contact-form textarea {
+      padding: 8px;
+    }
+  
+    .contact-form button {
+      padding: 8px 16px;
+    }
+  }
+  

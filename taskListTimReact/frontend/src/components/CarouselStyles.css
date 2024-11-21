@@ -1,40 +1,94 @@
-/* Set consistent height for the main carousel container */
-.slick-list {
-  overflow: hidden;
-  height: 400px; /* Adjust to fit the largest image */
-}
-
-/* Ensure slick-track aligns images properly */
-.slick-track {
+/* Style for the arrows */
+.slick-prev,
+.slick-next {
+  position: absolute;
+  top: 50%; /* Center vertically */
+  transform: translateY(-50%);
+  z-index: 2; /* Ensure they appear above other elements */
+  width: 40px; /* Adjust arrow size */
+  height: 40px;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for visibility */
+  border-radius: 50%; /* Circle shape */
   display: flex;
-  align-items: center; /* Vertically center the images */
-  height: 100%;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }
 
-/* Main images in the carousel */
+/* Position prev arrow on the left */
+.slick-prev {
+  left: 10px; /* Inside the container */
+}
+
+/* Position next arrow on the right */
+.slick-next {
+  right: 10px; /* Inside the container */
+}
+
+/* Style for the arrow icons */
+.slick-prev:before,
+.slick-next:before {
+  content: ''; /* Remove default text */
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-top: 2px solid white; /* Arrow design */
+  border-right: 2px solid white;
+  transform: rotate(-135deg);
+}
+
+.slick-next:before {
+  transform: rotate(45deg); /* Adjust direction for next arrow */
+}
+
+/* Hover effect for arrows */
+.slick-prev:hover,
+.slick-next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Main container for carousel */
+.carousel-container {
+  max-width: 100%;
+  margin: 0 auto;
+  padding-bottom: 50px; /* Add space between thumbnails and footer */
+  position: relative; /* For absolute positioning of dots */
+  overflow: hidden; /* Prevent arrows from sticking out */
+}
+
+/* Main image slider */
 .slick-slide img {
-  max-height: 400px; /* Adjust to fit the largest image */
+  max-height: 400px; /* Ensure consistent height */
   width: auto; /* Maintain aspect ratio */
   margin: auto;
   display: block;
   object-fit: contain; /* Ensure images fit neatly */
 }
 
-/* Thumbnails under the main carousel */
+/* Align slick-track properly */
+.slick-track {
+  display: flex;
+  align-items: center; /* Vertically center the images */
+  height: 100%;
+}
+
+/* Thumbnail slider settings */
 .slick-dots {
   display: flex !important;
   justify-content: center;
   flex-wrap: wrap;
-  margin-top: 15px;
+  gap: 10px; /* Space between thumbnails */
+  margin-top: 20px; /* Space below the carousel */
 }
 
 .slick-dots li {
-  margin: 20px;padding:20px;
+  margin: 0; /* Remove unnecessary spacing */
 }
 
+/* Thumbnail styles */
 .slick-dots img {
-  height: 50px; /* Thumbnail height */
-  width: 50px; /* Maintain square aspect */
+  height: 60px; /* Thumbnail height */
+  width: auto; /* Maintain aspect ratio */
   object-fit: cover;
   border-radius: 5px;
   cursor: pointer;
@@ -42,38 +96,23 @@
   transition: border-color 0.3s ease;
 }
 
-/* Highlight the active thumbnail */
 .slick-dots .slick-active img {
-  border-color: #1976d2; /* Theme color for active thumbnail */
+  border-color: #1976d2; /* Highlight active thumbnail */
 }
 
-/* Adjust carousel for responsiveness */
+/* Responsive adjustments for smaller screens */
 @media (max-width: 768px) {
-  .slick-list {
-    height: 300px; /* Reduce main image height */
-  }
-
-  .slick-slide img {
-    max-height: 280px; /* Scale down main image */
-  }
-
   .slick-dots img {
-    height: 40px; /* Reduce thumbnail size */
-    width: 40px;
+    height: 50px; /* Adjust thumbnail size for tablets */
+  }
+
+  .slick-dots {
+    gap: 5px; /* Reduce spacing between thumbnails */
   }
 }
 
 @media (max-width: 480px) {
-  .slick-list {
-    height: 240px; /* Further reduce main image height */
-  }
-
-  .slick-slide img {
-    max-height: 220px; /* Scale down for mobile */
-  }
-
   .slick-dots img {
-    height: 30px; /* Smaller thumbnails */
-    width: 30px;
+    height: 40px; /* Further reduce thumbnail size for mobile */
   }
 }

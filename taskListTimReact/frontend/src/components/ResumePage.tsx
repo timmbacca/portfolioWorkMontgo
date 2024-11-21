@@ -71,14 +71,21 @@ const Resume = () => {
       </ResumeSection>
 
       <ResumeSection>
-        <h2>Computer Skills</h2>
+        <h2>Computer Skills</h2> 
         <ul>
           <li>Design Software: Adobe Creative Suite, Corel Painter, Procreate</li>
           <li>3D Tools: Blender, Autodesk Maya, 3D Studio Max</li>
-          <li>Programming: HTML, CSS, JavaScript, TypeScript, React, Node.js</li>
+          <li>Programming: HTML, CSS, JavaScript, TypeScript, React, Node.js, Java, SQL (MySQL, Oracle SQL), </li>
           <li>Cloud: Google Cloud Platform</li>
           <li>Project Management: Jira, Trello, Microsoft Teams</li>
           <li>Accessibility: 508 and WCAG compliance</li>
+        </ul>
+      </ResumeSection>
+
+      <ResumeSection>
+        <h2>Certification</h2> 
+        <ul>
+          <li>Certified Scrum Master (CSM)</li>
         </ul>
       </ResumeSection>
 
@@ -94,7 +101,7 @@ const Resume = () => {
 
         <h3>Tiber Creek Consulting | 2009–2015</h3>
         <ul>
-          <li>Created responsive web pages and UI mockups for National Guard portals.</li>
+          <li>Created responsive web pages and UI mockups for National Guard and Army Reserve portals.</li>
           <li>Updated web portals using Bootstrap and jQuery UI for responsive layouts.</li>
           <li>Themed multiple military websites for consistency and accessibility.</li>
         </ul>
