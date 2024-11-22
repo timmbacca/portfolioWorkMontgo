@@ -1,36 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useTheme } from '@mui/material/styles';
+import { StyledLink } from './StyledLink'; // Import the StyledLink component
 
-const ResumeWrapper = styled.div<{ theme: any }>`
+const ResumeWrapper = styled.div`
   padding: 20px;
   max-width: 800px;
   margin: 0 auto;
   margin-bottom: 15px;
-  background-color: ${({ theme }) => theme.palette.background.default};
-  color: ${({ theme }) => theme.palette.text.primary};
-  border: 1px solid ${({ theme }) => theme.palette.primary.main};
+  background-color: ${({ theme }) => theme.palette?.background?.default || '#ffffff'};
+  color: ${({ theme }) => theme.palette?.text?.primary || '#000000'};
+  border: 1px solid ${({ theme }) => theme.palette?.primary?.main || '#1976d2'};
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 `;
 
-const DownloadLink = styled.a<{ theme: any }>`
-  display: inline-block;
-  margin-top: 20px;
-  padding: 10px 15px;
-  color: ${({ theme }) => theme.palette.background.default};
-  background-color: ${({ theme }) => theme.palette.primary.main};
-  text-decoration: none;
-  font-weight: bold;
-  border-radius: 4px;
-  text-align: center;
-
-  &:hover {
-    background-color: ${({ theme }) => theme.palette.secondary.main};
-  }
-`;
-
-const ResumeSection = styled.div<{ theme: any }>`
+const ResumeSection = styled.div`
   margin-bottom: 20px;
   text-align: left;
 
@@ -39,14 +24,13 @@ const ResumeSection = styled.div<{ theme: any }>`
     font-size: 1.5rem;
     font-weight: bold;
     margin-bottom: 10px;
-    color: ${({ theme }) => theme.palette.primary.main};
   }
 
   p,
   ul {
     font-size: 1rem;
     line-height: 1.6;
-    color: ${({ theme }) => theme.palette.text.primary};
+    text-align: left;
   }
 
   ul {
@@ -59,44 +43,45 @@ const ResumeSection = styled.div<{ theme: any }>`
 `;
 
 const Resume = () => {
-  const theme = useTheme(); // Access the theme context dynamically
+  const theme = useTheme(); // Access theme
 
   return (
     <ResumeWrapper theme={theme}>
       <h1>Charles T. Montgomery</h1>
       <p>
-        Cell: 703-336-9942 • Email: <a href="mailto:ctmontgo@gmail.com">ctmontgo@gmail.com</a>
+        Cell: 703-336-9942 • Email: 
+        <StyledLink href="mailto:ctmontgo@gmail.com" theme={theme}>
+          ctmontgo@gmail.com
+        </StyledLink>
       </p>
 
-      <ResumeSection theme={theme}>
+      <ResumeSection>
         <h2>Objective</h2>
         <p>
-          Experienced Developer seeking a challenging position to design and develop engaging
-          websites, user interfaces, and mobile applications. Aiming to utilize cutting-edge
-          technologies to enhance the effectiveness of web/mobile applications.
+          Experienced Developer seeking a challenging position to design and develop engaging websites, user interfaces, and mobile applications. Aiming to utilize cutting-edge technologies to enhance the effectiveness of web/mobile applications.
         </p>
       </ResumeSection>
 
-      <ResumeSection theme={theme}>
+      <ResumeSection>
         <h2>Computer Skills</h2>
         <ul>
           <li>Design Software: Adobe Creative Suite, Corel Painter, Procreate</li>
           <li>3D Tools: Blender, Autodesk Maya, 3D Studio Max</li>
-          <li>Programming: HTML, CSS, JavaScript, TypeScript, React, Node.js, Java, SQL (MySQL, Oracle SQL)</li>
+          <li>Programming: HTML, CSS, JavaScript, TypeScript, React, Node.js, Java, SQL (MySQL, Oracle SQL), </li>
           <li>Cloud: Google Cloud Platform</li>
           <li>Project Management: Jira, Trello, Microsoft Teams</li>
           <li>Accessibility: 508 and WCAG compliance</li>
         </ul>
       </ResumeSection>
 
-      <ResumeSection theme={theme}>
+      <ResumeSection>
         <h2>Certification</h2>
         <ul>
           <li>Certified Scrum Master (CSM)</li>
         </ul>
       </ResumeSection>
 
-      <ResumeSection theme={theme}>
+      <ResumeSection>
         <h2>Employment Experience</h2>
         <h3>Optimo-IT (Contractor for USPS) | 2015–2024</h3>
         <ul>
@@ -121,7 +106,7 @@ const Resume = () => {
         </ul>
       </ResumeSection>
 
-      <ResumeSection theme={theme}>
+      <ResumeSection>
         <h2>Education</h2>
         <ul>
           <li>B.F.A., Media Arts and Animation - Illinois Institute of Art</li>
@@ -130,9 +115,14 @@ const Resume = () => {
         </ul>
       </ResumeSection>
 
-      <DownloadLink theme={theme} href="/CMontgomery_Resume_2024.pdf" download>
+      <StyledLink
+        href="/CMontgomery_Resume_2024.pdf"
+        download
+        theme={theme}
+        style={{ marginTop: '20px', display: 'inline-block' }}
+      >
         Download Resume (PDF)
-      </DownloadLink>
+      </StyledLink>
     </ResumeWrapper>
   );
 };

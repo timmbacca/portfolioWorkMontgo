@@ -15,14 +15,14 @@
   }
   
   .contact-info a {
-    color: var(--link-color); /* Dynamic based on theme */
+    /* color: var(--link-color);  Dynamic based on theme */
     text-decoration: none;
     transition: color 0.3s ease-in-out;
   }
   
   .contact-info a:hover {
     text-decoration: underline;
-    color: var(--link-hover-color); /* Dynamic based on theme */
+    /* color: var(--link-hover-color);  Dynamic based on theme */
   }
   
   /* Responsive Adjustments */
