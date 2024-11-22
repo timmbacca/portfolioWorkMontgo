@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useTheme } from '@mui/material/styles';
 
-const LandingPageWrapper = styled.main`
+const LandingPageWrapper = styled.main<{ theme: any }>`
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -9,10 +10,10 @@ const LandingPageWrapper = styled.main`
   justify-content: center;
   text-align: center;
   padding: 20px;
-  background-color: ${({ theme }) => theme.palette?.background?.default || '#ffffff'};
+  background-color: ${({ theme }) => theme.palette.background.default};
 `;
 
-const HeroBanner = styled.section`
+const HeroBanner = styled.section<{ theme: any }>`
   width: 100%;
   height: 270px; /* Adjust height as needed */
   background: url('/path-to-hero-banner-graphic.png') no-repeat center center;
@@ -24,12 +25,12 @@ const HeroBanner = styled.section`
   justify-content: center;
 `;
 
-const PhotoWrapper = styled.div`
+const PhotoWrapper = styled.div<{ theme: any }>`
   width: 269px;
   height: 269px;
   border-radius: 50%;
   overflow: hidden;
-  border: 4px solid ${({ theme }) => theme.palette?.primary?.main || '#1976d2'};
+  border: 4px solid ${({ theme }) => theme.palette.primary.main};
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 
   img {
@@ -39,53 +40,55 @@ const PhotoWrapper = styled.div`
   }
 `;
 
-const WelcomeSection = styled.section`
+const WelcomeSection = styled.section<{ theme: any }>`
   margin-bottom: 40px;
 
   h1 {
     font-size: 2.5rem;
     font-weight: bold;
-    color: ${({ theme }) => theme.palette?.text?.primary || '#000000'};
+    color: ${({ theme }) => theme.palette.text.primary};
   }
 
   p {
     font-size: 1.25rem;
-    color: ${({ theme }) => theme.palette?.text?.secondary || '#555555'};
+    color: ${({ theme }) => theme.palette.text.secondary};
   }
 `;
 
-const AboutSection = styled.section`
+const AboutSection = styled.section<{ theme: any }>`
   max-width: 800px;
   text-align: justify;
 
   h2 {
     font-size: 2rem;
     font-weight: bold;
-    color: ${({ theme }) => theme.palette?.primary?.main || '#1976d2'};
+    color: ${({ theme }) => theme.palette.primary.main};
     margin-bottom: 20px;
   }
 
   p {
     font-size: 1.1rem;
     line-height: 1.6;
-    color: ${({ theme }) => theme.palette?.text?.primary || '#000000'};
+    color: ${({ theme }) => theme.palette.text.primary};
     margin-bottom: 20px;
   }
 `;
 
 const LandingPage = () => {
+  const theme = useTheme(); // Access the theme context dynamically
+
   return (
-    <LandingPageWrapper>
-      <HeroBanner>
-        <PhotoWrapper>
+    <LandingPageWrapper theme={theme}>
+      <HeroBanner theme={theme}>
+        <PhotoWrapper theme={theme}>
           <img src="/timmie.jpg" alt="Timmie Montgomery" />
         </PhotoWrapper>
       </HeroBanner>
-      <WelcomeSection>
+      <WelcomeSection theme={theme}>
         <h1>Tim Montgomery</h1>
         <p>Discover my journey, projects, and passion for web development.</p>
       </WelcomeSection>
-      <AboutSection>
+      <AboutSection theme={theme}>
         <h2>About Me</h2>
         <p>
           With nearly two decades of experience as a UI Designer and Front-End Developer, I am passionate about building intuitive, accessible, and visually engaging user interfaces that align with both client objectives and user needs. I am also committed to growing and expanding my back-end development skills.

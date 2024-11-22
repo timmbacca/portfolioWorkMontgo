@@ -1,32 +1,23 @@
-import { createTheme } from '@mui/material/styles';
+import { createTheme, PaletteMode } from '@mui/material/styles';
+
+const federalMode: PaletteMode = 'light';
 
 const federalTheme = createTheme({
   palette: {
-    mode: 'light',
-    primary: {
-      main: '#002868', // Federal blue
-    },
-    secondary: {
-      main: '#BF0A30', // Federal red
-    },
+    mode: federalMode,
+    primary: { main: '#0b5394' },
+    secondary: { main: '#b7d9f2' },
     background: {
-      default: '#ffffff', // White background
-      paper: '#f7f7f7', // Light gray background for cards
+      default: '#ffffff',
+      paper: '#f8f8f8',
     },
     text: {
-      primary: '#002868', // Federal blue text
-      secondary: '#555555', // Gray text
+      primary: '#333333',
+      secondary: '#666666',
     },
   },
   typography: {
     fontFamily: 'Roboto, Arial, sans-serif',
-    h4: {
-      fontWeight: 'bold',
-      color: '#002868',
-    },
-    body1: {
-      color: '#555555',
-    },
   },
 });
 
