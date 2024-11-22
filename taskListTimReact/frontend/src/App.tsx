@@ -2,11 +2,8 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider as MuiThemeProvider, CssBaseline, Button, Box } from '@mui/material';
 import { ThemeProvider as StyledThemeProvider } from 'styled-components'; // Import styled-components ThemeProvider
-import lightTheme from './themes/lightTheme';
 import darkTheme from './themes/darkTheme';
 import federalTheme from './themes/federalTheme';
-import forestTheme from './themes/forestTheme';
-import desertTheme from './themes/desertTheme';
 import Header from './components/Header';
 import LandingPage from './components/LandingPage';
 import TaskTrackerPage from './components/TaskTrackerPage';
@@ -18,22 +15,19 @@ import Footer from './components/Footer';
 
 const App: React.FC = () => {
   const themes = {
-    Light: lightTheme,
     Dark: darkTheme,
     Federal: federalTheme,
-    Forest: forestTheme,
-    Desert: desertTheme,
   };
 
-  const [selectedTheme, setSelectedTheme] = useState<keyof typeof themes>('Light');
+  const [selectedTheme, setSelectedTheme] = useState<keyof typeof themes>('Federal');
 
   const handleThemeChange = (theme: keyof typeof themes) => {
     setSelectedTheme(theme);
   };
 
   return (
-    <MuiThemeProvider theme={themes[selectedTheme] || lightTheme}>
-      <StyledThemeProvider theme={themes[selectedTheme] || lightTheme}>
+    <MuiThemeProvider theme={themes[selectedTheme] || federalTheme}>
+      <StyledThemeProvider theme={themes[selectedTheme] || federalTheme}>
         <CssBaseline />
         <Router>
           <div className="App">

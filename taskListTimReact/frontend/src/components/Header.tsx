@@ -16,6 +16,7 @@ const HeaderWrapper = styled.header`
   padding: 10px 20px;
   border-bottom: 1px solid ${({ theme }) => theme.palette?.primary?.main || '#1976d2'};
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow for a floating effect */
+  border:none;
 `;
 
 
@@ -50,21 +51,24 @@ const NavLinks = styled.nav<{ isActive: boolean }>`
   flex-direction: column;
   align-items: flex-start;
   position: absolute;
-  top: 125px;
+  top: 65px;
   left: 0;
   background-color: ${({ theme }) => theme.palette?.background?.default || '#ffffff'};
-  padding: 10px 20px;
+  padding: 0px;
   z-index: 2;
 
   a {
-    padding: 10px 0;
+    padding: 10px;
     text-decoration: none;
     color: ${({ theme }) => theme.palette?.text?.primary || '#000000'};
     font-weight: bold;
+    width:100%;
+    text-align:left;
 
     &:hover {
       background-color: ${({ theme }) => theme.palette?.primary?.main || '#1976d2'};
       color: ${({ theme }) => theme.palette?.background?.default || '#ffffff'};
+      padding: 10px;
     }
   }
 

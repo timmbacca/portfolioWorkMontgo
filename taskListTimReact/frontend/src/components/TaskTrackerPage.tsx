@@ -6,7 +6,8 @@ import TaskUpdateModal from './TaskUpdateModal';
 import {
   TextField, Select, MenuItem, Button, FormControl, InputLabel, FormGroup,
   FormControlLabel, Checkbox, Slider, Typography, Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow,
-  TableSortLabel, Paper, TablePagination
+  TableSortLabel, Paper, TablePagination,
+  Link
 } from '@mui/material';
 import { validateInput } from '../utils/validation';
 import { LocalizationProvider } from '@mui/x-date-pickers';
@@ -328,6 +329,16 @@ function formatDateToMMDDYYYY(date: Date | string | null | undefined): string {
     
     <Box sx={{ padding: 2 }}>
      <h1>Task Tracker</h1>
+     <h2>
+        Follow my project progress on{' '}
+        <Link 
+          href="https://github.com/timmbacca/portfolioWorkMontgo" 
+          target="_blank" 
+          rel="noopener noreferrer"
+        >
+          GitHub
+        </Link>.
+      </h2>
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, maxWidth: 400, margin: 'auto' }}>
       <TextField
           label="Task Title"

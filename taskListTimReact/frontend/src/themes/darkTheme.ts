@@ -12,6 +12,7 @@ const darkTheme = createTheme({
     background: {
       default: '#141414', // dark background
       paper: '#1f1f1f', // Slightly lighter for cards
+      
     },
     text: {
       primary: '#ffffff',

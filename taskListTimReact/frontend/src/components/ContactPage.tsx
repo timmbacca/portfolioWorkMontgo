@@ -26,25 +26,6 @@ const ContactMe = () => {
           </a>
         </p>
       </div>
-      <form className="contact-form">
-        <label>
-          Name:
-          <input type="text" name="name" required />
-        </label>
-        <label>
-          Email:
-          <input type="email" name="email" required />
-        </label>
-        <label>
-          Subject:
-          <input type="text" name="subject" required />
-        </label>
-        <label>
-          Message:
-          <textarea name="message" rows={5} required />
-        </label>
-        <button type="submit">Send</button>
-      </form>
     </div>
   );
 };
