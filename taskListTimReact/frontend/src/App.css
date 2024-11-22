@@ -1,8 +1,15 @@
-html, body, #root {
-  height: 100%;
+html, body {
+  height: 100%; /* Ensures the body takes the full height of the viewport */
   margin: 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%; /* Ensures the root takes the full height of the viewport */
 }
 
 /* Ensure the body has a minimum width of 420px */
@@ -35,7 +42,11 @@ main {
 footer {
   flex-shrink: 0; /* Ensures the footer does not shrink */
   width: 100%; /* Ensures the footer spans the full width */
+  margin-top: auto; /* Pushes the footer to the bottom */
 }
 
 @import "~slick-carousel/slick/slick.css";
 @import "~slick-carousel/slick/slick-theme.css";
+
+
+
