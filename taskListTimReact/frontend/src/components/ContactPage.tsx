@@ -21,7 +21,7 @@ const ContactSection = styled.section<{ theme: any }>`
   h1 {
     font-size: 2rem;
     font-weight: bold;
-    color: ${({ theme }) => theme.palette.primary.main};
+    //color: ${({ theme }) => theme.palette.primary.main};
   }
 
   p {
