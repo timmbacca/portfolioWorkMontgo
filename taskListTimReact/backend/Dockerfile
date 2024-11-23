@@ -13,8 +13,8 @@ RUN npm install
 # Copy the rest of the application code into the working directory
 COPY . .
 
-# Ensure mysql-client is installed for database initialization
-RUN apt-get update && apt-get install -y mysql-client
+# Update apt-get and install the default MySQL client
+RUN apt-get update && apt-get install -y default-mysql-client
 
 # Copy the SQL initialization script into the container
 COPY ./db/init_tasks_table.sql /app/db/init_tasks_table.sql
