@@ -22,6 +22,9 @@ FROM nginx:stable-alpine
 # Copy the build output from the previous step
 COPY --from=build /app/build /usr/share/nginx/html
 
+# Add the custom Nginx configuration to handle React Router
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
 # Expose port 80 for the web server
 EXPOSE 80
 
