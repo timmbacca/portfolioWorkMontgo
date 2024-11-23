@@ -13,6 +13,9 @@ RUN npm install
 # Copy the rest of the application code into the working directory
 COPY . .
 
+# Compile TypeScript into JavaScript
+RUN npm run build
+
 # Update apt-get and install the default MySQL client
 RUN apt-get update && apt-get install -y default-mysql-client
 
@@ -23,4 +26,4 @@ COPY ./db/init_tasks_table.sql /app/db/init_tasks_table.sql
 EXPOSE 4000
 
 # Define the command to start the application and initialize the database
-CMD ["sh", "-c", "npm start && mysql -h $DB_HOST -u $DB_USER -p$DB_PASSWORD $DB_NAME < /app/db/init_tasks_table.sql"]
+CMD ["sh", "-c", "mysql -h $DB_HOST -u $DB_USER -p$DB_PASSWORD $DB_NAME < /app/db/init_tasks_table.sql && node dist/index.js"]
