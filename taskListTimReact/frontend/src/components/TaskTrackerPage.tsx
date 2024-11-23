@@ -339,6 +339,11 @@ function formatDateToMMDDYYYY(date: Date | string | null | undefined): string {
           GitHub
         </Link>.
       </h2>
+      <Box sx={{ textAlign: 'center', marginBottom: 2 }}>
+        <Typography variant="body2" color="textSecondary">
+          {tasks.length}/100 tasks created
+        </Typography>
+      </Box>
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, maxWidth: 400, margin: 'auto' }}>
       <TextField
           label="Task Title"
