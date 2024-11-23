@@ -1,8 +1,8 @@
 -- Create a database if it doesn't exist
-CREATE DATABASE IF NOT EXISTS task_tracker;
+CREATE DATABASE IF NOT EXISTS task_tracker_tim;
 
 -- Use the database
-USE task_tracker;
+USE task_tracker_tim;
 
 -- Drop the table if it already exists
 DROP TABLE IF EXISTS tasks;

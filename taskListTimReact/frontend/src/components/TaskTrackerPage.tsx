@@ -131,7 +131,13 @@ const TaskTrackerPage: React.FC = () => {
     // Filter by search query
     if (searchQuery) {
       displayedTasks = displayedTasks.filter((task) =>
-        task.title.toLowerCase().includes(searchQuery.toLowerCase())
+        ['title', 'description', 'priority', 'status', 'assignedTo', 'tags', 'comments', 'riskLevel']
+          .some((field) =>
+            (task[field as keyof Task] || '') // Ensure the field exists
+              .toString()
+              .toLowerCase()
+              .includes(searchQuery.toLowerCase())
+          )
       );
     }
   
@@ -145,7 +151,7 @@ const TaskTrackerPage: React.FC = () => {
       const isAsc = sortOrder === 'asc';
       const aValue = a[sortField] ?? ''; // Default to empty string if null or undefined
       const bValue = b[sortField] ?? ''; // Default to empty string if null or undefined
-    
+  
       if (aValue < bValue) return isAsc ? -1 : 1;
       if (aValue > bValue) return isAsc ? 1 : -1;
       return 0;
@@ -154,6 +160,7 @@ const TaskTrackerPage: React.FC = () => {
     // Update filtered tasks state
     setFilteredTasks(displayedTasks);
   };
+  
   
   
   const handleAddTask = async () => {
@@ -496,7 +503,7 @@ function formatDateToMMDDYYYY(date: Date | string | null | undefined): string {
       zIndex: 10,
     }}>
         <TextField
-          label="Search by Title or Description"
+          label="Search by Title, Description, or Other Fields"
           variant="outlined"
           fullWidth
           margin="dense"

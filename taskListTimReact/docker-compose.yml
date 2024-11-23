@@ -1,5 +1,16 @@
 version: '3.8'
 services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    environment:
+      REACT_APP_BACKEND_URL: "http://localhost:4000" # Frontend connects to the backend on localhost in development
+
   backend:
     build:
       context: ./backend
@@ -9,17 +20,17 @@ services:
     depends_on:
       - db
     env_file:
-      - .env  # Use the root .env file
+      - ./backend/.env  # Use backend-specific .env file for backend
 
   db:
     image: mysql:8
-    env_file:
-      - .env  # Use the root .env file
     ports:
       - "3307:3306"
+    env_file:
+      - .env  # Root .env file for MySQL variables
     volumes:
-      - db_data:/var/lib/mysql
-      - ./db/init_tasks_table.sql:/docker-entrypoint-initdb.d/init_tasks_table.sql  # Mount the SQL file for initialization
+      - db_data:/var/lib/mysql  # Persist database data
+      - ./db:/docker-entrypoint-initdb.d  # Mount the db directory for initialization scripts
 
 volumes:
   db_data:
