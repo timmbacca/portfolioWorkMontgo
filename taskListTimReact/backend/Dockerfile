@@ -7,8 +7,11 @@ WORKDIR /app
 # Copy package.json and package-lock.json into the working directory
 COPY package*.json ./
 
-# Install dependencies
+# Install dependencies (including devDependencies)
 RUN npm install
+
+# Install TypeScript globally (optional but useful for debugging)
+RUN npm install -g typescript
 
 # Copy the rest of the application code into the working directory
 COPY . .
@@ -26,4 +29,4 @@ COPY ./db/init_tasks_table.sql /app/db/init_tasks_table.sql
 EXPOSE 4000
 
 # Define the command to start the application and initialize the database
-CMD ["sh", "-c", "mysql -h $DB_HOST -u $DB_USER -p$DB_PASSWORD $DB_NAME < /app/db/init_tasks_table.sql && node dist/index.js"]
+CMD ["sh", "-c", "node dist/index.js && mysql -h $DB_HOST -u $DB_USER -p$DB_PASSWORD $DB_NAME < /app/db/init_tasks_table.sql"]
