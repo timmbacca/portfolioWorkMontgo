@@ -2,7 +2,7 @@
 FROM node:16
 
 # Set the working directory in the container
-WORKDIR /taskListTimReact
+WORKDIR /app
 
 # Copy package.json and package-lock.json for dependency installation
 COPY package*.json tsconfig.json ./
