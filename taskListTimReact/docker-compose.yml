@@ -11,16 +11,14 @@ services:
     environment:
       REACT_APP_BACKEND_URL: "http://localhost:4000" # Frontend connects to the backend on localhost in development
 
-  backend:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
-    ports:
-      - "4000:4000"
-    depends_on:
-      - db
-    env_file:
-      - ./backend/.env  # Use backend-specific .env file for backend
+backend:
+  build:
+    context: ./backend
+    dockerfile: Dockerfile
+  ports:
+    - "4000:4000"
+  depends_on:
+    - db
 
   db:
     image: mysql:8
