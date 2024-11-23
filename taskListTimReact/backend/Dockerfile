@@ -1,24 +1,26 @@
-# Use the official Node.js 18 image as the base
-FROM node:18
+# Use the Node.js 16 base image
+FROM node:16
 
 # Set the working directory inside the container
-WORKDIR /app
+WORKDIR /taskListTimReact
 
-# Copy package.json and package-lock.json (if available)
+# Copy package.json and package-lock.json into the working directory
 COPY package*.json ./
 
 # Install dependencies
 RUN npm install
-RUN npm install -g ts-node typescript
 
-# Copy the rest of the application code to the container
+# Copy the rest of the application code into the working directory
 COPY . .
 
-# Compile TypeScript code
-RUN npm run build
+# Install mysql-client to handle database initialization
+RUN apt-get update && apt-get install -y mysql-client
 
-# Expose the application port
+# Copy the SQL initialization script into the container
+COPY ../db/init_tasks_table.sql /taskListTimReact/db/init_tasks_table.sql
+
+# Expose the backend port
 EXPOSE 4000
 
-# Start the application
-CMD ["npm", "start"]
+# Define the command to start the application and initialize the database
+CMD ["sh", "-c", "npm start && mysql -h $DB_HOST -u $DB_USER -p$DB_PASSWORD $DB_NAME < /taskListTimReact/db/init_tasks_table.sql"]
