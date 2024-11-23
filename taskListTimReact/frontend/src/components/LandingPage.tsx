@@ -81,7 +81,7 @@ const LandingPage = () => {
     <LandingPageWrapper theme={theme}>
       <HeroBanner theme={theme}>
         <PhotoWrapper theme={theme}>
-          <img src="/timmie.jpg" alt="Tim Montgomery" />
+          <img src="/timmie.JPG" alt="Tim Montgomery" />
         </PhotoWrapper>
       </HeroBanner>
       <WelcomeSection theme={theme}>
