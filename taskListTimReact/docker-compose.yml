@@ -1,4 +1,5 @@
-version: '3.8'
+version: '3.9'  # Adjusted version for compatibility
+
 services:
   frontend:
     build:
@@ -9,26 +10,35 @@ services:
     depends_on:
       - backend
     environment:
-      REACT_APP_BACKEND_URL: "http://localhost:4000" # Frontend connects to the backend on localhost in development
+      - REACT_APP_BACKEND_URL=http://backend:4000  # Pass backend URL for the frontend
 
-backend:
-  build:
-    context: ./backend
-    dockerfile: Dockerfile
-  ports:
-    - "4000:4000"
-  depends_on:
-    - db
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "4000:4000"
+    depends_on:
+      - db
+    environment:  # Environment variables for the backend
+      - DB_HOST=db
+      - DB_USER=${MYSQL_USER}  # Replace with your DB user
+      - DB_PASSWORD=${MYSQL_PASSWORD}  # Replace with your DB password
+      - DB_NAME=${MYSQL_DATABASE}  # Replace with your DB name
+      - PORT=4000
 
   db:
     image: mysql:8
     ports:
       - "3307:3306"
-    env_file:
-      - .env  # Root .env file for MySQL variables
+    environment:  # Environment variables for MySQL
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     volumes:
       - db_data:/var/lib/mysql  # Persist database data
-      - ./db:/docker-entrypoint-initdb.d  # Mount the db directory for initialization scripts
+      - ./db:/docker-entrypoint-initdb.d  # Initialization script for the DB
 
 volumes:
   db_data:
