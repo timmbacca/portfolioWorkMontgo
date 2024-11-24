@@ -21,12 +21,11 @@ export interface Task {
 
 // Set up Axios instance for the API
 const api = axios.create({
-  baseURL: process.env.REACT_APP_BACKEND_URL || 'http://localhost:4000',
+  baseURL: process.env.REACT_APP_BACKEND_URL || 'https://portfolioWorkMontgoBack.onrender.com',
   headers: {
     'Content-Type': 'application/json',
   },
 });
-
 
 // Get all tasks
 export const getTasks = async (): Promise<Task[]> => {
