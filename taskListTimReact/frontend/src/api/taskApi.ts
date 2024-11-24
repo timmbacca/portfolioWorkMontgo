@@ -1,4 +1,3 @@
-
 import axios from 'axios';
 
 // Define and export the Task interface
@@ -22,7 +21,7 @@ export interface Task {
 
 // Set up Axios instance for the API
 const api = axios.create({
-  baseURL: 'http://localhost:4000', // The URL where your backend is running
+  baseURL: process.env.REACT_APP_BACKEND_URL || 'http://localhost:4000', // Use the backend URL from the environment variable
 });
 
 // Get all tasks
