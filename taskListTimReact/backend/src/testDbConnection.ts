@@ -1,13 +1,13 @@
-import { pool } from './db'; // Use named import instead of a default import
+import { pool } from './db'; // Use named import from the updated db.ts file
 
 const testConnection = async () => {
   try {
-    const [rows] = await pool.query('SELECT * FROM tasks');
-    console.log('Connection successful, tasks:', rows);
+    const result = await pool.query('SELECT * FROM tasks'); // Use `query` for PostgreSQL
+    console.log('Connection successful, tasks:', result.rows); // Access the `rows` property for the data
   } catch (error) {
     console.error('Error connecting to the database:', error);
   } finally {
-    pool.end();
+    await pool.end(); // Use `await` to properly close the connection pool
   }
 };
 

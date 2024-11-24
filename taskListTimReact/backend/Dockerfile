@@ -19,8 +19,8 @@ COPY . .
 # Compile TypeScript into JavaScript
 RUN npm run build
 
-# Update apt-get and install the default MySQL client
-RUN apt-get update && apt-get install -y default-mysql-client
+# Update apt-get and install the default PostgreSQL client
+RUN apt-get update && apt-get install -y postgresql-client
 
 # Copy the SQL initialization script into the container
 COPY ./db/init_tasks_table.sql /app/db/init_tasks_table.sql
@@ -29,4 +29,4 @@ COPY ./db/init_tasks_table.sql /app/db/init_tasks_table.sql
 EXPOSE 4000
 
 # Define the command to start the application and initialize the database
-CMD ["sh", "-c", "node dist/index.js && mysql -h $DB_HOST -u $DB_USER -p$DB_PASSWORD $DB_NAME < /app/db/init_tasks_table.sql"]
+CMD ["sh", "-c", "node dist/index.js && psql $DATABASE_URL -f /app/db/init_tasks_table.sql"]
