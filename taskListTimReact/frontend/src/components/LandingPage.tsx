@@ -58,8 +58,8 @@ const WelcomeSection = styled.section<{ theme: any }>`
 const AboutSection = styled.section<{ theme: any }>`
   max-width: 800px;
   text-align: justify;
-  padding-left:20px;
-  padding-right:20px;
+  padding-left:10px;
+  padding-right:10px;
 
   h2 {
     font-size: 2rem;
@@ -83,7 +83,7 @@ const LandingPage = () => {
     <LandingPageWrapper theme={theme}>
       <HeroBanner theme={theme}>
         <PhotoWrapper theme={theme}>
-          <img src="/timmie.JPG" alt="Tim Montgomery" />
+          <img src="./timmieM.jpg" alt="Tim Montgomery" />
         </PhotoWrapper>
       </HeroBanner>
       <WelcomeSection theme={theme}>

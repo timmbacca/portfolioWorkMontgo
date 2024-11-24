@@ -164,6 +164,7 @@ const TaskUpdateModal: React.FC<TaskUpdateModalProps> = ({ open, onClose, onSubm
           onChange={handleChange}
           fullWidth
           margin="dense"
+          inputProps={{ min: 0, step: 1 }}
         />
         <TextField
           label="Time Spent (hrs)"
@@ -173,6 +174,7 @@ const TaskUpdateModal: React.FC<TaskUpdateModalProps> = ({ open, onClose, onSubm
           onChange={handleChange}
           fullWidth
           margin="dense"
+          inputProps={{ min: 0, step: 1 }}
         />
         <TextField
           label="Tags"
