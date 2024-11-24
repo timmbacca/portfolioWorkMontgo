@@ -29,4 +29,4 @@ COPY ./db/init_tasks_table.sql /app/db/init_tasks_table.sql
 EXPOSE 4000
 
 # Define the command to start the application and initialize the database
-CMD ["sh", "-c", "node dist/index.js && psql $DATABASE_URL -f /app/db/init_tasks_table.sql"]
+CMD ["sh", "-c", "psql $DATABASE_URL -f /app/db/init_tasks_table.sql && node dist/index.js"]
