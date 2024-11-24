@@ -21,19 +21,34 @@ export interface Task {
 
 // Set up Axios instance for the API
 const api = axios.create({
-  baseURL: process.env.REACT_APP_BACKEND_URL || 'http://localhost:4000', // Use the backend URL from the environment variable
+  baseURL: process.env.REACT_APP_BACKEND_URL || 'http://localhost:4000',
+  headers: {
+    'Content-Type': 'application/json',
+  },
 });
+
 
 // Get all tasks
 export const getTasks = async (): Promise<Task[]> => {
-  const response = await api.get('/tasks');
-  return response.data;
+  try {
+    const response = await api.get('/tasks');
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching tasks:', error);
+    throw error; // Rethrow the error to handle it in the calling component
+  }
 };
 
 // Add a new task
 export const addTask = async (task: Omit<Task, 'id'>): Promise<Task> => {
-  const response = await api.post('/tasks', task);
-  return response.data;
+  try {
+    console.log('Payload sent to backend:', task); // Log payload for debugging
+    const response = await api.post('/tasks', task);
+    return response.data;
+  } catch (error) {
+    console.error('Error adding task:', error);
+    throw error; // Rethrow the error to handle it in the calling component
+  }
 };
 
 // Update an existing task
