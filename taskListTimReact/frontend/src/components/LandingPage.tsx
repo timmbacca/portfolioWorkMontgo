@@ -58,6 +58,8 @@ const WelcomeSection = styled.section<{ theme: any }>`
 const AboutSection = styled.section<{ theme: any }>`
   max-width: 800px;
   text-align: justify;
+  padding-left:20px;
+  padding-right:20px;
 
   h2 {
     font-size: 2rem;
