@@ -9,7 +9,7 @@ const HeaderWrapper = styled.header<{ theme: any }>`
   left: 0;
   width: 100%; /* Ensures the header spans the full width of the viewport */
   z-index: 1000; /* Ensures the header stays above other content */
-  background-color: ${({ theme }) => theme.palette.background.default};
+  background-color: ${({ theme }) => theme.palette.background.paper};
   color: ${({ theme }) => theme.palette.text.primary};
   display: flex;
   align-items: center;

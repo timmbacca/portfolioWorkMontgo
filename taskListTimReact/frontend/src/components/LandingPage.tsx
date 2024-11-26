@@ -74,6 +74,15 @@ const AboutSection = styled.section<{ theme: any }>`
     color: ${({ theme }) => theme.palette.text.primary};
     margin-bottom: 20px;
   }
+
+  a {
+    color: ${({ theme }) => theme.palette.primary.main};
+    text-decoration: none;
+    font-weight: bold;
+
+    &:hover {
+      color: ${({ theme }) => theme.palette.secondary.main};
+    }
 `;
 
 const LandingPage = () => {
@@ -91,15 +100,18 @@ const LandingPage = () => {
         <p>Discover my journey, projects, and passion for web development.</p>
       </WelcomeSection>
       <AboutSection theme={theme}>
-        <h2>About Me</h2>
+        <h2>About Tim</h2>
         <p>
-          With nearly two decades of experience as a UI Designer and Front-End Developer, I am passionate about building intuitive, accessible, and visually engaging user interfaces that align with both client objectives and user needs. I am also committed to growing and expanding my back-end development skills.
+        Tim Montgomery is a UI Designer and Front-End Developer with experience working as a contractor for multiple Federal agencies. Tim has a passion for building intuitive, accessible, and visually engaging user interfaces that align with both client objectives and user needs.
         </p>
         <p>
-          I am grateful that my recent employment with Optimo-IT afforded me the opportunity to learn new languages, platforms, and techniques. As such, I have developed a versatile skill set that combines a depth of technical expertise with creative insight.
+        Throughout his career, Tim has been quick to adapt to changing needs by learning new languages, platforms, techniques, requirements, and more. As such, he has developed a versatile skill set that combines a depth of technical expertise with creative insight. Tim considers himself a life-long-learner and is looking forward to continuing to expand his Front and Back-end skill sets while maintaining his keen eye for quality design and easy-to-use interfaces.
         </p>
         <p>
-          In my recent role as a contractor to the US Postal Service, I created dynamic web pages, enhanced application interfaces, and maintained accessibility guidelines using a variety of programming languages, frameworks, platforms, and tools.
+        Tim is currently seeking a challenging and rewarding opportunity puting his unique skills and perspective to work in the private or public sector. Connect with Tim to learn more about how he can contribute to your Team's mission at{' '}
+          <a href="mailto:ctmontgo@gmail.com" target="_blank" rel="noopener noreferrer">
+            ctmontgo@gmail.com
+          </a>.
         </p>
       </AboutSection>
     </LandingPageWrapper>

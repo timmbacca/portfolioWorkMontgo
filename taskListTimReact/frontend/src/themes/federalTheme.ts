@@ -9,7 +9,7 @@ const federalTheme = createTheme({
     secondary: { main: '#b7d9f2' },
     background: {
       default: '#ffffff',
-      paper: '#f8f8f8',
+      paper: '#F7F7F7',
     },
     text: {
       primary: '#333333',
