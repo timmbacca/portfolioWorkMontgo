@@ -31,6 +31,7 @@ const api = axios.create({
 export const getTasks = async (): Promise<Task[]> => {
   try {
     const response = await api.get('/tasks');
+    console.log('response :', response.data);
     return response.data;
   } catch (error) {
     console.error('Error fetching tasks:', error);

@@ -361,7 +361,7 @@ function formatDateToMMDDYYYY(date: Date | string | null | undefined): string {
   <h2>
     How It's Put Together
   </h2>
-  <ul style={{ listStyleType: 'disc', margin: 'auto', lineHeight: '1.5', textAlign:'justify', width:'80%', marginBottom:'10px' }}>
+  <ul style={{ listStyleType: 'disc', margin: 'auto', lineHeight: '1.5', textAlign:'justify', width:'90%', marginBottom:'10px', paddingInlineStart: '0px' }}>
     <li style={{ marginBottom: '10px' }}>
             <strong>Frontend:</strong> Built using <strong>React</strong> with <strong>TypeScript</strong> and styled
             with <strong>Material-UI</strong> for a responsive, modern design. Features modular components for task

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useTheme } from '@mui/material/styles';
+import HeroSVG from '../assets/ssspiral.svg';
 
 const LandingPageWrapper = styled.main<{ theme: any }>`
   flex: 1;
@@ -16,7 +17,7 @@ const LandingPageWrapper = styled.main<{ theme: any }>`
 const HeroBanner = styled.section<{ theme: any }>`
   width: 100%;
   height: 270px; /* Adjust height as needed */
-  background: url('/path-to-hero-banner-graphic.png') no-repeat center center;
+  background: url(${HeroSVG}) no-repeat center center;
   background-size: cover;
   position: relative;
   margin-bottom: 10px;
@@ -26,8 +27,8 @@ const HeroBanner = styled.section<{ theme: any }>`
 `;
 
 const PhotoWrapper = styled.div<{ theme: any }>`
-  width: 269px;
-  height: 269px;
+  width: 240px;
+  height: 240px;
   border-radius: 50%;
   overflow: hidden;
   border: 4px solid ${({ theme }) => theme.palette.primary.main};
@@ -41,7 +42,7 @@ const PhotoWrapper = styled.div<{ theme: any }>`
 `;
 
 const WelcomeSection = styled.section<{ theme: any }>`
-  margin-bottom: 40px;
+  margin-bottom: 0px;
 
   h1 {
     font-size: 2.5rem;

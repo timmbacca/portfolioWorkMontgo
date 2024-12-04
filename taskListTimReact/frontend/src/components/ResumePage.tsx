@@ -67,9 +67,9 @@ const Resume = () => {
         <ul>
           <li>Design Software: Adobe Creative Suite, Corel Painter, Procreate</li>
           <li>3D Tools: Blender, Autodesk Maya, 3D Studio Max</li>
-          <li>Programming: HTML, CSS, JavaScript, TypeScript, React, Node.js, Java, SQL (MySQL, Oracle SQL), </li>
-          <li>Cloud: Google Cloud Platform</li>
-          <li>Project Management: Jira, Trello, Microsoft Teams</li>
+          <li>Programming: HTML, CSS, JavaScript, TypeScript, React, Node.js, Java, SQL (MySQL, Oracle SQL, PostgreSQL), </li>
+          <li>Cloud: Google Cloud Platform, Render</li>
+          <li>Project Management: Jira, Trello, Version One, Microsoft Teams</li>
           <li>Accessibility: 508 and WCAG compliance</li>
         </ul>
       </ResumeSection>

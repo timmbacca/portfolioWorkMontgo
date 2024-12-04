@@ -1,4 +1,3 @@
-// src/utils/validation.ts
 
 /**
  * Validates an input string against a regex and a max length.

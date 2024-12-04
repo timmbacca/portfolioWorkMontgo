@@ -15,10 +15,12 @@ const darkTheme = createTheme({
       primary: '#ffffff',
       secondary: '#b3b3b3',
     },
+    divider: '#333333',
   },
   typography: {
-    fontFamily: 'Roboto, Arial, sans-serif',
+    fontFamily: 'BlenderProBook, Arial, sans-serif',
   },
+  chartColors: ['#E50914', '#6C757D', '#FFD700', '#2ECC71', '#FF5733', '#9B59B6'],
 });
 
 export default darkTheme;

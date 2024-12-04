@@ -15,10 +15,12 @@ const federalTheme = createTheme({
       primary: '#333333',
       secondary: '#666666',
     },
+    divider: '#CCCCCC',
   },
   typography: {
-    fontFamily: 'Roboto, Arial, sans-serif',
+    fontFamily: 'BlenderProBook, Arial, sans-serif',
   },
+  chartColors: ['#BF0A30', '#FFBF00', '#002868', '#007A33', '#F1C40F', '#1ABC9C'],
 });
 
 export default federalTheme;

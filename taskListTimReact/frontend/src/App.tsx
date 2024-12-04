@@ -6,6 +6,7 @@ import darkTheme from './themes/darkTheme';
 import federalTheme from './themes/federalTheme';
 import Header from './components/Header';
 import LandingPage from './components/LandingPage';
+import DashboardPage from './components/DashboardPage';
 import TaskTrackerPage from './components/TaskTrackerPage';
 import PastProjectsPage from './components/PastProjectsPage';
 import ResumePage from './components/ResumePage';
@@ -43,6 +44,7 @@ const App: React.FC = () => {
             <Header />
             <Routes>
               <Route path="/" element={<LandingPage />} />
+              <Route path="/dashboard" element={<DashboardPage />} />
               <Route path="/task-tracker" element={<TaskTrackerPage />} />
               <Route path="/projects" element={<PastProjectsPage />} />
               <Route path="/resume" element={<ResumePage />} />

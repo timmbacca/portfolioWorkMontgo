@@ -35,7 +35,7 @@ const Hamburger = styled.button<{ theme: any }>`
   color: ${({ theme }) => theme.palette.text.primary};
   display: block;
 
-  @media (min-width: 769px) {
+  @media (min-width: 845px) {
     display: none;
   }
 `;
@@ -77,7 +77,7 @@ const NavLinks = styled.nav<{ isActive: boolean; theme: any }>`
     }
   }
 
-  @media (min-width: 769px) {
+  @media (min-width: 845px) {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -119,6 +119,9 @@ const Header = () => {
         </Link>
         <Link to="/task-tracker" onClick={closeMenu}>
           Task Tracker
+        </Link>
+        <Link to="/dashboard" onClick={closeMenu}>
+          Task Dashboard
         </Link>
         <Link to="/projects" onClick={closeMenu}>
           Projects
