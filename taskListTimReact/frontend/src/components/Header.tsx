@@ -1,24 +1,46 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { useTheme } from '@mui/material/styles';
 
+// Keyframes for animations
+const slideIn = keyframes`
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+`;
+
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
+
+// Wrapper for header
 const HeaderWrapper = styled.header<{ theme: any }>`
-  position: fixed; /* Fixes the header at the top */
+  position: fixed;
   top: 0;
   left: 0;
-  width: 100%; /* Ensures the header spans the full width of the viewport */
-  z-index: 1000; /* Ensures the header stays above other content */
+  width: 100%;
+  z-index: 1000;
   background-color: ${({ theme }) => theme.palette.background.paper};
   color: ${({ theme }) => theme.palette.text.primary};
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Space between the logo and navigation */
-  padding: 5px 20px; /* Reduced padding for a shorter header */
-  height: 50px; /* Sets a consistent height */
+  justify-content: space-between;
+  padding: 5px 20px;
+  height: 50px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border-bottom: 1px solid ${({ theme }) => theme.palette.primary.main};
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow for a floating effect */
-  border: none;
+  animation: ${slideIn} 0.4s ease-out; /* Header slide-in animation */
 `;
 
 const LogoContainer = styled.div`
@@ -35,45 +57,65 @@ const Hamburger = styled.button<{ theme: any }>`
   color: ${({ theme }) => theme.palette.text.primary};
   display: block;
 
+  &:hover {
+    transform: scale(1.1); /* Subtle hover animation */
+    transition: transform 0.2s ease-in-out;
+  }
+
   @media (min-width: 845px) {
     display: none;
   }
 `;
 
 const Logo = styled.div<{ theme: any }>`
-  font-size: 1.25rem; /* Slightly reduced font size */
+  font-size: 1.25rem;
   font-weight: bold;
-  text-align: left; /* Ensure the text alignment is left */
   color: ${({ theme }) => theme.palette.text.primary};
+  text-align: left;
+  text-decoration: none !important;
+
+  &:hover {
+      color: ${({ theme }) => theme.palette.background.default};
+      transform: translateX(5px); /* Subtle move on hover */
+      transition: all 0.3s ease;
+  }
+
+    a {
+    text-decoration: none !important;
+    color: ${({ theme }) => theme.palette.text.primary};
+    }
+
 `;
 
 const NavLinks = styled.nav<{ isActive: boolean; theme: any }>`
   display: ${({ isActive }) => (isActive ? 'flex' : 'none')};
   flex-direction: column;
-  align-items: stretch; /* Ensure child elements stretch to the container width */
+  align-items: stretch;
   position: absolute;
-  top: 55px; /* Adjusted to align with the shorter header height */
-  left: 10px; /* Margin from the left */
-  background-color: ${({ theme }) => theme.palette?.background?.default || '#ffffff'};
-  padding: 10px; /* Padding inside the nav menu */
+  top: 55px;
+  left: 10px;
+  background-color: ${({ theme }) => theme.palette.background.default};
+  padding: 10px;
   z-index: 2;
-  border: 1px solid ${({ theme }) => theme.palette?.primary?.main || '#1976d2'};
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Slight shadow */
-  border-radius: 5px; /* Rounded corners */
+  border: 1px solid ${({ theme }) => theme.palette.primary.main};
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  animation: ${fadeIn} 0.3s ease-out;
 
   a {
-    display: block; /* Ensures the anchor tag spans the full width */
-    padding: 10px; /* Space inside each menu item */
+    display: block;
+    padding: 10px;
     text-decoration: none;
-    color: ${({ theme }) => theme.palette?.text?.primary || '#000000'};
+    color: ${({ theme }) => theme.palette.text.primary};
     font-weight: bold;
-    width: 100%; /* Ensures full width coverage for hover background */
-    white-space: nowrap; /* Prevents text wrapping */
     text-align: left;
+    white-space: nowrap;
 
     &:hover {
-      background-color: ${({ theme }) => theme.palette?.primary?.main || '#1976d2'};
-      color: ${({ theme }) => theme.palette?.background?.default || '#ffffff'};
+      background-color: ${({ theme }) => theme.palette.primary.main};
+      color: ${({ theme }) => theme.palette.background.default};
+      transform: translateX(5px); /* Subtle move on hover */
+      transition: all 0.3s ease;
     }
   }
 
@@ -88,14 +130,19 @@ const NavLinks = styled.nav<{ isActive: boolean; theme: any }>`
 
     a {
       padding: 10px 15px;
-      text-align: center; /* Center-align text in desktop view */
+      text-align: center;
+
+      &:hover {
+        transform: translateY(-5px); /* Subtle lift on hover for desktop */
+        transition: transform 0.3s ease;
+      }
     }
   }
 `;
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const theme = useTheme(); // Access the theme context
+  const theme = useTheme();
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -111,7 +158,11 @@ const Header = () => {
         <Hamburger theme={theme} onClick={toggleMenu}>
           ☰
         </Hamburger>
-        <Logo theme={theme}>Tim Montgomery</Logo>
+        <Logo theme={theme}>
+          <Link to="/">
+          Tim Montgomery
+          </Link>
+        </Logo>
       </LogoContainer>
       <NavLinks theme={theme} isActive={menuOpen}>
         <Link to="/" onClick={closeMenu}>
