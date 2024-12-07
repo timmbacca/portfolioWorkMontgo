@@ -83,9 +83,9 @@ const Resume = () => {
 
       <ResumeSection>
         <h2>Employment Experience</h2>
-        <h3>Optimo-IT (Contractor for USPS) | 2015–2024</h3>
+        <h3>Optimo-IT | 2015–2024</h3>
         <ul>
-          <li>Designed and maintained the USPS Informed Delivery website and portals.</li>
+          <li>Designed and maintained websites and portals.</li>
           <li>Developed React applications with TypeScript and integrated APIs.</li>
           <li>Created responsive HTML/CSS email templates tested across clients.</li>
           <li>Performed DevOps tasks using Jenkins, Gradle, and Google Cloud.</li>
@@ -115,14 +115,6 @@ const Resume = () => {
         </ul>
       </ResumeSection>
 
-      <StyledLink
-        href="/CMontgomery_Resume_2024.pdf"
-        download
-        theme={theme}
-        style={{ marginTop: '20px', display: 'inline-block' }}
-      >
-        Download Resume (PDF)
-      </StyledLink>
     </ResumeWrapper>
   );
 };

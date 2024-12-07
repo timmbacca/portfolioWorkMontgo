@@ -10,9 +10,6 @@ type Project = {
 };
 
 const projects: Project[] = [
-  { image: '/idDD.jpg', description: 'USPS Informed Delivery user interface to enhance mail preview accessibility for households. Focused on optimizing visual layouts and mobile responsiveness for a seamless user experience.' },
-  { image: '/informed-delivery-screenshot.png', description: 'USPS Informed Delivery sign-up portal. Integrated clear visual cues and simple navigation to improve user onboarding and increase subscription rates.' },
-  { image: '/id-package-image.jpg', description: 'USPS Informed Delivery tracking interface. Prioritized clarity and efficiency to allow users to easily track mailpieces and packages on the go.' },
   { image: '/natguardg1personnelgateway.jpg', description: 'Army National Guard G1 Personnel Gateway, streamlining access to HR resources for soldiers, veterans, and families. Implemented user-friendly features such as announcements, news highlights, and quick access to essential tools and programs.' },
   { image: '/ngEdu.jpg', description: 'National Guard Patriot Academy website mockup, showcasing programs aimed at providing education and career opportunities for recruits.' },
   { image: '/MGMTmockContactInfo.jpg', description: 'ESC Single Source Tracker, a comprehensive tool for managing soldier information and actions. Developed an interface for accessing and updating detailed soldier profiles, contact information, and uploaded files, ensuring a user-friendly experience for military personnel management.' },

@@ -67,12 +67,6 @@ const ContactPage = () => {
             linkedin.com/in/ctmontgo
           </a>
         </p>
-        <p>
-          GitHub:{' '}
-          <a href="https://github.com/timmbacca" target="_blank" rel="noopener noreferrer">
-            github.com/timmbacca
-          </a>
-        </p>
       </ContactSection>
     </ContactWrapper>
   );
