@@ -1,6 +1,7 @@
 // frontend/src/components/TaskList.tsx
 
 import React, { useEffect, useState } from 'react';
+import Papa from 'papaparse'; // For CSV parsing
 import DeleteConfirmationModal from './DeleteConfirmationModal';
 import TaskUpdateModal from './TaskUpdateModal';
 import {
@@ -17,6 +18,7 @@ import { getTasks, addTask, updateTask, deleteTask, Task } from '../api/taskApi'
 
 const TaskTrackerPage: React.FC = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
+  const [file, setFile] = useState<File | null>(null);
   const [filteredTasks, setFilteredTasks] = useState<Task[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [filterStatus, setFilterStatus] = useState<string>('');
@@ -51,6 +53,69 @@ const TaskTrackerPage: React.FC = () => {
   useEffect(() => {
     fetchTasks();
   }, []);
+
+  // Handle file selection
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setFile(e.target.files[0]);
+    }
+  };
+
+  // Process CSV file
+  const handleFileUpload = async () => {
+    if (!file) {
+      alert('Please select a CSV file first.');
+      return;
+    }
+
+    Papa.parse(file, {
+      header: true,
+      complete: async (results) => {
+        const rows = results.data as Partial<Task>[];
+
+        if (rows.length > 20) {
+          alert('Only the first 20 rows will be processed.');
+        }
+
+        let addedCount = 0;
+
+        for (const row of rows.slice(0, 20)) {
+          if (tasks.length + addedCount >= 100) {
+            alert('Task limit of 100 reached. Not all rows could be added.');
+            break;
+          }
+
+          const newTask: Task = {
+            title: row.title || 'Untitled Task',
+            description: row.description || '',
+            priority: row.priority || 'Low',
+            status: row.status || 'To Do',
+            assignedTo: row.assignedTo || '',
+            startDate: row.startDate || null,
+            dueDate: row.dueDate || null,
+            estimatedTime: Number(row.estimatedTime) || null,
+            timeSpent: Number(row.timeSpent) || null,
+            tags: row.tags || '',
+            progress: Number(row.progress) || 0,
+            comments: row.comments || '',
+            isRecurring: Boolean(row.isRecurring) || false,
+            riskLevel: row.riskLevel || 'Low',
+          };
+
+          try {
+            await addTask(newTask);
+            addedCount++;
+          } catch (error) {
+            console.error('Error adding task:', error);
+          }
+        }
+
+        alert(`Successfully added ${addedCount} tasks.`);
+        fetchTasks(); // Refresh tasks
+        setFile(null); // Clear file input
+      },
+    });
+  };
 
   useEffect(() => {
     applyFilters();
@@ -567,6 +632,71 @@ function formatDateToMMDDYYYY(date: Date | string | null | undefined): string {
         {errors.dates && <Typography color="error">{errors.dates}</Typography>}
         <Button onClick={handleAddTask} variant="contained" color="primary">Add Task</Button>
       </Box>
+
+{/* File Upload Section */}
+<Box
+  sx={{
+    marginTop: 6,
+    marginBottom: 2,
+    padding: 2,
+    border: '2px dashed',
+    borderColor: 'divider',
+    borderRadius: '8px',
+    textAlign: 'center',
+    maxWidth: 400, // Matches the width of the Add Task section
+    marginX: 'auto', // Centers the box
+    backgroundColor: 'background.paper',
+    boxShadow: 1, // Subtle shadow using MUI theme
+  }}
+>
+  <Typography variant="h6" sx={{ marginBottom: 2, color: 'primary.main' }}>
+    Bulk Upload Tasks (CSV)
+  </Typography>
+
+  {/* File Input and Styled Upload Button */}
+  <label htmlFor="csv-upload">
+    <input
+      id="csv-upload"
+      type="file"
+      accept=".csv"
+      onChange={handleFileChange}
+      style={{ display: 'none' }} // Hide the default file input
+    />
+    <Button
+      variant="outlined"
+      component="span"
+      sx={{
+        width: '100%', // Match the button size to the box
+      }}
+    >
+      Choose File
+    </Button>
+  </label>
+
+  <Button
+    variant="contained"
+    color="primary"
+    onClick={handleFileUpload}
+    sx={{ marginTop: 2, width: '100%' }} // Full width for symmetry
+  >
+    Upload CSV
+  </Button>
+
+  {/* Download Sample CSV Link */}
+  <Box sx={{ marginTop: 2 }}>
+    <Typography variant="body2" sx={{ textAlign: 'center' }}>
+      Need a sample?{' '}
+      <Link
+        href="/sample-tasks.csv"
+        download="sample-tasks.csv"
+        sx={{ fontWeight: 'bold', textDecoration: 'underline' }}
+      >
+        Download Sample CSV
+      </Link>
+    </Typography>
+  </Box>
+</Box>
+
 
       <Box sx={{ marginTop: 4 }}>
       <Typography variant="h4" gutterBottom>
