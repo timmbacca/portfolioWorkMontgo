@@ -13,7 +13,7 @@ const federalTheme = createTheme({
     },
     text: {
       primary: '#333333',
-      secondary: '#666666',
+      secondary: '#896C2D',
     },
     divider: '#CCCCCC',
   },

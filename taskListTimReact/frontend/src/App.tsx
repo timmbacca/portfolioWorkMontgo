@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { useEffect, useState, PropsWithChildren } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { ThemeProvider, CssBaseline } from '@mui/material';
 import { createTheme, PaletteMode } from '@mui/material/styles';
 import darkTheme from './themes/darkTheme';
@@ -13,6 +13,22 @@ import ResumePage from './components/ResumePage';
 import ContactPage from './components/ContactPage';
 import Footer from './components/Footer';
 import './App.css';
+import { initializeAnalytics, logPageView } from './analytics';
+
+const AnalyticsWrapper: React.FC<PropsWithChildren> = ({ children }) => {
+  const location = useLocation();
+
+  useEffect(() => {
+    initializeAnalytics(); // Initialize Google Analytics
+    logPageView(); // Log the initial page view
+  }, []);
+
+  useEffect(() => {
+    logPageView(); // Log page view on route change
+  }, [location]);
+
+  return <>{children}</>;
+};
 
 const App: React.FC = () => {
   const [theme, setTheme] = useState(createTheme(federalTheme));
@@ -39,6 +55,7 @@ const App: React.FC = () => {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Router>
+      <AnalyticsWrapper>
         <div className="App">
           <main>
             <Header />
@@ -53,6 +70,7 @@ const App: React.FC = () => {
             <Footer />
           </main>
         </div>
+        </AnalyticsWrapper>
       </Router>
     </ThemeProvider>
   );

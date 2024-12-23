@@ -41,13 +41,13 @@ const Sitemap = styled.nav<{ theme: any }>`
 
   a {
     text-decoration: none;
-    color: ${({ theme }) => theme.palette.primary.main};
+    color: ${({ theme }) => theme.palette.text.primary};
     font-weight: bold;
     position: relative;
     transition: color 0.3s ease;
 
     &:hover {
-      color: ${({ theme }) => theme.palette.secondary.main};
+      color: ${({ theme }) => theme.palette.text.secondary};
       animation: ${hoverGlow} 0.5s alternate infinite ease-in-out; /* Glow effect on hover */
     }
 
@@ -73,13 +73,13 @@ const FooterInfo = styled.div<{ theme: any }>`
   margin-top: 20px;
   animation: ${fadeIn} 1.5s ease-out; /* Footer info fade-in animation with delay */
 
-  a {
-    color: ${({ theme }) => theme.palette.primary.main};
+   a {
+    color: ${({ theme }) => theme.palette.text.primary};
     text-decoration: none;
     transition: color 0.3s ease;
 
     &:hover {
-      color: ${({ theme }) => theme.palette.secondary.main};
+      color: ${({ theme }) => theme.palette.text.secondary};
       animation: ${hoverGlow} 0.5s alternate infinite ease-in-out; /* Glow effect on hover */
     }
   }

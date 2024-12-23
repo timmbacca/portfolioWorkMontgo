@@ -187,16 +187,20 @@ const TaskUpdateModal: React.FC<TaskUpdateModalProps> = ({ open, onClose, onSubm
 
         {/* Progress Slider */}
         <FormControl fullWidth margin="dense">
-          <Typography gutterBottom>Progress: {updatedTask.progress}%</Typography>
-          <Slider
-            value={updatedTask.progress || 0}
-            onChange={handleSliderChange}
-            aria-labelledby="progress-slider"
-            min={0}
-            max={100}
-            step={5} // Move in 5% increments
-          />
-        </FormControl>
+  <Typography id="progress-slider-label" gutterBottom>
+    Progress: {updatedTask.progress}%
+  </Typography>
+  <Slider
+    value={updatedTask.progress || 0}
+    onChange={handleSliderChange}
+    aria-labelledby="progress-slider-label"
+    aria-valuetext={`${updatedTask.progress || 0}%`}
+    min={0}
+    max={100}
+    step={5} // Move in 5% increments
+  />
+</FormControl>
+
 
         <TextField
           label="Comments"

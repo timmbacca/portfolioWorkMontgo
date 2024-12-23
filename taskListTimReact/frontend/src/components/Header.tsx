@@ -87,8 +87,8 @@ const Logo = styled.div<{ theme: any }>`
 
 `;
 
-const NavLinks = styled.nav<{ isActive: boolean; theme: any }>`
-  display: ${({ isActive }) => (isActive ? 'flex' : 'none')};
+const NavLinks = styled.nav<{ $isActive: boolean; theme: any }>`
+  display: ${({ $isActive }) => ($isActive ? 'flex' : 'none')};
   flex-direction: column;
   align-items: stretch;
   position: absolute;
@@ -164,7 +164,7 @@ const Header = () => {
           </Link>
         </Logo>
       </LogoContainer>
-      <NavLinks theme={theme} isActive={menuOpen}>
+      <NavLinks theme={theme} $isActive={menuOpen}>
         <Link to="/" onClick={closeMenu}>
           About Me
         </Link>

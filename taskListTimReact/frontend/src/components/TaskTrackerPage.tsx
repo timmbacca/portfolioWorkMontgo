@@ -598,16 +598,20 @@ function formatDateToMMDDYYYY(date: Date | string | null | undefined): string {
         <TextField label="Tags" value={tags} onChange={(e) => setTags(e.target.value)} />
 
         <FormControl fullWidth margin="dense">
-        <Typography gutterBottom>Progress: {progress}%</Typography>
-        <Slider
-          value={progress}
-          onChange={(e, newValue) => setProgress(newValue as number)}
-          aria-labelledby="progress-slider"
-          min={0}
-          max={100}
-          step={5} // Move in 5% increments
-        />
-        </FormControl>
+  <Typography id="add-task-progress-slider-label" gutterBottom>
+    Progress: {progress}%
+  </Typography>
+  <Slider
+    value={progress}
+    onChange={(e, newValue) => setProgress(newValue as number)}
+    aria-labelledby="add-task-progress-slider-label"
+    aria-valuetext={`${progress}%`}
+    min={0}
+    max={100}
+    step={5} // Move in 5% increments
+  />
+</FormControl>
+
 
         <TextField label="Comments" value={comments} onChange={(e) => setComments(e.target.value)} multiline rows={2} />
 
@@ -649,9 +653,10 @@ function formatDateToMMDDYYYY(date: Date | string | null | undefined): string {
     boxShadow: 1, // Subtle shadow using MUI theme
   }}
 >
-  <Typography variant="h6" sx={{ marginBottom: 2, color: 'primary.main' }}>
-    Bulk Upload Tasks (CSV)
-  </Typography>
+<Typography component="div" variant="h6" sx={{ marginBottom: 2, color: 'primary.main' }}>
+  Bulk Upload Tasks (CSV)
+</Typography>
+
 
   {/* File Input and Styled Upload Button */}
   <label htmlFor="csv-upload">
@@ -699,7 +704,7 @@ function formatDateToMMDDYYYY(date: Date | string | null | undefined): string {
 
 
       <Box sx={{ marginTop: 4 }}>
-      <Typography variant="h4" gutterBottom>
+      <Typography component="div" variant="h4" gutterBottom>
         Task List
       </Typography>
 
