@@ -5,7 +5,7 @@ const darkMode: PaletteMode = 'dark';
 const darkTheme = createTheme({
   palette: {
     mode: darkMode,
-    primary: { main: '#e50914' },
+    primary: { main: '#ff303b' },
     secondary: { main: '#b81d24' },
     background: {
       default: '#141414',
@@ -20,7 +20,7 @@ const darkTheme = createTheme({
   typography: {
     fontFamily: 'BlenderProBook, Arial, sans-serif',
   },
-  chartColors: ['#E50914', '#6C757D', '#FFD700', '#2ECC71', '#FF5733', '#9B59B6'],
+  chartColors: ['#ff303b', '#6C757D', '#FFD700', '#2ECC71', '#FF5733', '#9B59B6'],
 });
 
 export default darkTheme;
