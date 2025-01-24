@@ -58,9 +58,10 @@ const Resume = () => {
       <ResumeSection>
         <h2>Objective</h2>
         <p>
-        Experienced Front-End Developer skilled in creating responsive, accessible, and engaging web 
-interfaces using modern technologies. Passionate about building user-friendly applications that drive 
-business success.
+        Innovative UI/UX/Web Developer with extensive experience in building responsive, accessible, and engaging 
+web applications. Passionate about leveraging AI technologies like ChatGPT and Llama 3 to push the 
+boundaries of user-friendly website design and development. Eager to explore the potential of AI-driven 
+solutions in crafting smarter and more dynamic web experiences.
         </p>
       </ResumeSection>
 
