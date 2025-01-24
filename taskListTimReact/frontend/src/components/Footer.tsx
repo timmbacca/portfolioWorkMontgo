@@ -93,12 +93,14 @@ const Footer = () => {
       <Sitemap theme={theme}>
         <Link to="/">About Me</Link>
         <Link to="/task-tracker">Task Tracker</Link>
+        <Link to="/dashboard">Task Dashboard</Link>
+        <Link to="/owasp">OWASP Top 10</Link>
         <Link to="/projects">Projects</Link>
         <Link to="/resume">Resume</Link>
         <Link to="/contact">Contact</Link>
       </Sitemap>
       <FooterInfo theme={theme}>
-        <div>© 2024 Tim Montgomery. All rights reserved.</div>
+        <div>© 2025 Tim Montgomery. All rights reserved.</div>
         <div>
           Connect with me on{' '}
           <a

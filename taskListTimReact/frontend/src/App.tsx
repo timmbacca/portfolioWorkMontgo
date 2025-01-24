@@ -8,6 +8,7 @@ import Header from './components/Header';
 import LandingPage from './components/LandingPage';
 import DashboardPage from './components/DashboardPage';
 import TaskTrackerPage from './components/TaskTrackerPage';
+import OWASPPage from './components/OWASPPage';
 import PastProjectsPage from './components/PastProjectsPage';
 import ResumePage from './components/ResumePage';
 import ContactPage from './components/ContactPage';
@@ -63,6 +64,7 @@ const App: React.FC = () => {
               <Route path="/" element={<LandingPage />} />
               <Route path="/dashboard" element={<DashboardPage />} />
               <Route path="/task-tracker" element={<TaskTrackerPage />} />
+              <Route path="/owasp" element={<OWASPPage />} />
               <Route path="/projects" element={<PastProjectsPage />} />
               <Route path="/resume" element={<ResumePage />} />
               <Route path="/contact" element={<ContactPage />} />

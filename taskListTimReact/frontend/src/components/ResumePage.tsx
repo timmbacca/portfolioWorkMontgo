@@ -67,14 +67,17 @@ business success.
       <ResumeSection>
         <h2>Computer Skills</h2>
         <ul>
-          <li>Design and Development Tools: Adobe Creative Suite, Autodesk 3ds Max, VS Code, Eclipse, 
-          SVN, Git, SonarQube, Oracle SQL Developer</li>
-          <li>Continuous Integration & Cloud Services: Jenkins, Artifactory, Google Cloud Platform (GCP), 
-          Render</li>
-          <li>Full-Stack Development: Responsive Web Design, Cross-Browser Compatibility, 508/WCAG 
-Accessibility, HTML, CSS (SASS/LESS), JavaScript, TypeScript, React, Bootstrap, jQuery, Node.js, 
-Express, Java, JSP, JSON, XML, SQL, PostgreSQL, Gradle, Bash</li>
-          <li>Project Management & Collaboration: MS Teams, SharePoint, Joomla, VersionOne, Trello, Jira</li>
+          <li><b>Full-Stack Development:</b><br /> 
+          React, TypeScript, JavaScript, AngularJS, Bootstrap, Node.js, Express, Java, JSP, 
+          WebSphere, Spring Boot, HTML, CSS (SASS/LESS), SQL, PostgreSQL, JSON, XML, Bash, Gradle</li>
+          <li><b>AI and Emerging Technologies:</b><br />
+          ChatGPT, Llama 3 integration for website development, OWASP Top 10 
+          principles for secure development</li>
+          <li><b>Tools & Platforms:</b><br />
+          SonarQube, Jenkins, Artifactory, Google Cloud Platform (GCP), Render, LM Studio, Adobe 
+          Creative Suite, Autodesk 3ds Max, VS Code, Git, SVN</li>
+          <li><b>Project Management & Collaboration:</b><br />
+          MS Teams, SharePoint, Joomla, VersionOne, Trello, Jira</li>
         </ul>
       </ResumeSection>
 
@@ -89,8 +92,7 @@ Express, Java, JSP, JSON, XML, SQL, PostgreSQL, Gradle, Bash</li>
         <h2>Employment Experience</h2>
         <h3>Optimo-IT | 2015–2024</h3>
         <ul>
-          <li>Contributed to the development of responsive interfaces for various USPS platforms using HTML, 
-          CSS, JavaScript, Bootstrap, JSP, React, and TypeScript.</li>
+          <li>Contributed to the development of responsive interfaces for various USPS platforms using React, TypeScript, JavaScript, JSP HTML, CSS, and Bootstrap.</li>
           <li>Created responsive HTML email templates for USPS, ensuring cross-client compatibility.</li>
           <li>Supported Google Cloud operations and DevOps tasks.</li>
           <li>Ensured 508/WCAG compliance through documentation and accessibility workshops.</li>
@@ -126,7 +128,7 @@ Express, Java, JSP, JSON, XML, SQL, PostgreSQL, Gradle, Bash</li>
         </ul>
       </ResumeSection>
       <StyledLink
-        href="/CMontgomery_Resume_2024_Dec.pdf"
+        href="/CMontgomery_Resume_01242025a.pdf"
         download
         theme={theme}
         style={{ marginTop: '20px', display: 'inline-block' }}

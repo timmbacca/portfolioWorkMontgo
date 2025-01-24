@@ -103,13 +103,13 @@ const LandingPage = () => {
       <AboutSection theme={theme}>
         <h2>About Tim</h2>
         <p>
-        Tim Montgomery is a UI Designer and Front-End Developer with experience working as a contractor for multiple Federal agencies. Tim has a passion for building intuitive, accessible, and visually engaging user interfaces that align with both client objectives and user needs.
+        Tim Montgomery is a Front-End Developer and UI Designer with nearly two decades of experience working with both Federal agencies and private-sector clients. With expertise in React, TypeScript, Java, and a range of modern web technologies, Tim specializes in building responsive, accessible, and visually engaging user interfaces that meet both client objectives and user needs.
         </p>
         <p>
-        Throughout his career, Tim has been quick to adapt to changing needs by learning new languages, platforms, techniques, requirements, and more. As such, he has developed a versatile skill set that combines a depth of technical expertise with creative insight. Tim considers himself a life-long-learner and is looking forward to continuing to expand his Front and Back-end skill sets while maintaining his keen eye for quality design and easy-to-use interfaces.
+        A lifelong learner, Tim is always eager to expand his expertise in both front-end and back-end technologies, maintaining a keen eye for quality design and usability. Whether it's creating intuitive dashboards or ensuring Section 508 compliance, Tim is dedicated to crafting user-friendly, impactful applications.
         </p>
         <p>
-        Tim is currently seeking a challenging and rewarding opportunity puting his unique skills and perspective to work in the private or public sector. Connect with Tim to learn more about how he can contribute to your Team's mission at{' '}
+        Currently, Tim is exploring new opportunities where he can apply his diverse skill set to support dynamic teams in achieving their mission. Connect with Tim at{' '}
           <a href="mailto:ctmontgo@gmail.com" target="_blank" rel="noopener noreferrer">
             ctmontgo@gmail.com
           </a>.
