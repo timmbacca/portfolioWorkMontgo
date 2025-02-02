@@ -1,36 +1,20 @@
-// frontend/src/components/TaskList.tsx
-
 import React, { useEffect, useState } from 'react';
 import Papa from 'papaparse'; // For CSV parsing
-import DeleteConfirmationModal from './DeleteConfirmationModal';
-import TaskUpdateModal from './TaskUpdateModal';
 import {
   TextField, Select, MenuItem, Button, FormControl, InputLabel, FormGroup,
-  FormControlLabel, Checkbox, Slider, Typography, Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow,
-  TableSortLabel, Paper, TablePagination,
-  Link
+  FormControlLabel, Checkbox, Slider, Typography, Box, Link
 } from '@mui/material';
+import HowItsMade from '../components/HowItsMade';
+import TaskTable from '../components/TaskTables';
 import { validateInput } from '../utils/validation';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { getTasks, addTask, updateTask, deleteTask, Task } from '../api/taskApi';
+import { getTasks, addTask, updateTask, Task } from '../api/taskApi';
 
 const TaskTrackerPage: React.FC = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [file, setFile] = useState<File | null>(null);
-  const [filteredTasks, setFilteredTasks] = useState<Task[]>([]);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [filterStatus, setFilterStatus] = useState<string>('');
-  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
-  const [sortField, setSortField] = useState<keyof Task>('title');
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [taskToDelete, setTaskToDelete] = useState<Task | null>(null);
-  const [selectedTask, setSelectedTask] = useState<Task | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  // Form state
   const [newTitle, setNewTitle] = useState('');
   const [newDescription, setNewDescription] = useState('');
   const [priority, setPriority] = useState('');
@@ -117,10 +101,6 @@ const TaskTrackerPage: React.FC = () => {
     });
   };
 
-  useEffect(() => {
-    applyFilters();
-  }, [tasks, searchQuery, filterStatus, sortOrder, sortField]);
-
   // Validation logic
   const validateField = (fieldName: string, value: string) => {
     let error = '';
@@ -190,44 +170,6 @@ const TaskTrackerPage: React.FC = () => {
   };
 
 
-  const applyFilters = () => {
-    let displayedTasks = tasks;
-  
-    // Filter by search query
-    if (searchQuery) {
-      displayedTasks = displayedTasks.filter((task) =>
-        ['title', 'description', 'priority', 'status', 'assignedTo', 'tags', 'comments', 'riskLevel']
-          .some((field) =>
-            (task[field as keyof Task] || '') // Ensure the field exists
-              .toString()
-              .toLowerCase()
-              .includes(searchQuery.toLowerCase())
-          )
-      );
-    }
-  
-    // Filter by status
-    if (filterStatus) {
-      displayedTasks = displayedTasks.filter((task) => task.status === filterStatus);
-    }
-  
-    // Sort tasks
-    displayedTasks = displayedTasks.sort((a, b) => {
-      const isAsc = sortOrder === 'asc';
-      const aValue = a[sortField] ?? ''; // Default to empty string if null or undefined
-      const bValue = b[sortField] ?? ''; // Default to empty string if null or undefined
-  
-      if (aValue < bValue) return isAsc ? -1 : 1;
-      if (aValue > bValue) return isAsc ? 1 : -1;
-      return 0;
-    });
-  
-    // Update filtered tasks state
-    setFilteredTasks(displayedTasks);
-  };
-  
-  
-  
   const handleAddTask = async () => {
 
     // Validate estimated time
@@ -287,22 +229,35 @@ const TaskTrackerPage: React.FC = () => {
       priority: priority || null,
       status: status || null,
       assignedTo: assignedTo || null,
-      startDate: formattedStartDate, // Converted to string (YYYY-MM-DD)
-      dueDate: formattedDueDate,      // Converted to string (YYYY-MM-DD)
+      startDate: startDate ? startDate.toISOString().split('T')[0] : null,
+      dueDate: dueDate ? dueDate.toISOString().split('T')[0] : null,
       estimatedTime: estimatedTime || null,
       timeSpent: timeSpent || null,
       tags: tags || null,
       progress: progress || 0,
       comments: comments || null,
-      isRecurring: isRecurring,       // Keep as boolean
-      riskLevel: riskLevel || null
+      isRecurring: isRecurring,
+      riskLevel: riskLevel || null,
     };
 
-    console.log("Payload sent to backend:", newTask); // Log for debugging
+    /* console.log("Payload sent to backend:", newTask); // Log for debugging
 
     await addTask(newTask); // Call addTask with formatted payload
     resetForm();
-    fetchTasks();
+    fetchTasks(); */
+
+    try {
+      const createdTask = await addTask(newTask);
+      
+      // Update state immediately to include the new task
+      setTasks((prevTasks) => [...prevTasks, createdTask]);
+  
+      // Optionally, refresh the task list to stay in sync with the backend
+      resetForm();
+      fetchTasks();
+    } catch (error) {
+      console.error("Error adding task:", error);
+    }
   };
 
   
@@ -337,140 +292,11 @@ const TaskTrackerPage: React.FC = () => {
     setErrors({});
   };
 
-  const openUpdateModal = (task: Task) => {
-    setSelectedTask(task);
-    setIsModalOpen(true);
-  };
-
-  const closeUpdateModal = () => {
-    setIsModalOpen(false);
-    setSelectedTask(null);
-  };
-
-  const handleUpdateTask = async (updatedTask: Task) => {
-    if (updatedTask.id === undefined) {
-      console.error("Task ID is undefined");
-      return;
-    }
-  
-    // Log the updatedTask object to confirm all fields are present
-    console.log("Updating task with:", updatedTask);
-  
-    await updateTask(updatedTask.id, updatedTask);
-    fetchTasks();
-  };
-
-  const handleDeleteClick = (task: Task) => {
-    setTaskToDelete(task);
-    setIsDeleteModalOpen(true);
-  };
-
-  const handleDeleteConfirm = async () => {
-    if (taskToDelete) {
-      await deleteTask(taskToDelete.id!); // Assuming taskToDelete has an id
-      fetchTasks();
-      setIsDeleteModalOpen(false);
-      setTaskToDelete(null);
-    }
-  };
-
-  const handleDeleteCancel = () => {
-    setIsDeleteModalOpen(false);
-    setTaskToDelete(null);
-  };
-
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(e.target.value);
-  };
-
-  const handleFilterStatusChange = (e: React.ChangeEvent<{ value: unknown }>) => {
-    setFilterStatus(e.target.value as string);
-  };
-
-  const handleSort = (field: keyof Task) => {
-    const isAsc = sortField === field && sortOrder === 'asc';
-    setSortOrder(isAsc ? 'desc' : 'asc');
-    setSortField(field);
-  };
-
-  const handleChangePage = (event: unknown, newPage: number) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
-
-  const paginatedTasks = filteredTasks.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
-
-
-// Utility function to format date as mm/dd/yyyy
-function formatDateToMMDDYYYY(date: Date | string | null | undefined): string {
-  if (!date) return '';
-  
-  const d = typeof date === 'string' ? new Date(date) : date;
-  const month = String(d.getMonth() + 1).padStart(2, '0');
-  const day = String(d.getDate()).padStart(2, '0');
-  const year = d.getFullYear();
-  
-  return `${month}/${day}/${year}`;
-}
-
-
   return (
     
     <Box sx={{ padding: 2 }}>
      <h1>Task Tracker</h1>
-      <Box sx={{ backgroundColor: 'background.default', boxShadow: '0px 2px 3px rgba(0, 0, 0, 0.2)', padding: '15px', borderRadius: '8px' }}>
-  <h2>
-    How It's Put Together
-  </h2>
-  <ul style={{ listStyleType: 'disc', margin: 'auto', lineHeight: '1.5', textAlign:'justify', width:'90%', marginBottom:'10px', paddingInlineStart: '0px' }}>
-    <li style={{ marginBottom: '10px' }}>
-            <strong>Frontend:</strong> Built using <strong>React</strong> with <strong>TypeScript</strong> and styled
-            with <strong>Material-UI</strong> for a responsive, modern design. Features modular components for task
-            management and form validations.
-          </li>
-          <li style={{ marginBottom: '10px' }}>
-            <strong>Backend:</strong> Developed with <strong>Node.js</strong> and <strong>Express.js</strong>, using
-            <strong>TypeScript</strong> for type safety. Provides RESTful endpoints for managing tasks, with robust
-            validation and error handling.
-          </li>
-          <li style={{ marginBottom: '10px' }}>
-            <strong>Database:</strong> Powered by <strong>PostgreSQL</strong>, hosted on Render. Includes a
-            well-structured schema for tasks, with default values and constraints, and uses parameterized queries for
-            security.
-          </li>
-          <li style={{ marginBottom: '10px' }}>
-            <strong>API Setup:</strong> Integrates the frontend and backend via <strong>Axios</strong>, dynamically
-            configured with environment variables for seamless deployment.
-          </li>
-          <li style={{ marginBottom: '10px' }}>
-            <strong>Docker:</strong> Utilizes multi-stage Dockerfiles for both frontend and backend. The frontend is
-            built and served using Nginx, while the backend compiles TypeScript and runs the server.
-          </li>
-          <li style={{ marginBottom: '10px' }}>
-            <strong>Git:</strong> Hosted on <strong>GitHub</strong> with branches for feature development and
-            production-ready code. Regular, meaningful commits track progress and maintain project stability.
-          </li>
-          <li style={{ marginBottom: '10px' }}>
-            <strong>Render Deployment:</strong> Frontend, backend, and PostgreSQL database are deployed on{' '}
-            <strong>Render</strong>, with environment variables securely managing configurations for cross-service
-            communication.
-          </li>
-  </ul>
-</Box>
-     <h2>
-        Follow my project progress on{' '}
-        <Link 
-          href="https://github.com/timmbacca/portfolioWorkMontgo" 
-          target="_blank" 
-          rel="noopener noreferrer"
-        >
-          GitHub
-        </Link>.
-      </h2>
+     <HowItsMade />
       <Box sx={{ textAlign: 'center', marginBottom: 2 }}>
         <Typography variant="body2" color="textSecondary">
           {tasks.length}/100 tasks created
@@ -702,174 +528,7 @@ function formatDateToMMDDYYYY(date: Date | string | null | undefined): string {
   </Box>
 </Box>
 
-
-      <Box sx={{ marginTop: 4 }}>
-      <Typography component="div" variant="h4" gutterBottom>
-        Task List
-      </Typography>
-
-      <Box     sx={{
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      padding: 2,
-      position: 'sticky',
-      top: 40,
-      zIndex: 10,
-    }}>
-        <TextField
-          label="Search by Title, Description, or Other Fields"
-          variant="outlined"
-          fullWidth
-          margin="dense"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          sx={{
-            maxWidth: 600, // Limit the width on larger screens
-            width: '100%', // Make it responsive to smaller screens
-            '& .MuiOutlinedInput-root': {
-              color: 'text.primary',
-            },
-            '& .MuiInputLabel-root': {
-              color: 'text.secondary',
-            },
-            backgroundColor: 'background.default',
-            boxShadow: '0px 2px 3px rgba(0, 0, 0, 0.2)', // Subtle shadow
-          }}
-        />
-      </Box>
-
-  <TableContainer component={Paper}
-  sx={{
-    marginTop: 4,
-    overflowX: 'auto',
-    '& .MuiOutlinedInput-notchedOutline': {
-              borderColor: '#444444',
-            },
-            boxShadow: '0px 2px 3px rgba(0, 0, 0, 0.2)', // cool timmy shadow
-  }}
-  >
-
-  <Table aria-label="task table" sx={{ minWidth: 650 }}>
-    <TableHead>
-      <TableRow>
-        {[
-          { label: 'Title', field: 'title' },
-          { label: 'Description', field: 'description' },
-          { label: 'Priority', field: 'priority' },
-          { label: 'Status', field: 'status' },
-          { label: 'Assigned To', field: 'assignedTo' },
-          { label: 'Start Date', field: 'startDate' },
-          { label: 'Due Date', field: 'dueDate' },
-          { label: 'Estimated Time (hrs)', field: 'estimatedTime' },
-          { label: 'Time Spent (hrs)', field: 'timeSpent' },
-          { label: 'Tags', field: 'tags' },
-          { label: 'Progress (%)', field: 'progress' },
-          { label: 'Comments', field: 'comments' },
-          { label: 'Recurring', field: 'isRecurring' },
-          { label: 'Risk Level', field: 'riskLevel' },
-          { label: 'Actions', field: 'actions' },
-        ].map((col) => (
-          <TableCell
-            key={col.field}
-            sortDirection={sortField === col.field ? sortOrder : false}
-          >
-            <TableSortLabel
-              active={sortField === col.field}
-              direction={sortField === col.field ? sortOrder : 'asc'}
-              onClick={() => handleSort(col.field as keyof Task)}
-            >
-              {col.label}
-            </TableSortLabel>
-          </TableCell>
-        ))}
-      </TableRow>
-    </TableHead>
-    <TableBody>
-    {paginatedTasks.map((task: Task) => (
-        <TableRow key={task.id}>
-          <TableCell>{task.title || '—'}</TableCell>
-          <TableCell>{task.description || '—'}</TableCell>
-          <TableCell>{task.priority || '—'}</TableCell>
-          <TableCell>{task.status || '—'}</TableCell>
-          <TableCell>{task.assignedTo || '—'}</TableCell>
-          <TableCell>{task.startDate ? formatDateToMMDDYYYY(task.startDate) : '—'}</TableCell>
-          <TableCell>{task.dueDate ? formatDateToMMDDYYYY(task.dueDate) : '—'}</TableCell>
-          <TableCell>{task.estimatedTime != null ? task.estimatedTime : '—'}</TableCell>
-          <TableCell>{task.timeSpent != null ? task.timeSpent : '—'}</TableCell>
-          <TableCell>{task.tags || '—'}</TableCell>
-          <TableCell>{task.progress != null ? `${task.progress}%` : '—'}</TableCell>
-          <TableCell>{task.comments || '—'}</TableCell>
-          <TableCell>{task.isRecurring ? 'Yes' : 'No'}</TableCell>
-          <TableCell>{task.riskLevel || '—'}</TableCell>
-          <TableCell>
-  <Box
-    sx={{
-      display: 'flex',
-      flexDirection: { xs: 'column', sm: 'row' },
-      gap: 1, // Adds space between the buttons
-      alignItems: 'center',
-      justifyContent: 'center',
-    }}
-  >
-    <Button
-      variant="contained"
-      color="primary"
-      onClick={() => openUpdateModal(task)}
-      sx={{
-        width: { xs: '100%', sm: 'auto' }, // Full width on mobile, auto on larger screens
-        mb: { xs: 1, sm: 0 }, // Adds margin at the bottom for mobile
-      }}
-    >
-      Update
-    </Button>
-    <Button
-      variant="contained"
-      color="secondary"
-      onClick={() => handleDeleteClick(task)}
-      sx={{
-        width: { xs: '100%', sm: 'auto' }, // Full width on mobile, auto on larger screens
-      }}
-    >
-      Delete
-    </Button>
-  </Box>
-</TableCell>
-
-        </TableRow>
-      ))}
-    </TableBody>
-  </Table>
-</TableContainer>
-
-<TablePagination
-  rowsPerPageOptions={[5, 10, 25]}
-  component="div"
-  count={filteredTasks.length}
-  rowsPerPage={rowsPerPage}
-  page={page}
-  onPageChange={handleChangePage}
-  onRowsPerPageChange={handleChangeRowsPerPage}
-/>
-
-
-      {/* Delete Confirmation Modal */}
-      <DeleteConfirmationModal
-        open={isDeleteModalOpen}
-        onClose={handleDeleteCancel}
-        onConfirm={handleDeleteConfirm}
-        taskTitle={taskToDelete?.title || ''}
-      />
-
-      {selectedTask && (
-        <TaskUpdateModal
-          open={isModalOpen}
-          onClose={closeUpdateModal}
-          onSubmit={handleUpdateTask}
-          task={selectedTask}
-        />
-      )}
-    </Box>
+<TaskTable tasks={tasks} setTasks={setTasks} />
     </Box>
   );
 };

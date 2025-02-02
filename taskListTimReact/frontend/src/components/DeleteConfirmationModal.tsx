@@ -1,4 +1,3 @@
-// frontend/src/components/DeleteConfirmationModal.tsx
 import React from 'react';
 import { Dialog, DialogActions, DialogContent, DialogTitle, Button, Typography } from '@mui/material';
 
