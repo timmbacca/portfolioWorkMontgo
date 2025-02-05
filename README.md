@@ -74,3 +74,5 @@ Experienced Developer seeking a challenging position to design and develop engag
 
 Feel free to explore my work and reach out for collaboration or inquiries.  
 📧 Email: [ctmontgo@gmail.com](mailto:ctmontgo@gmail.com)  
+
+[![SonarQube Cloud](https://sonarcloud.io/images/project_badges/sonarcloud-dark.svg)](https://sonarcloud.io/summary/new_code?id=timmbacca_portfolioWorkMontgo)
