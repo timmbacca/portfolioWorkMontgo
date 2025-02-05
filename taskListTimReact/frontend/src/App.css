@@ -1,0 +1,60 @@
+@font-face {
+  font-family: 'BlenderProBook';
+  src: url('./assets/fonts/Blender-Pro-Book.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+html, body {
+  height: 100%; 
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  font-family: 'BlenderProBook', sans-serif;
+  font-size: 1.1em;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%; 
+}
+
+body {
+  min-width: 420px;
+  overflow-x: auto; 
+}
+
+@media (max-width: 420px) {
+  html, body {
+    width: 420px; 
+  }
+}
+
+.App {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding-top: 57px; 
+
+}
+
+main {
+  flex: 1; 
+  display: flex;
+  flex-direction: column;
+}
+
+footer {
+  flex-shrink: 0; 
+  width: 100%; 
+  margin-top: auto; 
+}
+
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
+
+
+

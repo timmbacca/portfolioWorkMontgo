@@ -1,0 +1,33 @@
+.contact-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+    background-color: var(--background-color); /* Dynamic based on theme */
+    color: var(--text-color); /* Dynamic based on theme */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .contact-info p {
+    margin: 10px 0;
+  }
+  
+  .contact-info a {
+    /* color: var(--link-color);  Dynamic based on theme */
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+  }
+  
+  .contact-info a:hover {
+    text-decoration: underline;
+    /* color: var(--link-hover-color);  Dynamic based on theme */
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .contact-container {
+      padding: 15px;
+    }
+  }
+  
