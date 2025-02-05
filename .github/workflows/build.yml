@@ -18,3 +18,10 @@ jobs:
         uses: SonarSource/sonarqube-scan-action@v4
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >
+            -Dsonar.projectKey=timmbacca_portfolioWorkMontgo
+            -Dsonar.organization=timmbacca
+            -Dsonar.sources=.
+            -Dsonar.host.url="https://sonarcloud.io"
+
