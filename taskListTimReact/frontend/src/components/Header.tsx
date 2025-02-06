@@ -175,7 +175,7 @@ const Header = () => {
           Task Dashboard
         </Link>
         <Link to="/owasp" onClick={closeMenu}>
-          OWASP Top 10
+          Helpful Tools
         </Link>
         <Link to="/projects" onClick={closeMenu}>
           Projects

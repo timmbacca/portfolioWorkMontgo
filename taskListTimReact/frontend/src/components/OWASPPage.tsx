@@ -86,7 +86,7 @@ const HeaderSection = styled.div`
 `;
 
 const ResourcesSection = styled.div`
-  margin-top: 50px;
+  margin-top: 10px;
 
   h2 {
     margin-bottom: 10px;
@@ -100,7 +100,7 @@ const ResourcesSection = styled.div`
       margin-bottom: 10px;
 
       a {
-        color: ${({ theme }) => theme?.palette?.primary?.main || "#1976d2"};
+        color: ${({ theme }) => theme?.palette?.primary?.main || "#ff303b"};
         text-decoration: none;
 
         &:hover {
@@ -108,6 +108,24 @@ const ResourcesSection = styled.div`
         }
       }
     }
+  }
+`;
+
+const ToolsSection = styled.div`
+  margin-top: 30px;
+
+  h2 {
+    margin-bottom: 10px;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    margin-top: 10px;
+    background-color: ${({ theme }) => theme.palette?.background?.default || '#ffffff'};
+    color: ${({ theme }) => theme.palette?.text?.primary || '#000000'};
+    border: 1px solid ${({ theme }) => theme.palette?.primary?.main || '#ff303b'};
+    margin-bottom: 20px;
   }
 `;
 
@@ -153,6 +171,26 @@ const OWASPPage = () => {
         </Accordion>
       ))}
 
+       {/* Security Tools Section */}
+       <ToolsSection>
+        <Typography variant="h5" component="h2">
+          How I Ensure Security Compliance
+        </Typography>
+        <Typography variant="body1">
+          I use various tools to validate my work and ensure that my projects adhere to security best practices:
+        </Typography>
+        <Typography variant="h6">SonarQube Analysis</Typography>
+        <Typography variant="body2">
+          I regularly run my projects through SonarQube to identify security vulnerabilities and code quality issues.
+        </Typography>
+        <img src="./sonarQube.png" alt="SonarQube analysis screenshot" />
+        <Typography variant="h6">ANDI Accessibility Checker</Typography>
+        <Typography variant="body2">
+          I leverage the ANDI tool to ensure compliance with accessibility standards and improve user experience for all.
+        </Typography>
+        <img src="./andi.png" alt="ANDI tool screenshot" />
+      </ToolsSection>
+
       {/* Additional Resources */}
       <ResourcesSection>
         <Typography variant="h5" component="h2">
@@ -184,6 +222,24 @@ const OWASPPage = () => {
               rel="noopener noreferrer"
             >
               CISA Security Resources
+            </MuiLink>
+          </li>
+          <li>
+            <MuiLink
+              href="https://www.sonarqube.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              SonarQube - Code Quality and Security Analysis
+            </MuiLink>
+          </li>
+          <li>
+            <MuiLink
+              href="https://www.ssa.gov/accessibility/andi/help/install.html"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              ANDI - Accessibility Testing Tool
             </MuiLink>
           </li>
         </ul>

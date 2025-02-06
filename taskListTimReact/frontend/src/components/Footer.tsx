@@ -94,7 +94,7 @@ const Footer = () => {
         <Link to="/">About Me</Link>
         <Link to="/task-tracker">Task Tracker</Link>
         <Link to="/dashboard">Task Dashboard</Link>
-        <Link to="/owasp">OWASP Top 10</Link>
+        <Link to="/owasp">Helpful Tools</Link>
         <Link to="/projects">Projects</Link>
         <Link to="/resume">Resume</Link>
         <Link to="/contact">Contact</Link>
