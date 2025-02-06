@@ -1,51 +1,34 @@
 /* Style for the arrows */
 .slick-prev,
 .slick-next {
+  font-size: 2rem; /* Makes arrows big */
+  color: red; /* Sets visible color */
   position: absolute;
-  top: 50%; /* Center vertically */
+  top: 50%;
   transform: translateY(-50%);
-  z-index: 2; /* Ensure they appear above other elements */
-  width: 40px; /* Adjust arrow size */
-  height: 40px;
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for visibility */
-  border-radius: 50%; /* Circle shape */
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.5);
+  border: none;
+  padding: 10px;
   cursor: pointer;
+  transition: 0.3s;
+  border-radius: 50%;
 }
 
-/* Position prev arrow on the left */
 .slick-prev {
-  left: 10px; /* Inside the container */
+  left: 10px;
 }
 
-/* Position next arrow on the right */
 .slick-next {
-  right: 10px; /* Inside the container */
+  right: 10px;
 }
 
-/* Style for the arrow icons */
-.slick-prev:before,
-.slick-next:before {
-  content: ''; /* Remove default text */
-  display: inline-block;
-  width: 12px;
-  height: 12px;
-  border-top: 2px solid white; /* Arrow design */
-  border-right: 2px solid white;
-  transform: rotate(-135deg);
-}
-
-.slick-next:before {
-  transform: rotate(45deg); /* Adjust direction for next arrow */
-}
-
-/* Hover effect for arrows */
 .slick-prev:hover,
 .slick-next:hover {
-  background-color: rgba(0, 0, 0, 0.8);
+  background: rgba(255, 255, 255, 0.8);
+  color: black;
 }
+
 
 /* Main container for carousel */
 .carousel-container {
@@ -63,6 +46,8 @@
   margin: auto;
   display: block;
   object-fit: contain; /* Ensure images fit neatly */
+  padding:10px;
+  background-color: rgba(102, 102, 102, 0.5);
 }
 
 /* Align slick-track properly */

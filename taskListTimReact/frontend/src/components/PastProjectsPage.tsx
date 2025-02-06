@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
+// import 'slick-carousel/slick/slick.css';
+// import 'slick-carousel/slick/slick-theme.css';
 import './CarouselStyles.css';
 
 type Project = {
@@ -36,14 +36,30 @@ const PastProjectsPage: React.FC = () => {
   }, [mainSliderRef, thumbSliderRef]);
 
   const mainSettings = {
-    asNavFor: thumbSlider || undefined, // Only pass a valid instance
+    asNavFor: thumbSlider || undefined,
     ref: mainSliderRef,
     dots: false,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    arrows: true,
+    arrows: true, // Ensure arrows are enabled
+    prevArrow: <button className="slick-prev">‹</button>,
+    nextArrow: <button className="slick-next">›</button>,
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          arrows: true, // Ensure arrows are shown on tablets
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          arrows: true, // Ensure arrows are shown on mobile
+        },
+      },
+    ],
   };
 
   const thumbSettings = {
@@ -67,6 +83,12 @@ const PastProjectsPage: React.FC = () => {
 
   return (
     <div className="carousel-container">
+
+    {/* Instruction for users */}
+    <p style={{ textAlign: 'center', fontSize: '1rem', marginBottom: '10px'}}>
+      Swipe left to browse projects.
+    </p>
+
       {/* Main Slider */}
       <Slider {...mainSettings}>
         {projects.map((project, index) => (

@@ -22,13 +22,13 @@ html, body {
 }
 
 body {
-  min-width: 420px;
+  min-width: 390px;
   overflow-x: auto; 
 }
 
-@media (max-width: 420px) {
+@media (max-width: 390px) {
   html, body {
-    width: 420px; 
+    width: 390px; 
   }
 }
 

@@ -35,6 +35,7 @@ const FooterWrapper = styled.footer<{ theme: any }>`
 
 const Sitemap = styled.nav<{ theme: any }>`
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   gap: 15px;
   margin-bottom: 20px;
@@ -45,6 +46,7 @@ const Sitemap = styled.nav<{ theme: any }>`
     font-weight: bold;
     position: relative;
     transition: color 0.3s ease;
+    white-space: nowrap;
 
     &:hover {
       color: ${({ theme }) => theme.palette.text.secondary};
