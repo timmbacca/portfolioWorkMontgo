@@ -77,8 +77,8 @@ const PageWrapper = styled.div<{ theme: any }>`
   max-width:600px;
   margin: 0 auto;
   text-align: left;
-  background-color: ${({ theme }) => theme?.palette?.background?.default || "#ffffff"};
-  color: ${({ theme }) => theme?.palette?.text?.primary || "#000000"};
+  background-color: ${({ theme }) => theme?.palette?.background?.default};
+  color: ${({ theme }) => theme?.palette?.text?.primary};
 `;
 
 const HeaderSection = styled.div`
@@ -100,7 +100,7 @@ const ResourcesSection = styled.div`
       margin-bottom: 10px;
 
       a {
-        color: ${({ theme }) => theme?.palette?.primary?.main || "#ff303b"};
+        color: ${({ theme }) => theme?.palette?.primary?.main};
         text-decoration: none;
 
         &:hover {
@@ -122,9 +122,9 @@ const ToolsSection = styled.div`
     max-width: 100%;
     height: auto;
     margin-top: 10px;
-    background-color: ${({ theme }) => theme.palette?.background?.default || '#ffffff'};
-    color: ${({ theme }) => theme.palette?.text?.primary || '#000000'};
-    border: 1px solid ${({ theme }) => theme.palette?.primary?.main || '#ff303b'};
+    background-color: ${({ theme }) => theme.palette?.background?.default};
+    color: ${({ theme }) => theme.palette?.text?.primary};
+    border: 1px solid ${({ theme }) => theme.palette?.primary?.main};
     margin-bottom: 20px;
   }
 `;
