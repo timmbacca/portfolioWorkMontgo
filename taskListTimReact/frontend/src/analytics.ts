@@ -1,10 +1,53 @@
 import ReactGA from 'react-ga4';
 
 /**
+ * Extends the Window interface to avoid TypeScript errors
+ */
+declare global {
+  interface Window {
+    dataLayer: any[];
+    gtag: (...args: any[]) => void;
+  }
+}
+
+/**
+ * Retrieves the CSP nonce from existing <script nonce="..."> tags.
+ */
+const getCSPNonce = (): string => {
+  return document?.querySelector('script[nonce]')?.getAttribute('nonce') || '';
+};
+
+/**
+ * Injects the Google Analytics script with a nonce for security.
+ * @param measurementId - The Google Analytics Measurement ID.
+ */
+const injectGAScript = (measurementId: string) => {
+  const nonce = getCSPNonce(); // Get the nonce from the page
+
+  // Create the Google Analytics script tag
+  const script = document.createElement('script');
+  script.src = `https://www.googletagmanager.com/gtag/js?id=${measurementId}`;
+  script.async = true;
+  script.setAttribute('nonce', nonce); // ✅ Apply the nonce
+  document.head.appendChild(script);
+
+  // Initialize Google Analytics
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function (...args: any[]) {
+    window.dataLayer.push(args);
+  };
+
+  window.gtag('js', new Date());
+  window.gtag('config', measurementId);
+};
+
+/**
  * Initializes Google Analytics with the provided Measurement ID.
  */
 export const initializeAnalytics = (): void => {
-  ReactGA.initialize('G-0X65LT19W0'); // Replace with your Measurement ID
+  const measurementId = 'G-0X65LT19W0'; 
+  injectGAScript(measurementId);
+  ReactGA.initialize(measurementId);
 };
 
 /**
