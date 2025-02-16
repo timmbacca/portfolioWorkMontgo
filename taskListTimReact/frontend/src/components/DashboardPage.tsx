@@ -2,26 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useTheme } from '@mui/material/styles';
 import './DashboardStyles.css';
 import TaskCharts from './TaskCharts';
-import rrreplicateSvg from '../assets/rrreplicate.svg';
 import { getTasks, Task } from '../api/taskApi';
-
-const dashboardStyles = {
-  background: `url(${rrreplicateSvg})`,
-  backgroundSize: '600px 600px',
-  backgroundBlendMode: 'overlay',
-  backgroundRepeat: 'repeat',
-};
 
 const DashboardPage: React.FC = () => {
   const theme = useTheme();
-
-  const dashboardStyles = {
-    backgroundColor: theme.palette.background.default,
-    color: theme.palette.text.primary,
-    padding: '20px',
-    borderRadius: '8px',
-    transition: 'background-color 0.3s ease, color 0.3s ease',
-  };
 
   const [tasks, setTasks] = useState<Task[]>([]);
   const [loading, setLoading] = useState(true);
@@ -77,7 +61,7 @@ const DashboardPage: React.FC = () => {
     const priorityCounts: Record<string, number> = { High: 0, Medium: 0, Low: 0, Urgent: 0 };
     const statusCounts: Record<string, number> = { 'To Do': 0, 'In Progress': 0, Completed: 0, 'On Hold': 0 };
     const progressData: { x: string; y: number }[] = [];
-    const riskCounts: Record<string, number> = { High: 0, Medium: 0, Low: 0 };
+    const riskCounts: Record<string, number> = { High: 0, Medium: 0, Low: 0, Undecided: 0 };
   
     tasks.forEach((task) => {
       // Increment priority counts
@@ -88,11 +72,11 @@ const DashboardPage: React.FC = () => {
       if (task.status && statusCounts[task.status] !== undefined) {
         statusCounts[task.status]++;
       }
-      // Increment risk counts (check for `risk_level` instead of `riskLevel`)
+      // Increment risk counts, handle "Undecided" case
       if (task.riskLevel && riskCounts[task.riskLevel] !== undefined) {
         riskCounts[task.riskLevel]++;
       } else {
-        console.warn(`Task "${task.title}" has no risk level defined.`);
+        riskCounts.Undecided++; // If no risk level is assigned, count as "Undecided"
       }
       // Add progress data
       if (task.title) {

@@ -184,6 +184,14 @@ const OWASPPage = () => {
           I regularly run my projects through SonarQube to identify security vulnerabilities and code quality issues.
         </Typography>
         <img src="./sonarQube.png" alt="SonarQube analysis screenshot" />
+
+        <Typography variant="h6">Security Headers Scanner</Typography>
+        <Typography variant="body2">
+        To ensure my website's security, I regularly test it using SecurityHeaders.com, a tool that provides a comprehensive analysis of security headers. 
+        This helps me monitor and improve my site's defense against attacks such as XSS, clickjacking, and data leaks. 
+        </Typography>
+        <img src="./securityHeadersTest.png" alt="Security Headers screenshot" />
+
         <Typography variant="h6">ANDI Accessibility Checker</Typography>
         <Typography variant="body2">
           I leverage the ANDI tool to ensure compliance with accessibility standards and improve user experience for all.
@@ -231,6 +239,15 @@ const OWASPPage = () => {
               rel="noopener noreferrer"
             >
               SonarQube - Code Quality and Security Analysis
+            </MuiLink>
+          </li>
+          <li>
+            <MuiLink
+              href="https://www.securityheaders.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Security Headers - Scan your site now
             </MuiLink>
           </li>
           <li>
