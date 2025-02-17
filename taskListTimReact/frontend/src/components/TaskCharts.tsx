@@ -12,7 +12,7 @@ import {
   RadarController,
   PointElement,
 } from 'chart.js';
-import { Pie, Bar, Line, Radar } from 'react-chartjs-2';
+import { Doughnut, Bar, Line, Radar } from 'react-chartjs-2';
 import './DashboardStyles.css'; // Unified styles
 import { useTheme } from '@mui/material/styles';
 
@@ -26,7 +26,7 @@ ChartJS.register(
   RadialLinearScale,
   BarElement,
   LineElement,
-  RadarController, // Ensure RadarController is registered
+  RadarController,
   PointElement
 );
 
@@ -43,27 +43,7 @@ type TaskChartsProps = {
 const TaskCharts: React.FC<TaskChartsProps> = ({ metrics, chartType }) => {
   const theme = useTheme();
   const { priorityCounts, statusCounts, progressData, riskCounts } = metrics;
-
-  // Ensure the risk chart includes a fourth 'Undecided' category
   const fullRiskCounts = { ...riskCounts, Undecided: riskCounts.Undecided || 0 };
-
-  const neonColors = ['#FF00FF', '#00FFFF', '#FF4500', '#32CD32'];
-
-  // Chart data configurations
-  const statusChartData = {
-    labels: Object.keys(statusCounts),
-    datasets: [
-      {
-        label: 'Task Status Distribution',
-        data: Object.values(statusCounts),
-        backgroundColor: neonColors.map(color => `${color}AA`),
-        borderColor: neonColors,
-        borderWidth: 2,
-        hoverBackgroundColor: neonColors.map(color => `${color}FF`),
-        hoverBorderWidth: 3,
-      },
-    ],
-  };
 
   const priorityChartData = {
     labels: Object.keys(priorityCounts),
@@ -71,34 +51,54 @@ const TaskCharts: React.FC<TaskChartsProps> = ({ metrics, chartType }) => {
       {
         label: 'Task Priority',
         data: Object.values(priorityCounts),
-        backgroundColor: neonColors.map(color => `${color}AA`),
-        borderColor: neonColors,
+        backgroundColor: Object.keys(priorityCounts).map(
+          (_, index) =>
+            theme.chartColors[index % theme.chartColors.length] + '33' // Semi-transparent
+        ),
+        borderColor: Object.keys(priorityCounts).map(
+          (_, index) => theme.chartColors[index % theme.chartColors.length]
+        ),
         borderWidth: 1,
-        hoverBackgroundColor: neonColors.map(color => `${color}FF`),
-        hoverBorderWidth: 3,
-        barThickness: 15,
-        borderSkipped: false,
-        borderRadius: 4,
-        barPercentage: 0.8,
-        categoryPercentage: 0.9,
-        borderShadowColor: '#222',
-        shadowOffsetX: 4,
-        shadowOffsetY: 4,
       },
     ],
   };
 
+  // Doughnut chart data for status
+  const statusChartData = {
+    labels: Object.keys(statusCounts),
+    datasets: [
+      {
+        label: 'Task Status Distribution',
+        data: Object.values(statusCounts),
+        backgroundColor: Object.keys(statusCounts).map(
+          (_, index) =>
+            theme.chartColors[index % theme.chartColors.length] + '33' // Semi-transparent
+        ),
+        borderColor: Object.keys(statusCounts).map(
+          (_, index) => theme.chartColors[index % theme.chartColors.length]
+        ),
+        borderWidth: 2,
+        cutout: '60%', // Donut effect
+      },
+    ],
+  };
+
+  // Progress and Risk charts using Chart.js
   const progressChartData = {
     labels: progressData.map((point) => point.x),
     datasets: [
       {
         label: 'Task Progress (%)',
         data: progressData.map((point) => point.y),
-        backgroundColor: `${neonColors[0]}AA`,
-        borderColor: neonColors[0],
+        backgroundColor: progressData.map(
+          (_, index) =>
+            theme.chartColors[index % theme.chartColors.length] + '33' // Semi-transparent
+        ),
+        borderColor: progressData.map(
+          (_, index) => theme.chartColors[index % theme.chartColors.length]
+        ),
         tension: 0.4,
         pointRadius: 4,
-        hoverBorderWidth: 3,
       },
     ],
   };
@@ -109,48 +109,53 @@ const TaskCharts: React.FC<TaskChartsProps> = ({ metrics, chartType }) => {
       {
         label: 'Risk Levels',
         data: Object.values(fullRiskCounts),
-        backgroundColor: `${neonColors[1]}AA`,
-        borderColor: neonColors[1],
-        pointBackgroundColor: neonColors[1],
+        backgroundColor: theme.chartColors[0] + '33', // Semi-transparent
+        borderColor: theme.chartColors[0],
+        pointBackgroundColor: theme.chartColors[0],
         borderWidth: 2,
         pointBorderColor: '#FFFFFF',
-        hoverBorderWidth: 3,
       },
     ],
   };
 
+  // Chart options
   const chartOptions = {
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
       legend: {
         labels: {
-          color: '#FFFFFF',
-          font: { size: 14 }
+          color: theme.palette.text.primary,
         },
       },
       tooltip: {
-        backgroundColor: '#222',
-        bodyColor: '#FFFFFF',
+        backgroundColor: theme.palette.background.paper,
+        bodyColor: theme.palette.text.primary,
       },
     },
-    scales: {
-      r: chartType === 'risk' ? { 
-        angleLines: { color: '#444' },
-        grid: { color: '#444', lineWidth: 0.5 },
-        pointLabels: { color: '#FFFFFF' },
-        ticks: { display: false },
-      } : undefined,
-      x: chartType === 'status' ? { display: false } : { grid: { color: '#444' } },
-      y: chartType === 'status' ? { display: false } : { grid: { color: '#444' } },
+    scales: chartType === 'status' ? {} : { // Remove grid only for Doughnut chart
+      r: {
+        angleLines: {
+          color: theme.palette.divider,
+        },
+        grid: {
+          color: theme.palette.divider,
+        },
+        pointLabels: {
+          color: theme.palette.text.primary,
+        },
+        ticks: {
+          display: false,
+        },
+      },
     },
-  };
+  };  
 
   // Chart rendering logic
   const renderChart = () => {
     switch (chartType) {
       case 'status':
-        return <Pie data={statusChartData} options={chartOptions} />;
+        return <Doughnut data={statusChartData} options={chartOptions} />;
       case 'priority':
         return <Bar data={priorityChartData} options={chartOptions} />;
       case 'progress':
@@ -162,7 +167,11 @@ const TaskCharts: React.FC<TaskChartsProps> = ({ metrics, chartType }) => {
     }
   };
 
-  return <div className="chart-container" style={{ backgroundColor: '#111', padding: '10px', borderRadius: '10px', boxShadow: '0 0 10px #0ff' }}>{renderChart()}</div>;
+  return (
+    <div className="chart-container">
+      {renderChart()}
+    </div>
+  );
 };
 
 export default TaskCharts;
