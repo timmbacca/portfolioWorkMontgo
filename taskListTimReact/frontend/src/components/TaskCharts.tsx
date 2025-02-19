@@ -109,11 +109,14 @@ const TaskCharts: React.FC<TaskChartsProps> = ({ metrics, chartType }) => {
       {
         label: 'Risk Levels',
         data: Object.values(fullRiskCounts),
-        backgroundColor: theme.chartColors[0] + '33', // Semi-transparent
-        borderColor: theme.chartColors[0],
-        pointBackgroundColor: theme.chartColors[0],
-        borderWidth: 2,
-        pointBorderColor: '#FFFFFF',
+        backgroundColor: Object.keys(fullRiskCounts).map(
+          (_, index) =>
+            theme.chartColors[index % theme.chartColors.length] + '33' // Semi-transparent
+        ),
+        borderColor: Object.keys(fullRiskCounts).map(
+          (_, index) => theme.chartColors[index % theme.chartColors.length]
+        ),
+        borderWidth: 1,
       },
     ],
   };
@@ -161,7 +164,7 @@ const TaskCharts: React.FC<TaskChartsProps> = ({ metrics, chartType }) => {
       case 'progress':
         return <Line data={progressChartData} options={chartOptions} />;
       case 'risk':
-        return <Radar data={riskChartData} options={chartOptions} />;
+        return <Bar data={riskChartData} options={chartOptions} />;
       default:
         return null;
     }
