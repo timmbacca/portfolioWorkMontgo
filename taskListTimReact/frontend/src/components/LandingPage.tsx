@@ -34,10 +34,11 @@ const PhotoWrapper = styled.div<{ theme: any }>`
   border: 4px solid ${({ theme }) => theme.palette.primary.main};
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 
-  img {
-    width: 100%;
-    height: 100%;
+    img {
+    width: 100%; /* Adjust back to 100% so the transform can scale it */
+    height: 100%; /* Adjust back to 100% */
     object-fit: cover;
+    transform: scale(1.5) translate(2.8%, 16%); /* Example zoom and center */
   }
 `;
 

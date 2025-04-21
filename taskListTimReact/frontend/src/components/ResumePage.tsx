@@ -59,9 +59,9 @@ const Resume = () => {
         <h2>Objective</h2>
         <p>
         Innovative UI/UX/Web Developer with extensive experience in building responsive, accessible, and engaging 
-web applications. Passionate about leveraging AI technologies like ChatGPT and Llama 3 to push the 
+web applications. Passionate about leveraging AI technologies like ChatGPT, Gemini, and Llama 3 to push the 
 boundaries of user-friendly website design and development. Eager to explore the potential of AI-driven 
-solutions in crafting smarter and more dynamic web experiences.
+solutions in cratiing smarter and more dynamic web experiences.
         </p>
       </ResumeSection>
 
@@ -71,12 +71,19 @@ solutions in crafting smarter and more dynamic web experiences.
           <li><b>Full-Stack Development:</b><br /> 
           React, TypeScript, JavaScript, AngularJS, Bootstrap, Node.js, Express, Java, JSP, 
           WebSphere, Spring Boot, HTML, CSS (SASS/LESS), SQL, PostgreSQL, JSON, XML, Bash, Gradle</li>
+          
+          <li><b>Graphic Design and UI/UX:</b><br />
+          Adobe Creative Suite (Photoshop, Illustrator, Dreamweaver, Premiere, InDesign, 
+            Animate, Acrobat), Autodesk 3ds Max, Blender, Gimp 2, Pixel Studio, DaVinci Resolve</li>
+
           <li><b>AI and Emerging Technologies:</b><br />
-          ChatGPT, Llama 3 integration for website development, OWASP Top 10 
+          ChatGPT, Gemini, Llama 3 integration for website development, OWASP Top 10 
           principles for secure development</li>
+          
           <li><b>Tools & Platforms:</b><br />
           SonarQube, Jenkins, Artifactory, Google Cloud Platform (GCP), Render, LM Studio, Adobe 
           Creative Suite, Autodesk 3ds Max, VS Code, Git, SVN</li>
+          
           <li><b>Project Management & Collaboration:</b><br />
           MS Teams, SharePoint, Joomla, VersionOne, Trello, Jira</li>
         </ul>
@@ -86,11 +93,18 @@ solutions in crafting smarter and more dynamic web experiences.
         <h2>Certification</h2>
         <ul>
           <li>Certified Scrum Master (CSM)</li>
+          <li>Substitute Teacher (Degreed PWCS)</li>
         </ul>
       </ResumeSection>
 
       <ResumeSection>
         <h2>Employment Experience</h2>
+        
+        <h3>Substitute Teacher | Prince William County Schools | 2025-Present</h3>
+        <ul>
+          <li>Substitute for Kindergarten through 12th-grade classes, as well as music and art classes.</li>
+        </ul>
+
         <h3>Optimo-IT | 2015–2024</h3>
         <ul>
           <li>Contributed to the development of responsive interfaces for various USPS platforms using React, TypeScript, JavaScript, JSP HTML, CSS, and Bootstrap.</li>
@@ -129,7 +143,7 @@ solutions in crafting smarter and more dynamic web experiences.
         </ul>
       </ResumeSection>
       <StyledLink
-        href="/CMontgomery_Resume_01242025a.pdf"
+        href="/CMontgomery_Resume_04212025a.pdf"
         download
         theme={theme}
         style={{ marginTop: '20px', display: 'inline-block' }}
