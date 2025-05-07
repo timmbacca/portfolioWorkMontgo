@@ -41,16 +41,6 @@ const HowItsMade: React.FC = () => {
                 communication.
               </li>
       </ul>
-         <h2>
-            Follow my project progress on{' '}
-            <Link 
-              href="https://github.com/timmbacca/portfolioWorkMontgo" 
-              target="_blank" 
-              rel="noopener noreferrer"
-            >
-              GitHub
-            </Link>.
-          </h2>
     </Box>
   );
 };
