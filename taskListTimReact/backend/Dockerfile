@@ -1,32 +1,45 @@
-# Use the Node.js 16 base image
-FROM node:16
+# Use a lighter-weight base image
+FROM node:18-slim AS base
 
-# Set the working directory inside the container
-WORKDIR /app
+# Set the working directory
+WORKDIR /usr/src/app
 
-# Copy package.json and package-lock.json into the working directory
+# Install dependencies
 COPY package*.json ./
-
-# Install dependencies (including devDependencies)
 RUN npm install
 
-# Install TypeScript globally (optional but useful for debugging)
-RUN npm install -g typescript
-
-# Copy the rest of the application code into the working directory
+# Copy the rest of the application code
 COPY . .
 
-# Compile TypeScript into JavaScript
+# Build the TypeScript code
 RUN npm run build
 
-# Update apt-get and install the default PostgreSQL client
-RUN apt-get update && apt-get install -y postgresql-client
+# Use a minimal production image
+FROM node:18-slim
+
+# Set the working directory
+WORKDIR /usr/src/app
+
+# Copy the built code and dependencies from the base stage
+COPY --from=base /usr/src/app/dist ./dist
+COPY --from=base /usr/src/app/node_modules ./node_modules
+COPY --from=base /usr/src/app/package*.json ./
+
+# Install postgresql-client
+RUN apt-get update && apt-get install -y postgresql-client && which psql
 
 # Copy the SQL initialization script into the container
-COPY ./db/init_tasks_table.sql /app/db/init_tasks_table.sql
+COPY ./db/init_tasks_table.sql /usr/src/app/db/init_tasks_table.sql
 
-# Expose the backend port
+# Download wait-for-it.sh
+ADD https://github.com/vishnubob/wait-for-it/raw/master/wait-for-it.sh /usr/src/app/wait-for-it.sh
+RUN chmod +x /usr/src/app/wait-for-it.sh
+
+# Install pg-connection-string
+RUN npm install pg-connection-string
+
+# Expose the port the app runs on
 EXPOSE 4000
 
 # Define the command to start the application and initialize the database
-CMD ["sh", "-c", "psql $DATABASE_URL -f /app/db/init_tasks_table.sql && node dist/index.js"]
+CMD ["node", "dist/index.js"]

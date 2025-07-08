@@ -1,0 +1,38 @@
+steps:
+  - name: 'gcr.io/cloud-builders/gcloud'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        gcloud sql databases query tasks --instance=task-list-db --database=tasks --user=task_app_user --password=newpassword123 --file=backend/db/init_tasks_table.sql
+    id: 'Initialize Database'
+    env:
+      - 'CLOUDSDK_CORE_PROJECT=tmontgo'
+      - 'CLOUDSDK_COMPUTE_REGION=us-central1'
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'us-central1-docker.pkg.dev/tmontgo/task-list-backend/task-list-backend:latest', '.']
+    dir: 'backend'
+    id: 'Build Backend Image'
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'us-central1-docker.pkg.dev/tmontgo/task-list-backend/task-list-backend:latest']
+    id: 'Push Backend Image'
+
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args:
+      - 'run'
+      - 'deploy'
+      - 'task-list-backend'
+      - '--image'
+      - 'us-central1-docker.pkg.dev/tmontgo/task-list-backend/task-list-backend:latest'
+      - '--region'
+      - 'us-central1'
+      - '--platform'
+      - 'managed'
+      - '--allow-unauthenticated'
+      - '--add-cloudsql-instances'
+      - 'tmontgo:us-central1:task-list-db'
+      - '--set-env-vars'
+      - 'DB_USER=task_app_user,DB_PASSWORD=newpassword123,DB_NAME=tasks,CLOUD_SQL_CONNECTION_NAME=tmontgo:us-central1:task-list-db,NODE_ENV=production'
+    id: 'Deploy Backend to Cloud Run'
