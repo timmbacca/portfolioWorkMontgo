@@ -21,7 +21,7 @@ export interface Task {
 
 // Set up Axios instance for the API
 const api = axios.create({
-  baseURL: process.env.REACT_APP_BACKEND_URL || 'https://portfolioWorkMontgoBack.onrender.com',
+  baseURL: 'https://task-list-backend-7sesojegqq-uc.a.run.app',
   headers: {
     'Content-Type': 'application/json',
   },

@@ -1,5 +1,5 @@
-# Use the Node.js 16 image for building the React app
-FROM node:16 as build
+# Use the Node.js 18 image for building the React app
+FROM node:18-slim as build
 
 # Set the working directory
 WORKDIR /app
@@ -16,17 +16,20 @@ COPY . .
 # Build the React app
 RUN npm run build
 
-# Use a lightweight web server (Nginx) to serve the production build
-FROM nginx:stable-alpine
+# Use a minimal image for serving
+FROM node:18-slim
 
-# Copy the build output from the previous step
-COPY --from=build /app/build /usr/share/nginx/html
+# Set the working directory
+WORKDIR /usr/src/app
 
-# Add the custom Nginx configuration to handle React Router
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+# Copy the built React app from the build stage
+COPY --from=build /app/build ./build
 
-# Expose port 80 for the web server
-EXPOSE 80
+# Install serve globally
+RUN npm install -g serve
 
-# Start the web server
-CMD ["nginx", "-g", "daemon off;"]
+# Expose the port the app runs on
+EXPOSE 8080
+
+# Start the server
+CMD ["serve", "-s", "build", "-l", "8080"]
