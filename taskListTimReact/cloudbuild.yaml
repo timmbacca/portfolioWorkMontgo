@@ -29,7 +29,7 @@ steps:
 
 # --- Database Initialization ---
 - name: 'gcr.io/cloud-builders/gsutil'
-  args: ['cp', 'backend/db/init_tasks_table.sql', 'gs://tmontgo-sql-init/init_tasks_table.sql']
+  args: ['cp', 'taskListTimReact/backend/db/init_tasks_table.sql', 'gs://tmontgo-sql-init/init_tasks_table.sql']
   id: 'Upload SQL to GCS'
 
 - name: 'gcr.io/cloud-builders/gcloud'
