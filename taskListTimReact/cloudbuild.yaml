@@ -2,7 +2,7 @@ steps:
 # Diagnostic step to list workspace contents
 - name: 'gcr.io/cloud-builders/gcloud'
   entrypoint: 'bash'
-  args: [' -c', 'ls -la /workspace']
+  args: ['-c', 'ls -la /workspace']
   id: 'List Workspace Contents'
 
 # --- Backend Build ---
