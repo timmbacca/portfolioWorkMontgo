@@ -7,14 +7,12 @@ steps:
 
 # --- Backend Build ---
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'us-central1-docker.pkg.dev/tmontgo/task-list-backend/task-list-backend:latest', '.']
-  dir: 'backend'
+  args: ['build', '-t', 'us-central1-docker.pkg.dev/tmontgo/task-list-backend/task-list-backend:latest', 'taskListTimReact/backend']
   id: 'Build Backend Image'
 
 # --- Frontend Build ---
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'us-central1-docker.pkg.dev/tmontgo/task-list-frontend/task-list-frontend:latest', '.']
-  dir: 'frontend'
+  args: ['build', '-t', 'us-central1-docker.pkg.dev/tmontgo/task-list-frontend/task-list-frontend:latest', 'taskListTimReact/frontend']
   id: 'Build Frontend Image'
 
 # --- Backend Push ---
