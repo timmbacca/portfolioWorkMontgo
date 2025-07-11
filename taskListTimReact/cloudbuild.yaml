@@ -60,8 +60,10 @@ steps:
     - '--add-cloudsql-instances'
     - 'tmontgo:us-central1:task-list-db'
     - '--set-env-vars'
-    - 'DB_USER=task_app_user,DB_PASSWORD=newpassword123,DB_NAME=tasks,CLOUD_SQL_CONNECTION_NAME=tmontgo:us-central1:task-list-db,NODE_ENV=production'
+    - 'DB_USER=task_app_user,DB_NAME=tasks,CLOUD_SQL_CONNECTION_NAME=tmontgo:us-central1:task-list-db,NODE_ENV=production'
     - '--timeout=300s'
+  secretEnv:
+    - DB_PASSWORD
   id: 'Deploy Backend to Cloud Run'
   waitFor: ['Push Backend Image', 'Initialize Database']
 
@@ -85,6 +87,9 @@ steps:
 options:
   logging: CLOUD_LOGGING_ONLY
   default_logs_bucket_behavior: REGIONAL_USER_OWNED_BUCKET
+secrets:
+- id: task-list-db-password
+  secretEnv: 'DB_PASSWORD'
 images:
 - 'us-central1-docker.pkg.dev/tmontgo/task-list-backend/task-list-backend:latest'
 - 'us-central1-docker.pkg.dev/tmontgo/task-list-frontend/task-list-frontend:latest'
