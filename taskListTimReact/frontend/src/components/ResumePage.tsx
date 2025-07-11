@@ -49,101 +49,131 @@ const Resume = () => {
     <ResumeWrapper theme={theme}>
       <h1>Charles T. Montgomery</h1>
       <p>
-        Cell: 703-336-9942 • Email: 
+        Manassas, VA | Cell: 703-336-9942 | Email:
         <StyledLink href="mailto:ctmontgo@gmail.com" theme={theme}>
           ctmontgo@gmail.com
+        </StyledLink>
+        <br />
+        Website:
+        <StyledLink href="https://www.tmontgo.com" target="_blank" rel="noopener noreferrer" theme={theme}>
+          www.tmontgo.com
         </StyledLink>
       </p>
 
       <ResumeSection>
         <h2>Objective</h2>
         <p>
-        Innovative UI/UX/Web Developer with extensive experience in building responsive, accessible, and engaging 
-web applications. Passionate about leveraging AI technologies like ChatGPT, Gemini, and Llama 3 to push the 
-boundaries of user-friendly website design and development. Eager to explore the potential of AI-driven 
-solutions in cratiing smarter and more dynamic web experiences.
+          Innovative UI/UX/Web Developer with extensive experience in building responsive, accessible, and engaging web applications. Eager and passionate about exploring and leveraging AI technologies to push the boundaries of user-friendly website design and development.
         </p>
       </ResumeSection>
 
       <ResumeSection>
-        <h2>Computer Skills</h2>
+        <h2>Skills</h2> {/* Updated section title */}
         <ul>
-          <li><b>Full-Stack Development:</b><br /> 
-          React, TypeScript, JavaScript, AngularJS, Bootstrap, Node.js, Express, Java, JSP, 
-          WebSphere, Spring Boot, HTML, CSS (SASS/LESS), SQL, PostgreSQL, JSON, XML, Bash, Gradle</li>
-          
+          <li><b>Full-Stack Development:</b><br />
+            React, TypeScript, JavaScript, Node.js, Express, Java, JSP, WebSphere, HTML, CSS, SQL, PostgreSQL, JSON, XML, Bash, Gradle</li>
+
           <li><b>Graphic Design and UI/UX:</b><br />
-          Adobe Creative Suite (Photoshop, Illustrator, Dreamweaver, Premiere, InDesign, 
-            Animate, Acrobat), Autodesk 3ds Max, Blender, Gimp 2, Pixel Studio, DaVinci Resolve</li>
+            Adobe Creative Suite, Autodesk 3ds Max, Blender, Pixel Studio, DaVinci Resolve, Traditional Studio Art</li>
 
           <li><b>AI and Emerging Technologies:</b><br />
-          ChatGPT, Gemini, Llama 3 integration for website development, OWASP Top 10 
-          principles for secure development</li>
-          
+            ChatGPT, Gemini, Gemini CLI, Gemma 3, Llama 3, Prompt Engineering Techniques (Zero/One/Few-shot, Role, Prompt Chaining, Grounding, RAG)</li>
+
           <li><b>Tools & Platforms:</b><br />
-          SonarQube, Jenkins, Artifactory, Google Cloud Platform (GCP), Render, LM Studio, Adobe 
-          Creative Suite, Autodesk 3ds Max, VS Code, Git, SVN</li>
-          
+            ANDI Trusted Tester, SonarQube, Jenkins, Artifactory, Google Cloud Platform (GCP), Google Tag Manager, Render, LM Studio, Firebase, Google AI Studio, Vertex AI, VS Code, Eclipse, Android Studio, Git, SVN</li>
+
           <li><b>Project Management & Collaboration:</b><br />
-          MS Teams, SharePoint, Joomla, VersionOne, Trello, Jira</li>
+            MS Teams, SharePoint, Joomla, VersionOne, Jira</li>
         </ul>
       </ResumeSection>
 
       <ResumeSection>
-        <h2>Certification</h2>
+        <h2>Projects</h2>
+        <h3>
+          <StyledLink href="https://www.tmontgo.com" target="_blank" rel="noopener noreferrer" theme={theme}>
+            Portfolio Website: www.tmontgo.com
+          </StyledLink>
+        </h3>
         <ul>
-          <li>Certified Scrum Master (CSM)</li>
-          <li>Substitute Teacher (Degreed PWCS)</li>
+          <li>Built a dynamic React-based website showcasing professional projects, resume, and a "How It's Put Together" section explaining technical approaches.</li>
+          <li>Developed a full-stack task management application hosted on the Google Cloud platform, featuring a React frontend, Node.js backend, and PostgreSQL database.</li>
+          <li>Integrated features such as CSV file uploads, calendar views, light/dark themes, and metrics dashboards for visualizing task performance and progress.</li>
+          <li>Ensured 508/WCAG compliance and implemented Material-UI for a modern, responsive UI.</li>
+        </ul>
+
+        <h3>
+          <StyledLink href="https://eztarotz.com" target="_blank" rel="noopener noreferrer" theme={theme}>
+            Tarot Reading Website: www.eztarotz.com
+          </StyledLink>
+        </h3>
+        <ul>
+          <li>Engineered an AI-powered web application providing personalized 3 or 5-card tarot readings by integrating with Google's Gemini API for dynamic interpretations.</li>
+          <li>Frontend developed with HTML, CSS, and JavaScript, hosted on Firebase Hosting.</li>
+          <li>Backend implemented as a serverless Cloud Function for Firebase, managing API requests and data processing.</li>
+        </ul>
+
+        <h3>
+          <StyledLink href="https://ezweatherz.com" target="_blank" rel="noopener noreferrer" theme={theme}>
+            Ad-Free Weather Website: www.ezweatherz.com
+          </StyledLink>
+        </h3>
+        <ul>
+          <li>Developed a clean, ad-free weather application using Next.js and TypeScript, focused on delivering a simple and fast user experience.</li>
+          <li>Utilized Docker for containerization and deployed on Google Cloud Run for scalability.</li>
+          <li>Sourced real-time weather data from the National Weather Service (NWS) API.</li>
+        </ul>
+      </ResumeSection>
+
+      <ResumeSection>
+        <h2>Education / Certifications</h2> {/* Combined section title */}
+        <ul>
+          <li>Google Cloud Certification - Generative AI Leader - Series ID 1861</li>
+          <li>DHS Trusted Tester Certification (TTv5) TT-2505-07367</li>
+          <li>Professional Scrum Master 1 - Scrum.org</li>
+          <li>BFA in Media Arts and Animation - Illinois Institute of Art, Schaumburg, IL</li>
+          <li>AA in Computer Animation - Art Institute of Atlanta, Atlanta, GA</li>
+          <li>AA in Pre-Liberal Arts - Surry Community College, Dobson, NC</li>
+          <li>Substitute Teacher (Degreed) - Prince William County Schools, VA</li>
         </ul>
       </ResumeSection>
 
       <ResumeSection>
         <h2>Employment Experience</h2>
-        
+
         <h3>Substitute Teacher | Prince William County Schools | 2025-Present</h3>
         <ul>
-          <li>Substitute for Kindergarten through 12th-grade classes, as well as music and art classes.</li>
+          <li>Substitute teaching for kindergarten through 12th-grade classes, as well as music and art classes.</li>
         </ul>
 
-        <h3>Optimo-IT | 2015–2024</h3>
+        <h3>Frontend Developer | Optimo-IT | 2015–2024</h3>
         <ul>
-          <li>Contributed to the development of responsive interfaces for various USPS platforms using React, TypeScript, JavaScript, JSP HTML, CSS, and Bootstrap.</li>
-          <li>Created responsive HTML email templates for USPS, ensuring cross-client compatibility.</li>
-          <li>Supported Google Cloud operations and DevOps tasks.</li>
+          <li>Contributed to the development of responsive interfaces for various USPS platforms, including USPS's Informed Delivery™ web application using React, TypeScript, JavaScript, Java, JSP, WebSphere, Spring Boot, and Bootstrap.</li>
+          <li>Created responsive HTML email templates for USPS, ensuring cross-email client and web compatibility using Java, HTML, and Litmus.</li>
+          <li>Supported Google Cloud operations and DevOps tasks using UNIX, Jenkins, Artifactory, and SonarQube.</li>
           <li>Ensured 508/WCAG compliance through documentation and accessibility workshops.</li>
         </ul>
 
-        <h3>Tiber Creek Consulting | 2009–2015</h3>
+        <h3>Graphic Web Designer | Tiber Creek Consulting | 2009–2015</h3>
         <ul>
-          <li>Designed and developed responsive interfaces and themes for National Guard and Department of 
-          the Navy portals using HTML, CSS, Bootstrap, and jQuery UI.</li>
+          <li>Created responsive interfaces for National Guard and Department of the Navy portals using HTML, CSS, JavaScript, jQuery, Adobe Flash, SharePoint Designer, and Joomla.</li>
           <li>Styled icons, graphics, and branding for multiple platforms while ensuring 508/WCAG compliance.</li>
           <li>Created prototypes and mockups to support portal design and functionality enhancements.</li>
         </ul>
 
-        <h3>Applied Research Associates | 2006–2009</h3>
+        <h3>Digital Media Artist | Applied Research Associates | 2006–2009</h3>
         <ul>
-          <li>Designed 3D assets for military simulation software and visual elements for proposals and 
-          marketing materials.</li>
-          <li>Produced interactive and print materials, including training content and trade show displays.</li>
+          <li>Modeled and Textured 3D assets for military training simulation software and visual elements for proposals and marketing materials using Adobe Creative Suite and Autodesk 3DS Max.</li>
+          <li>Produced interactive and print materials, proposal graphics, and trade show displays.</li>
         </ul>
 
-        <h3>Surry Community College | 2005–2006</h3>
+        <h3>Adjunct Instructor | Surry Community College | 2005–2006</h3>
         <ul>
-          <li>Taught Illustration and Computer Design Basics as an adjunct instructor for two semesters.</li>
+          <li>Instructed Traditional Illustration and Computer Graphic Design as an adjunct instructor for two semesters using Adobe Illustrator, Adobe Photoshop, and Quark Express.</li>
         </ul>
       </ResumeSection>
 
-      <ResumeSection>
-        <h2>Education</h2>
-        <ul>
-          <li>B.F.A., Media Arts and Animation - Illinois Institute of Art</li>
-          <li>A.A., Computer Animation - Art Institute of Atlanta</li>
-          <li>A.A., Pre-Liberal Arts - Surry Community College</li>
-        </ul>
-      </ResumeSection>
       <StyledLink
-        href="/CMontgomery_Resume_04212025a.pdf"
+        href="/CMontgomery_Resume_0710.pdf"
         download
         theme={theme}
         style={{ marginTop: '20px', display: 'inline-block' }}

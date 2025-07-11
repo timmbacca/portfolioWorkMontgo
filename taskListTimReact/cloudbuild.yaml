@@ -1,10 +1,14 @@
 steps:
+  - name: 'gcr.io/cloud-builders/gsutil'
+    args: ['cp', 'backend/db/init_tasks_table.sql', 'gs://tmontgo-sql-init/init_tasks_table.sql']
+    id: 'Upload SQL to GCS'
+
   - name: 'gcr.io/cloud-builders/gcloud'
     entrypoint: 'bash'
     args:
       - '-c'
       - |
-        gcloud sql databases query tasks --instance=task-list-db --database=tasks --user=task_app_user --password=newpassword123 --file=backend/db/init_tasks_table.sql
+        gcloud sql import sql task-list-db gs://tmontgo-sql-init/init_tasks_table.sql --database=tasks --user=task_app_user
     id: 'Initialize Database'
     env:
       - 'CLOUDSDK_CORE_PROJECT=tmontgo'

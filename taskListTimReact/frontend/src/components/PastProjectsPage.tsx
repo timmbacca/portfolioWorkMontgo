@@ -3,13 +3,27 @@ import Slider from 'react-slick';
 // import 'slick-carousel/slick/slick.css';
 // import 'slick-carousel/slick/slick-theme.css';
 import './CarouselStyles.css';
+import { useTheme } from '@mui/material/styles'; // Import useTheme
+import { StyledLink } from './StyledLink'; // Import StyledLink
 
 type Project = {
   image: string;
   description: string;
+  url?: string;
 };
 
 const projects: Project[] = [
+  {
+    image: '/eztarotz.png',
+    url: 'https://eztarotz.com', // Add the URL here
+    description: 'eztarotz.com - AI-Powered Tarot Reading Web Application. This modern web application provides users with personalized 3 or 5-card tarot readings, leveraging the power of Google’s Gemini API for insightful interpretations. Users can perform a spread, and the application’s backend service queries the Gemini API to generate dynamic, context-aware interpretations of the cards in their specific positions, offering a unique and engaging experience. The frontend is built with HTML, CSS, and JavaScript, deployed globally via Firebase Hosting, while the backend logic is implemented as a serverless Cloud Function for Firebase, securely handling API requests and integrating seamlessly with the frontend.'
+  },
+  {
+    image: '/simpleweather.png',
+    url: 'https://ezweatherz.com', // Add the URL here
+    description: 'ezweatherz.com - Ad-Free Weather Application This project is a clean, ad-free weather application engineered for a simple and fast user experience. It was developed in response to the prevalence of intrusive pop-ups and advertisements on many existing weather websites. The application leverages Next.js and TypeScript for a robust frontend, is containerized with Docker, and deployed on Google Cloud Run for high availability and scalability. Weather data is reliably sourced from the National Weather Service (NWS) API.'
+  },
+  // ... other projects
   { image: '/natguardg1personnelgateway.jpg', description: 'Army National Guard G1 Personnel Gateway, streamlining access to HR resources for soldiers, veterans, and families. Implemented user-friendly features such as announcements, news highlights, and quick access to essential tools and programs.' },
   { image: '/ngEdu.jpg', description: 'National Guard Patriot Academy website mockup, showcasing programs aimed at providing education and career opportunities for recruits.' },
   { image: '/MGMTmockContactInfo.jpg', description: 'ESC Single Source Tracker, a comprehensive tool for managing soldier information and actions. Developed an interface for accessing and updating detailed soldier profiles, contact information, and uploaded files, ensuring a user-friendly experience for military personnel management.' },
@@ -27,6 +41,8 @@ const PastProjectsPage: React.FC = () => {
 
   const [mainSlider, setMainSlider] = useState<Slider | null>(null);
   const [thumbSlider, setThumbSlider] = useState<Slider | null>(null);
+
+  const theme = useTheme(); // Access theme
 
   useEffect(() => {
     if (mainSliderRef.current && thumbSliderRef.current) {
@@ -90,18 +106,43 @@ const PastProjectsPage: React.FC = () => {
     </p>
 
       {/* Main Slider */}
-      <Slider {...mainSettings}>
-        {projects.map((project, index) => (
-          <div key={index}>
+    <Slider {...mainSettings}>
+      {projects.map((project, index) => (
+        <div key={index}>
+          {/* Conditionally render <a> tag around the image if a URL exists */}
+          {project.url ? (
+            <a href={project.url} target="_blank" rel="noopener noreferrer">
+              <img
+                src={project.image}
+                alt={project.description.split(' - ')[0]}
+                style={{ width: '100%', height: 'auto', maxHeight: '400px' }}
+              />
+            </a>
+          ) : (
             <img
               src={project.image}
               alt={project.description}
               style={{ width: '100%', height: 'auto', maxHeight: '400px' }}
             />
-            <p style={{ textAlign: 'center', marginTop: '10px' }}>{project.description}</p>
-          </div>
-        ))}
-      </Slider>
+          )}
+
+          <p style={{ textAlign: 'center', marginTop: '10px', padding: '10px' }}>
+            {/* Conditionally render StyledLink around the project name in description */}
+            {project.url ? (
+              <>
+                <StyledLink href={project.url} target="_blank" rel="noopener noreferrer" theme={theme}>
+                  {project.description.split(' - ')[0]} {/* "eztarotz.com" or "ezweatherz.com" */}
+                </StyledLink>
+                {" - "} {/* Add back the " - " separator */}
+                {project.description.split(' - ').slice(1).join(' - ')} {/* Rest of the description */}
+              </>
+            ) : (
+              project.description
+            )}
+          </p>
+        </div>
+      ))}
+    </Slider>
 
       {/* Thumbnail Slider */}
       <Slider {...thumbSettings}>
