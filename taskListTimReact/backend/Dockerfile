@@ -40,7 +40,7 @@ RUN chmod +x /usr/src/app/wait-for-it.sh
 RUN npm install pg-connection-string
 
 # Expose the port the app runs on
-EXPOSE 4000
+EXPOSE 8080
 
 # Define the command to start the application and initialize the database
 CMD ["node", "dist/index.js"]
