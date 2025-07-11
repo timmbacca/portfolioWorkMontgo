@@ -61,6 +61,7 @@ steps:
     - 'tmontgo:us-central1:task-list-db'
     - '--set-env-vars'
     - 'DB_USER=task_app_user,DB_PASSWORD=newpassword123,DB_NAME=tasks,CLOUD_SQL_CONNECTION_NAME=tmontgo:us-central1:task-list-db,NODE_ENV=production'
+    - '--timeout=300s'
   id: 'Deploy Backend to Cloud Run'
   waitFor: ['Push Backend Image', 'Initialize Database']
 
