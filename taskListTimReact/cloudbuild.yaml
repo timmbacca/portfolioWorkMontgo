@@ -1,6 +1,9 @@
 # Consolidated build file for frontend and backend
 steps:
 # --- Backend Build ---
+- name: 'gcr.io/cloud-builders/bash'
+  args: ['ls -la /workspace/backend']
+  id: 'List Backend Directory Contents'
 - name: 'gcr.io/cloud-builders/docker'
   args: ['build', '-t', 'us-central1-docker.pkg.dev/tmontgo/task-list-backend/task-list-backend:latest', '.']
   dir: 'backend'
