@@ -91,6 +91,5 @@ images:
 - 'us-central1-docker.pkg.dev/tmontgo/task-list-frontend/task-list-frontend:latest'
 
 secrets:
-- id: task-list-db-password
-  secretEnv:
-    DB_PASSWORD: 'projects/tmontgo/secrets/task-list-db-password/versions/latest'
+- id: 'task-list-db-password'
+  value: 'projects/tmontgo/secrets/task-list-db-password/versions/latest'
