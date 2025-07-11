@@ -1,4 +1,4 @@
-# Dockerfile for the backend service
+# Dockerfile for the backend services
 # Use a lighter-weight base image
 FROM node:18-slim AS base
 
