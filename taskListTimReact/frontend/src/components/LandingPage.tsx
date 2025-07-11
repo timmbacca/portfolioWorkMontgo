@@ -85,6 +85,7 @@ const AboutSection = styled.section<{ theme: any }>`
     &:hover {
       color: ${({ theme }) => theme.palette.secondary.main};
     }
+  }
 `;
 
 const LandingPage = () => {
@@ -104,13 +105,13 @@ const LandingPage = () => {
       <AboutSection theme={theme}>
         <h2>About Tim</h2>
         <p>
-        Tim Montgomery is a Front-End Developer and UI Designer with nearly two decades of experience working with both Federal agencies and private-sector clients. With expertise in React, TypeScript, Java, and a range of modern web technologies, Tim specializes in building responsive, accessible, and visually engaging user interfaces that meet both client objectives and user needs.
+          Tim Montgomery is an innovative UI/UX/Web Developer with nearly two decades of experience working with both Federal agencies and private-sector clients. With expertise in a range of modern web technologies, Tim specializes in building responsive, accessible, and visually engaging user interfaces that meet both client objectives and user needs.
         </p>
         <p>
-        A lifelong learner, Tim is always eager to expand his expertise in both front-end and back-end technologies, maintaining a keen eye for quality design and usability. Whether it's creating intuitive dashboards or ensuring Section 508 compliance, Tim is dedicated to crafting user-friendly, impactful applications.
+          Eager and passionate about exploring and leveraging AI technologies, Tim is dedicated to pushing the boundaries of user-friendly website design and development. He is a lifelong learner, always expanding his expertise in both front-end and back-end technologies, maintaining a keen eye for quality design and usability. Whether it's creating intuitive dashboards or ensuring Section 508 compliance, Tim is committed to crafting user-friendly, impactful applications.
         </p>
         <p>
-        Currently, Tim is exploring new opportunities where he can apply his diverse skill set to support dynamic teams in achieving their mission. Connect with Tim at{' '}
+          Currently, Tim is exploring new opportunities where he can apply his diverse skill set to support dynamic teams in achieving their mission. Connect with Tim at{' '}
           <a href="mailto:ctmontgo@gmail.com" target="_blank" rel="noopener noreferrer">
             ctmontgo@gmail.com
           </a>.
