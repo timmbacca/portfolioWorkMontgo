@@ -1,3 +1,4 @@
+# Consolidated build file for frontend and backend
 steps:
 # --- Backend Build ---
 - name: 'gcr.io/cloud-builders/docker'
