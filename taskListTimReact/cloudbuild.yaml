@@ -78,6 +78,8 @@ steps:
   waitFor: ['Push Frontend Image']
 
 
+options:
+  logging: CLOUD_LOGGING_ONLY
 images:
 - 'us-central1-docker.pkg.dev/tmontgo/task-list-backend/task-list-backend:latest'
 - 'us-central1-docker.pkg.dev/tmontgo/task-list-frontend/task-list-frontend:latest'
