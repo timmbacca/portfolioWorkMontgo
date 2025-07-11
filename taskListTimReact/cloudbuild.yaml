@@ -1,7 +1,8 @@
 # Consolidated build file for frontend and backend
 steps:
 # --- Backend Build ---
-- name: 'gcr.io/cloud-builders/bash'
+- name: 'gcr.io/cloud-builders/gcloud'
+  entrypoint: 'bash'
   args: ['ls -la /workspace/backend']
   id: 'List Backend Directory Contents'
 - name: 'gcr.io/cloud-builders/docker'
