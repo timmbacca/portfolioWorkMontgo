@@ -49,7 +49,7 @@ const Resume = () => {
     <ResumeWrapper theme={theme}>
       <h1>Charles T. Montgomery</h1>
       <p>
-        Manassas, VA | Cell: 703-336-9942 | Email:
+        Cell: 703-336-9942 | Email:
         <StyledLink href="mailto:ctmontgo@gmail.com" theme={theme}>
           ctmontgo@gmail.com
         </StyledLink>
@@ -71,7 +71,7 @@ const Resume = () => {
         <h2>Skills</h2> {/* Updated section title */}
         <ul>
           <li><b>Full-Stack Development:</b><br />
-            React, TypeScript, JavaScript, Node.js, Express, Java, JSP, WebSphere, HTML, CSS, SQL, PostgreSQL, JSON, XML, Bash, Gradle</li>
+            React, TypeScript, JavaScript, Node.js, Express, Java, Django, Python, HTML, CSS, SQL, PostgreSQL, JSON, XML, Bash, Gradle</li>
 
           <li><b>Graphic Design and UI/UX:</b><br />
             Adobe Creative Suite, Autodesk 3ds Max, Blender, Pixel Studio, DaVinci Resolve, Traditional Studio Art</li>
@@ -129,6 +129,7 @@ const Resume = () => {
         <ul>
           <li>Google Cloud Certification - Generative AI Leader - Series ID 1861</li>
           <li>DHS Trusted Tester Certification (TTv5) TT-2505-07367</li>
+          <li>Praxis 2 Exam – Art: Content Knowledge (5134) – 172</li>
           <li>Professional Scrum Master 1 - Scrum.org</li>
           <li>BFA in Media Arts and Animation - Illinois Institute of Art, Schaumburg, IL</li>
           <li>AA in Computer Animation - Art Institute of Atlanta, Atlanta, GA</li>
@@ -173,7 +174,7 @@ const Resume = () => {
       </ResumeSection>
 
       <StyledLink
-        href="/CMontgomery_Resume_0710.pdf"
+        href="/CMontgomery_Resume_0805.pdf"
         download
         theme={theme}
         style={{ marginTop: '20px', display: 'inline-block' }}

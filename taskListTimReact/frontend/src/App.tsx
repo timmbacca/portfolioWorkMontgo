@@ -15,6 +15,7 @@ import ContactPage from './components/ContactPage';
 import Footer from './components/Footer';
 import './App.css';
 import { initializeAnalytics, logPageView } from './analytics';
+import ChatWidget from './components/ChatWidget';
 
 const AnalyticsWrapper: React.FC<PropsWithChildren> = ({ children }) => {
   const location = useLocation();
@@ -71,6 +72,7 @@ const App: React.FC = () => {
             </Routes>
             <Footer />
           </main>
+          <ChatWidget />
         </div>
         </AnalyticsWrapper>
       </Router>
