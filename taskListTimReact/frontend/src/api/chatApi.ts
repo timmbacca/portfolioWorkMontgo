@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const chatApi = axios.create({
   baseURL: process.env.NODE_ENV === 'production'
-    ? 'https://task-list-backend-7sesojegqq-uc.a.run.app' // Deployed backend URL
+    ? 'https://task-list-backend-7eezqzppyq-uc.a.run.app' // Deployed backend URL
     : 'http://localhost:8081', // Local backend URL
   headers: {
     'Content-Type': 'application/json',
