@@ -21,13 +21,9 @@ app.get('/', (req, res) => {
 
 const startServer = async () => {
   try {
-    // Bypassing database connection test for local development.
-    // The /chat endpoint does not require a database connection.
-    /*
     const client = await pool.connect();
     console.log('Successfully connected to the database');
     client.release();
-    */
 
     app.listen(PORT, () => {
       console.log(`Server is listening on port ${PORT}`);
