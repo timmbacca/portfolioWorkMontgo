@@ -10,12 +10,20 @@ const app = express();
 // Cloud Run provides the PORT environment variable
 const PORT = process.env.PORT || 8081;
 
-// This updated CORS configuration allows requests from both 'www.tmontgo.com' and 'tmontgo.com'
+// --- START: MORE ROBUST CORS CONFIGURATION ---
+
 const allowedOrigins = ['https://www.tmontgo.com', 'https://tmontgo.com'];
 
-// Configure CORS options
-const corsOptions = {
-  origin: allowedOrigins,
+const corsOptions: cors.CorsOptions = {
+  origin: (origin, callback) => {
+    // The 'origin' can be undefined for server-to-server requests or REST tools.
+    // We allow these, and we allow any origin in our whitelist.
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('This origin is not allowed by the CORS policy.'));
+    }
+  },
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 };
@@ -23,7 +31,7 @@ const corsOptions = {
 // Use the CORS middleware
 app.use(cors(corsOptions));
 
-// --- END: FINAL CORS CONFIGURATION ---
+// --- END: MORE ROBUST CORS CONFIGURATION ---
 
 app.use(express.json());
 app.use('/tasks', taskRoutes);
