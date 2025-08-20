@@ -10,7 +10,11 @@ const app = express();
 // Cloud Run provides the PORT environment variable
 const PORT = process.env.PORT || 8081;
 
-app.use(cors());
+app.use(cors({
+  origin: 'https://www.tmontgo.com',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 app.use(express.json());
 app.use('/tasks', taskRoutes);
 app.use('/chat', chatRoutes); // Use chat routes
