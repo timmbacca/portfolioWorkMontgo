@@ -1,4 +1,3 @@
-// src/utils/format.ts
 
 /**
  * Formats a date to mm/dd/yyyy.

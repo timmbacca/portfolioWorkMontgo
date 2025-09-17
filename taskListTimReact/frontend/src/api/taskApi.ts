@@ -1,8 +1,7 @@
 import axios from 'axios';
 
-// Define and export the Task interface
 export interface Task {
-  id?: number; // 'id' is optional because it might not exist before the task is saved
+  id?: number; 
   title: string;
   description: string;
   priority?: string | null;
@@ -19,7 +18,7 @@ export interface Task {
   riskLevel?: string | null;
 }
 
-// Set up Axios instance for the API
+
 const api = axios.create({
   baseURL: 'https://task-list-backend-7sesojegqq-uc.a.run.app',
   headers: {
@@ -27,7 +26,7 @@ const api = axios.create({
   },
 });
 
-// Get all tasks
+
 export const getTasks = async (): Promise<Task[]> => {
   try {
     const response = await api.get('/tasks');
@@ -35,29 +34,29 @@ export const getTasks = async (): Promise<Task[]> => {
     return response.data;
   } catch (error) {
     console.error('Error fetching tasks:', error);
-    throw error; // Rethrow the error to handle it in the calling component
+    throw error; 
   }
 };
 
-// Add a new task
+
 export const addTask = async (task: Omit<Task, 'id'>): Promise<Task> => {
   try {
-    console.log('Payload sent to backend:', task); // Log payload for debugging
+    console.log('Payload sent to backend:', task); 
     const response = await api.post('/tasks', task);
     return response.data;
   } catch (error) {
     console.error('Error adding task:', error);
-    throw error; // Rethrow the error to handle it in the calling component
+    throw error; 
   }
 };
 
-// Update an existing task
+
 export const updateTask = async (id: number, updatedTask: Omit<Task, 'id'>): Promise<Task> => {
   const response = await api.put(`/tasks/${id}`, updatedTask);
   return response.data;
 };
 
-// Delete a task
+
 export const deleteTask = async (id: number): Promise<void> => {
   await api.delete(`/tasks/${id}`);
 };

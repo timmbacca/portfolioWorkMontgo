@@ -18,10 +18,9 @@ const DashboardPage: React.FC = () => {
     try {
       const fetchedTasks = await getTasks();
   
-      // Use type assertion to inform TypeScript that tasks may have `risk_level`
       const transformedTasks = fetchedTasks.map((task) => ({
         ...task,
-        riskLevel: (task as any).risk_level, // Use `any` to bypass strict typing for `risk_level`
+        riskLevel: (task as any).risk_level, 
       }));
   
       setTasks(transformedTasks);
@@ -64,21 +63,21 @@ const DashboardPage: React.FC = () => {
     const riskCounts: Record<string, number> = { High: 0, Medium: 0, Low: 0, Undecided: 0 };
   
     tasks.forEach((task) => {
-      // Increment priority counts
+      
       if (task.priority && priorityCounts[task.priority] !== undefined) {
         priorityCounts[task.priority]++;
       }
-      // Increment status counts
+      
       if (task.status && statusCounts[task.status] !== undefined) {
         statusCounts[task.status]++;
       }
-      // Increment risk counts, handle "Undecided" case
+      
       if (task.riskLevel && riskCounts[task.riskLevel] !== undefined) {
         riskCounts[task.riskLevel]++;
       } else {
-        riskCounts.Undecided++; // If no risk level is assigned, count as "Undecided"
+        riskCounts.Undecided++; 
       }
-      // Add progress data
+      
       if (task.title) {
         progressData.push({ x: task.title, y: task.progress || 0 });
       }

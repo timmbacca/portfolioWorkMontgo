@@ -1,8 +1,7 @@
-/* Style for the arrows */
 .slick-prev,
 .slick-next {
-  font-size: 2rem; /* Makes arrows big */
-  color: red; /* Sets visible color */
+  font-size: 2rem; 
+  color: red; 
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -30,50 +29,45 @@
 }
 
 
-/* Main container for carousel */
 .carousel-container {
   max-width: 100%;
   margin: 0 auto;
-  padding-bottom: 50px; /* Add space between thumbnails and footer */
-  position: relative; /* For absolute positioning of dots */
-  overflow: hidden; /* Prevent arrows from sticking out */
+  padding-bottom: 50px; 
+  position: relative; 
+  overflow: hidden; 
 }
 
-/* Main image slider */
 .slick-slide img {
-  max-height: 400px; /* Ensure consistent height */
-  width: auto; /* Maintain aspect ratio */
+  max-height: 400px; 
+  width: auto; 
   margin: auto;
   display: block;
-  object-fit: contain; /* Ensure images fit neatly */
+  object-fit: contain;
   padding:10px;
   background-color: rgba(102, 102, 102, 0.5);
 }
 
-/* Align slick-track properly */
 .slick-track {
   display: flex;
-  align-items: center; /* Vertically center the images */
+  align-items: center; 
   height: 100%;
 }
 
-/* Thumbnail slider settings */
 .slick-dots {
   display: flex !important;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 10px; /* Space between thumbnails */
-  margin-top: 20px; /* Space below the carousel */
+  gap: 10px;
+  margin-top: 20px; 
 }
 
 .slick-dots li {
-  margin: 0; /* Remove unnecessary spacing */
+  margin: 0;
 }
 
-/* Thumbnail styles */
 .slick-dots img {
-  height: 60px; /* Thumbnail height */
-  width: auto; /* Maintain aspect ratio */
+  height: 60px;
+  width: auto; 
   object-fit: cover;
   border-radius: 5px;
   cursor: pointer;
@@ -82,22 +76,21 @@
 }
 
 .slick-dots .slick-active img {
-  border-color: #1976d2; /* Highlight active thumbnail */
+  border-color: #1976d2; 
 }
 
-/* Responsive adjustments for smaller screens */
 @media (max-width: 768px) {
   .slick-dots img {
-    height: 50px; /* Adjust thumbnail size for tablets */
+    height: 50px; 
   }
 
   .slick-dots {
-    gap: 5px; /* Reduce spacing between thumbnails */
+    gap: 5px; 
   }
 }
 
 @media (max-width: 480px) {
   .slick-dots img {
-    height: 40px; /* Further reduce thumbnail size for mobile */
+    height: 40px; 
   }
 }

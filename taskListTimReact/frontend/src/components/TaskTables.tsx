@@ -49,7 +49,7 @@ interface TaskTableProps {
               riskLevel: task.risk_level,
             }));
             setTasks(formattedTasks);
-            console.log("Formatted tasks:", formattedTasks); // For debugging
+            console.log("Formatted tasks:", formattedTasks); 
           };
         
           const applyFilters = () => {
@@ -60,7 +60,7 @@ interface TaskTableProps {
               displayedTasks = displayedTasks.filter((task) =>
                 ['title', 'description', 'priority', 'status', 'assignedTo', 'tags', 'comments', 'riskLevel']
                   .some((field) =>
-                    (task[field as keyof Task] || '') // Ensure the field exists
+                    (task[field as keyof Task] || '') 
                       .toString()
                       .toLowerCase()
                       .includes(searchQuery.toLowerCase())
@@ -71,15 +71,15 @@ interface TaskTableProps {
             // Sort tasks
             displayedTasks = displayedTasks.sort((a, b) => {
               const isAsc = sortOrder === 'asc';
-              const aValue = a[sortField] ?? ''; // Default to empty string if null or undefined
-              const bValue = b[sortField] ?? ''; // Default to empty string if null or undefined
+              const aValue = a[sortField] ?? ''; 
+              const bValue = b[sortField] ?? ''; 
           
               if (aValue < bValue) return isAsc ? -1 : 1;
               if (aValue > bValue) return isAsc ? 1 : -1;
               return 0;
             });
           
-            // Update filtered tasks state
+            
             setFilteredTasks(displayedTasks);
           };
             const openUpdateModal = (task: Task) => {
@@ -98,7 +98,7 @@ interface TaskTableProps {
                 return;
               }
             
-              // Log the updatedTask object to confirm all fields are present
+              
               console.log("Updating task with:", updatedTask);
             
               await updateTask(updatedTask.id, updatedTask);
@@ -112,7 +112,7 @@ interface TaskTableProps {
           
             const handleDeleteConfirm = async () => {
               if (taskToDelete) {
-                await deleteTask(taskToDelete.id!); // Assuming taskToDelete has an id
+                await deleteTask(taskToDelete.id!);
                 fetchTasks();
                 setIsDeleteModalOpen(false);
                 setTaskToDelete(null);
@@ -141,7 +141,7 @@ interface TaskTableProps {
           
             const paginatedTasks = filteredTasks.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
           
-            // Utility function to format date as mm/dd/yyyy
+            
 function formatDateToMMDDYYYY(date: Date | string | null | undefined): string {
     if (!date) return '';
     
@@ -176,8 +176,8 @@ function formatDateToMMDDYYYY(date: Date | string | null | undefined): string {
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
         sx={{
-          maxWidth: 600, // Limit the width on larger screens
-          width: '100%', // Make it responsive to smaller screens
+          maxWidth: 600, 
+          width: '100%', 
           '& .MuiOutlinedInput-root': {
             color: 'text.primary',
           },
@@ -185,7 +185,7 @@ function formatDateToMMDDYYYY(date: Date | string | null | undefined): string {
             color: 'text.secondary',
           },
           backgroundColor: 'background.default',
-          boxShadow: '0px 2px 3px rgba(0, 0, 0, 0.2)', // Subtle shadow
+          boxShadow: '0px 2px 3px rgba(0, 0, 0, 0.2)', 
         }}
       />
     </Box>
@@ -197,7 +197,7 @@ sx={{
   '& .MuiOutlinedInput-notchedOutline': {
             borderColor: '#444444',
           },
-          boxShadow: '0px 2px 3px rgba(0, 0, 0, 0.2)', // cool timmy shadow
+          boxShadow: '0px 2px 3px rgba(0, 0, 0, 0.2)', 
 }}
 >
 
@@ -258,7 +258,7 @@ sx={{
   sx={{
     display: 'flex',
     flexDirection: { xs: 'column', sm: 'row' },
-    gap: 1, // Adds space between the buttons
+    gap: 1, 
     alignItems: 'center',
     justifyContent: 'center',
   }}
@@ -268,8 +268,8 @@ sx={{
     color="primary"
     onClick={() => openUpdateModal(task)}
     sx={{
-      width: { xs: '100%', sm: 'auto' }, // Full width on mobile, auto on larger screens
-      mb: { xs: 1, sm: 0 }, // Adds margin at the bottom for mobile
+      width: { xs: '100%', sm: 'auto' }, 
+      mb: { xs: 1, sm: 0 }, 
     }}
   >
     Update
@@ -279,7 +279,7 @@ sx={{
     color="secondary"
     onClick={() => handleDeleteClick(task)}
     sx={{
-      width: { xs: '100%', sm: 'auto' }, // Full width on mobile, auto on larger screens
+      width: { xs: '100%', sm: 'auto' }, 
     }}
   >
     Delete

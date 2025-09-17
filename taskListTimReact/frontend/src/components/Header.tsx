@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
 import { useTheme } from '@mui/material/styles';
 
-// Keyframes for animations
 const slideIn = keyframes`
   from {
     transform: translateY(-100%);
@@ -24,7 +23,6 @@ const fadeIn = keyframes`
   }
 `;
 
-// Wrapper for header
 const HeaderWrapper = styled.header<{ theme: any }>`
   position: fixed;
   top: 0;

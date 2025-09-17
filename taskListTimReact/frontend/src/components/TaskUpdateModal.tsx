@@ -13,7 +13,7 @@ interface TaskUpdateModalProps {
   task: Task;
 }
 
-// Utility function to safely parse date strings to Date objectsz
+
 const parseDate = (date: string | Date | null | undefined): Date | null => {
   if (!date) return null;
   return typeof date === 'string' ? new Date(date) : date;
@@ -59,7 +59,7 @@ const TaskUpdateModal: React.FC<TaskUpdateModalProps> = ({ open, onClose, onSubm
   };
   
   const handleSubmit = () => {
-    // Format dates for backend submission
+    
     const formattedTask = {
       ...updatedTask,
       startDate: updatedTask.startDate instanceof Date ? updatedTask.startDate.toISOString().split('T')[0] : null,
@@ -197,7 +197,7 @@ const TaskUpdateModal: React.FC<TaskUpdateModalProps> = ({ open, onClose, onSubm
     aria-valuetext={`${updatedTask.progress || 0}%`}
     min={0}
     max={100}
-    step={5} // Move in 5% increments
+    step={5} 
   />
 </FormControl>
 

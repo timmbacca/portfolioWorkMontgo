@@ -1,4 +1,3 @@
-
 /**
  * Validates an input string against a regex and a max length.
  * @param input The string to validate.

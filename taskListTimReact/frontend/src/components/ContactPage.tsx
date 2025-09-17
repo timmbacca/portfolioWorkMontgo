@@ -40,7 +40,7 @@ const ContactSection = styled.section<{ theme: any }>`
 `;
 
 const ContactPage = () => {
-  const theme = useTheme(); // Access the current theme
+  const theme = useTheme(); 
 
   return (
     <ContactWrapper theme={theme}>

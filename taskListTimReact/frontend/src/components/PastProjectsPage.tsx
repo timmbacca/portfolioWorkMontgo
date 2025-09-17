@@ -1,10 +1,8 @@
 import React, { useRef, useState, useEffect } from 'react';
 import Slider from 'react-slick';
-// import 'slick-carousel/slick/slick.css';
-// import 'slick-carousel/slick/slick-theme.css';
 import './CarouselStyles.css';
-import { useTheme } from '@mui/material/styles'; // Import useTheme
-import { StyledLink } from './StyledLink'; // Import StyledLink
+import { useTheme } from '@mui/material/styles';
+import { StyledLink } from './StyledLink';
 
 type Project = {
   image: string;
@@ -15,15 +13,15 @@ type Project = {
 const projects: Project[] = [
   {
     image: '/eztarotz.png',
-    url: 'https://eztarotz.com', // Add the URL here
+    url: 'https://eztarotz.com', 
     description: 'eztarotz.com - AI-Powered Tarot Reading Web Application. This modern web application provides users with personalized 3 or 5-card tarot readings, leveraging the power of Google’s Gemini API for insightful interpretations. Users can perform a spread, and the application’s backend service queries the Gemini API to generate dynamic, context-aware interpretations of the cards in their specific positions, offering a unique and engaging experience. The frontend is built with HTML, CSS, and JavaScript, deployed globally via Firebase Hosting, while the backend logic is implemented as a serverless Cloud Function for Firebase, securely handling API requests and integrating seamlessly with the frontend.'
   },
   {
     image: '/simpleweather.png',
-    url: 'https://ezweatherz.com', // Add the URL here
+    url: 'https://ezweatherz.com',
     description: 'ezweatherz.com - Ad-Free Weather Application This project is a clean, ad-free weather application engineered for a simple and fast user experience. It was developed in response to the prevalence of intrusive pop-ups and advertisements on many existing weather websites. The application leverages Next.js and TypeScript for a robust frontend, is containerized with Docker, and deployed on Google Cloud Run for high availability and scalability. Weather data is reliably sourced from the National Weather Service (NWS) API.'
   },
-  // ... other projects
+  
   { image: '/natguardg1personnelgateway.jpg', description: 'Army National Guard G1 Personnel Gateway, streamlining access to HR resources for soldiers, veterans, and families. Implemented user-friendly features such as announcements, news highlights, and quick access to essential tools and programs.' },
   { image: '/ngEdu.jpg', description: 'National Guard Patriot Academy website mockup, showcasing programs aimed at providing education and career opportunities for recruits.' },
   { image: '/MGMTmockContactInfo.jpg', description: 'ESC Single Source Tracker, a comprehensive tool for managing soldier information and actions. Developed an interface for accessing and updating detailed soldier profiles, contact information, and uploaded files, ensuring a user-friendly experience for military personnel management.' },
@@ -42,7 +40,7 @@ const PastProjectsPage: React.FC = () => {
   const [mainSlider, setMainSlider] = useState<Slider | null>(null);
   const [thumbSlider, setThumbSlider] = useState<Slider | null>(null);
 
-  const theme = useTheme(); // Access theme
+  const theme = useTheme(); 
 
   useEffect(() => {
     if (mainSliderRef.current && thumbSliderRef.current) {
@@ -59,27 +57,27 @@ const PastProjectsPage: React.FC = () => {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    arrows: true, // Ensure arrows are enabled
+    arrows: true, 
     prevArrow: <button className="slick-prev">‹</button>,
     nextArrow: <button className="slick-next">›</button>,
     responsive: [
       {
         breakpoint: 768,
         settings: {
-          arrows: true, // Ensure arrows are shown on tablets
+          arrows: true,
         },
       },
       {
         breakpoint: 480,
         settings: {
-          arrows: true, // Ensure arrows are shown on mobile
+          arrows: true, 
         },
       },
     ],
   };
 
   const thumbSettings = {
-    asNavFor: mainSlider || undefined, // Only pass a valid instance
+    asNavFor: mainSlider || undefined, 
     ref: thumbSliderRef,
     infinite: true,
     slidesToShow: 5,

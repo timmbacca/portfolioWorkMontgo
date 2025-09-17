@@ -5,18 +5,18 @@ import CloseIcon from '@mui/icons-material/Close';
 import ChatIcon from '@mui/icons-material/Chat';
 import { sendMessage } from '../api/chatApi';
 
-// Define the structure of a message
+
 interface Message {
   text: string;
   sender: 'user' | 'bot';
 }
 
-// Styled Components
+
 const WidgetContainer = styled('div')({
   position: 'fixed',
   bottom: 20,
   right: 20,
-  zIndex: 1100, // Typically above other elements
+  zIndex: 1100, 
 });
 
 const ToggleButton = styled(IconButton)(({ theme }) => ({
@@ -107,7 +107,6 @@ const ChatWidget: React.FC = () => {
 
   const toggleChat = () => {
     if (isOpen) {
-      // Chat is being closed, reset messages
       setMessages([
         { text: "Hello! I'm a Gemini-powered assistant. How can I help you today?", sender: 'bot' }
       ]);

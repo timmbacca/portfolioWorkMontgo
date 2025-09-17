@@ -10,14 +10,12 @@ import {
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
-// Type for OWASP Item
 type OWASPItem = {
   name: string;
   description: string;
   url: string;
 };
 
-// Static OWASP Top 10 Data
 const owaspTop10: OWASPItem[] = [
   {
     name: "A01:2021 – Broken Access Control",
@@ -71,7 +69,6 @@ const owaspTop10: OWASPItem[] = [
   },
 ];
 
-// Styled Components with Fallbacks
 const PageWrapper = styled.div<{ theme: any }>`
   padding: 20px;
   max-width:600px;

@@ -3,7 +3,6 @@ import styled, { keyframes } from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
 
-// Keyframes for animations
 const fadeIn = keyframes`
   from {
     opacity: 0;
@@ -88,7 +87,7 @@ const FooterInfo = styled.div<{ theme: any }>`
 `;
 
 const Footer = () => {
-  const theme = useTheme(); // Access the theme context
+  const theme = useTheme(); 
 
   return (
     <FooterWrapper theme={theme}>

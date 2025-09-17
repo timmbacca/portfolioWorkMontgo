@@ -16,7 +16,6 @@ import { Doughnut, Bar, Line, Radar } from 'react-chartjs-2';
 import './DashboardStyles.css'; // Unified styles
 import { useTheme } from '@mui/material/styles';
 
-// Register required Chart.js elements
 ChartJS.register(
   ArcElement,
   Tooltip,
@@ -53,7 +52,7 @@ const TaskCharts: React.FC<TaskChartsProps> = ({ metrics, chartType }) => {
         data: Object.values(priorityCounts),
         backgroundColor: Object.keys(priorityCounts).map(
           (_, index) =>
-            theme.chartColors[index % theme.chartColors.length] + '33' // Semi-transparent
+            theme.chartColors[index % theme.chartColors.length] + '33' 
         ),
         borderColor: Object.keys(priorityCounts).map(
           (_, index) => theme.chartColors[index % theme.chartColors.length]
@@ -63,7 +62,7 @@ const TaskCharts: React.FC<TaskChartsProps> = ({ metrics, chartType }) => {
     ],
   };
 
-  // Doughnut chart data for status
+  
   const statusChartData = {
     labels: Object.keys(statusCounts),
     datasets: [
@@ -72,18 +71,18 @@ const TaskCharts: React.FC<TaskChartsProps> = ({ metrics, chartType }) => {
         data: Object.values(statusCounts),
         backgroundColor: Object.keys(statusCounts).map(
           (_, index) =>
-            theme.chartColors[index % theme.chartColors.length] + '33' // Semi-transparent
+            theme.chartColors[index % theme.chartColors.length] + '33' 
         ),
         borderColor: Object.keys(statusCounts).map(
           (_, index) => theme.chartColors[index % theme.chartColors.length]
         ),
         borderWidth: 2,
-        cutout: '60%', // Donut effect
+        cutout: '60%', 
       },
     ],
   };
 
-  // Progress and Risk charts using Chart.js
+
   const progressChartData = {
     labels: progressData.map((point) => point.x),
     datasets: [
@@ -92,7 +91,7 @@ const TaskCharts: React.FC<TaskChartsProps> = ({ metrics, chartType }) => {
         data: progressData.map((point) => point.y),
         backgroundColor: progressData.map(
           (_, index) =>
-            theme.chartColors[index % theme.chartColors.length] + '33' // Semi-transparent
+            theme.chartColors[index % theme.chartColors.length] + '33' 
         ),
         borderColor: progressData.map(
           (_, index) => theme.chartColors[index % theme.chartColors.length]
@@ -111,7 +110,7 @@ const TaskCharts: React.FC<TaskChartsProps> = ({ metrics, chartType }) => {
         data: Object.values(fullRiskCounts),
         backgroundColor: Object.keys(fullRiskCounts).map(
           (_, index) =>
-            theme.chartColors[index % theme.chartColors.length] + '33' // Semi-transparent
+            theme.chartColors[index % theme.chartColors.length] + '33' 
         ),
         borderColor: Object.keys(fullRiskCounts).map(
           (_, index) => theme.chartColors[index % theme.chartColors.length]
@@ -121,7 +120,7 @@ const TaskCharts: React.FC<TaskChartsProps> = ({ metrics, chartType }) => {
     ],
   };
 
-  // Chart options
+  
   const chartOptions = {
     responsive: true,
     maintainAspectRatio: false,
@@ -136,7 +135,7 @@ const TaskCharts: React.FC<TaskChartsProps> = ({ metrics, chartType }) => {
         bodyColor: theme.palette.text.primary,
       },
     },
-    scales: chartType === 'status' ? {} : { // Remove grid only for Doughnut chart
+    scales: chartType === 'status' ? {} : { 
       r: {
         angleLines: {
           color: theme.palette.divider,
@@ -154,7 +153,7 @@ const TaskCharts: React.FC<TaskChartsProps> = ({ metrics, chartType }) => {
     },
   };  
 
-  // Chart rendering logic
+  
   const renderChart = () => {
     switch (chartType) {
       case 'status':

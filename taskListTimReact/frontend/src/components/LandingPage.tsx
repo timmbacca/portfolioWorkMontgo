@@ -89,7 +89,7 @@ const AboutSection = styled.section<{ theme: any }>`
 `;
 
 const LandingPage = () => {
-  const theme = useTheme(); // Access the theme context dynamically
+  const theme = useTheme(); 
 
   return (
     <LandingPageWrapper theme={theme}>

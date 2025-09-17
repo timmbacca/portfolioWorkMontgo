@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useTheme } from '@mui/material/styles';
-import { StyledLink } from './StyledLink'; // Import the StyledLink component
+import { StyledLink } from './StyledLink';
 
 const ResumeWrapper = styled.div`
   padding: 20px;
@@ -43,7 +43,7 @@ const ResumeSection = styled.div`
 `;
 
 const Resume = () => {
-  const theme = useTheme(); // Access theme
+  const theme = useTheme(); 
 
   return (
     <ResumeWrapper theme={theme}>

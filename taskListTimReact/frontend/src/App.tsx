@@ -21,12 +21,12 @@ const AnalyticsWrapper: React.FC<PropsWithChildren> = ({ children }) => {
   const location = useLocation();
 
   useEffect(() => {
-    initializeAnalytics(); // Initialize Google Analytics
-    logPageView(); // Log the initial page view
+    initializeAnalytics(); 
+    logPageView(); 
   }, []);
 
   useEffect(() => {
-    logPageView(); // Log page view on route change
+    logPageView(); 
   }, [location]);
 
   return <>{children}</>;

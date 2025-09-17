@@ -30,22 +30,21 @@ const TaskTrackerPage: React.FC = () => {
   const [isRecurring, setIsRecurring] = useState(false);
   const [riskLevel, setRiskLevel] = useState('');
 
-  // Validation errors
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
-  // Fetch tasks on component load
+  
   useEffect(() => {
     fetchTasks();
   }, []);
 
-  // Handle file selection
+  
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
       setFile(e.target.files[0]);
     }
   };
 
-  // Process CSV file
+  
   const handleFileUpload = async () => {
     if (!file) {
       alert('Please select a CSV file first.');
@@ -95,13 +94,13 @@ const TaskTrackerPage: React.FC = () => {
         }
 
         alert(`Successfully added ${addedCount} tasks.`);
-        fetchTasks(); // Refresh tasks
-        setFile(null); // Clear file input
+        fetchTasks(); 
+        setFile(null); 
       },
     });
   };
 
-  // Validation logic
+  
   const validateField = (fieldName: string, value: string) => {
     let error = '';
 
@@ -166,13 +165,13 @@ const TaskTrackerPage: React.FC = () => {
       riskLevel: task.risk_level,
     }));
     setTasks(formattedTasks);
-    console.log("Formatted tasks:", formattedTasks); // For debugging
+    console.log("Formatted tasks:", formattedTasks);
   };
 
 
   const handleAddTask = async () => {
 
-    // Validate estimated time
+    
     if (estimatedTime < 0) {
       alert('Estimated Time cannot be negative.');
       return;
@@ -182,7 +181,7 @@ const TaskTrackerPage: React.FC = () => {
       return;
     }
 
-    // Validate spent time
+    
     if (timeSpent < 0) {
       alert('Spent Time cannot be negative.');
       return;
@@ -195,19 +194,17 @@ const TaskTrackerPage: React.FC = () => {
     const formattedStartDate = startDate ? startDate.toISOString().split('T')[0] : null;
     const formattedDueDate = dueDate ? dueDate.toISOString().split('T')[0] : null;  
 
-    validateAllFields(); // Ensure all fields are validated
-
-    // Check if any errors exist after validation
+    validateAllFields();
+    
     const hasErrors = Object.values(errors).some((error) => error);
     if (hasErrors || !newTitle || !newDescription || !assignedTo) {
-      // Validate empty fields explicitly here for edge cases
+      
       if (!newTitle) validateField('title', newTitle);
       if (!newDescription) validateField('description', newDescription);
       if (!assignedTo) validateField('assignedTo', assignedTo);
-      return; // Stop submission if errors exist
+      return; 
     }
 
-    // Log each piece of data to confirm
     console.log("Title:", newTitle);
     console.log("Description:", newDescription);
     console.log("Priority:", priority);
@@ -240,19 +237,13 @@ const TaskTrackerPage: React.FC = () => {
       riskLevel: riskLevel || null,
     };
 
-    /* console.log("Payload sent to backend:", newTask); // Log for debugging
-
-    await addTask(newTask); // Call addTask with formatted payload
-    resetForm();
-    fetchTasks(); */
-
     try {
       const createdTask = await addTask(newTask);
       
-      // Update state immediately to include the new task
+      
       setTasks((prevTasks) => [...prevTasks, createdTask]);
   
-      // Optionally, refresh the task list to stay in sync with the backend
+      
       resetForm();
       fetchTasks();
     } catch (error) {
@@ -434,7 +425,7 @@ const TaskTrackerPage: React.FC = () => {
     aria-valuetext={`${progress}%`}
     min={0}
     max={100}
-    step={5} // Move in 5% increments
+    step={5} 
   />
 </FormControl>
 
@@ -473,10 +464,10 @@ const TaskTrackerPage: React.FC = () => {
     borderColor: 'divider',
     borderRadius: '8px',
     textAlign: 'center',
-    maxWidth: 400, // Matches the width of the Add Task section
-    marginX: 'auto', // Centers the box
+    maxWidth: 400, 
+    marginX: 'auto',  
     backgroundColor: 'background.paper',
-    boxShadow: 1, // Subtle shadow using MUI theme
+    boxShadow: 1,  
   }}
 >
 <Typography component="div" variant="h6" sx={{ marginBottom: 2, color: 'primary.main' }}>
@@ -491,13 +482,13 @@ const TaskTrackerPage: React.FC = () => {
       type="file"
       accept=".csv"
       onChange={handleFileChange}
-      style={{ display: 'none' }} // Hide the default file input
+      style={{ display: 'none' }}  
     />
     <Button
       variant="outlined"
       component="span"
       sx={{
-        width: '100%', // Match the button size to the box
+        width: '100%',  
       }}
     >
       Choose File
@@ -508,7 +499,7 @@ const TaskTrackerPage: React.FC = () => {
     variant="contained"
     color="primary"
     onClick={handleFileUpload}
-    sx={{ marginTop: 2, width: '100%' }} // Full width for symmetry
+    sx={{ marginTop: 2, width: '100%' }}  
   >
     Upload CSV
   </Button>

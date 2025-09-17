@@ -22,16 +22,16 @@ const getCSPNonce = (): string => {
  * @param measurementId - The Google Analytics Measurement ID.
  */
 const injectGAScript = (measurementId: string) => {
-  const nonce = getCSPNonce(); // Get the nonce from the page
+  const nonce = getCSPNonce(); 
 
-  // Create the Google Analytics script tag
+  
   const script = document.createElement('script');
   script.src = `https://www.googletagmanager.com/gtag/js?id=${measurementId}`;
   script.async = true;
-  script.setAttribute('nonce', nonce); // ✅ Apply the nonce
+  script.setAttribute('nonce', nonce); 
   document.head.appendChild(script);
 
-  // Initialize Google Analytics
+  
   window.dataLayer = window.dataLayer || [];
   window.gtag = function (...args: any[]) {
     window.dataLayer.push(args);

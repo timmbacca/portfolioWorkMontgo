@@ -9,9 +9,9 @@ const HowItsMade: React.FC = () => {
         boxShadow: '0px 2px 3px rgba(0, 0, 0, 0.2)',
         padding: '15px',
         borderRadius: '8px',
-        maxWidth: '800px', // Added max-width for better readability on wide screens
-        margin: '20px auto', // Centered horizontally with auto margins, added top margin
-        textAlign: 'left', // Ensure the box content is left-aligned
+        maxWidth: '800px', 
+        margin: '20px auto', 
+        textAlign: 'left', 
       }}
     >
       <h2>
@@ -20,10 +20,10 @@ const HowItsMade: React.FC = () => {
       <ul
         style={{
           listStyleType: 'disc',
-          margin: 'auto', // Keep auto margin for the ul itself to center it within the box if needed
+          margin: 'auto', 
           lineHeight: '1.5',
-          textAlign: 'justify', // Keep text justified for a block-like appearance
-          width: '90%', // Maintain width relative to its container
+          textAlign: 'justify', 
+          width: '90%', 
           marginBottom: '10px',
           paddingInlineStart: '0px'
         }}
